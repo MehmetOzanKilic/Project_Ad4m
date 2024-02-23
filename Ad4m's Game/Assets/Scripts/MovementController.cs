@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MovementController : MonoBehaviour
 {
@@ -12,17 +15,25 @@ public class MovementController : MonoBehaviour
 
     private Rigidbody rb;
 
+    [SerializeField] private LayerMask groundMask;
+    private Camera mainCamera;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        mainCamera = Camera.main;
     }
 
     void Update()
     {
+        Aim();
+
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             Jump();
         }
+
     }
 
     void FixedUpdate()
@@ -31,8 +42,12 @@ public class MovementController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
+        Debug.Log(movement);
+
         movement = Camera.main.transform.TransformDirection(movement);
         movement.y = 0.0f;
+
+        Debug.Log(movement);
 
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 
@@ -59,6 +74,34 @@ public class MovementController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+        }
+    }
+
+    private (bool success, Vector3 position) GetMousePosition()
+    {
+        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if(Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
+        {
+            return(success: true, position: hitInfo.point);
+        }
+
+        else
+        {
+            return(success: false, position: Vector3.zero);
+        }
+    }
+
+    private void Aim()
+    {
+        var(success,position) = GetMousePosition();
+        if(success)
+        {
+            var direction = position - transform.position;
+            
+            direction.y=0;
+
+            transform.forward = direction; 
         }
     }
 
