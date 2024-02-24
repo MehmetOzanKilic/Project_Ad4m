@@ -31,7 +31,7 @@ public class MovementController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
-            Jump();
+            //Jump();
         }
 
     }
@@ -47,7 +47,7 @@ public class MovementController : MonoBehaviour
         movement = Camera.main.transform.TransformDirection(movement);
         movement.y = 0.0f;
 
-        Debug.Log(movement);
+        //Debug.Log(movement);
 
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 
@@ -63,11 +63,11 @@ public class MovementController : MonoBehaviour
         }
     }*/
 
-    void Jump()
+    /*void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isOnGround = false;
-    }
+    }*/
 
     void OnCollisionEnter(Collision collision)
     {
