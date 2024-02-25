@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
 {
     [HideInInspector] public Vector3 move;
     [SerializeField] private float speed;
-
     private float time=0.0f;
 
     Rigidbody rb;

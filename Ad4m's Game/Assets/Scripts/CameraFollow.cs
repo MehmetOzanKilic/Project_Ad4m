@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    [SerializeField]
+    private float topDownAngle;
+
+    [SerializeField]
+    private float distance;
     public Transform target;
-    public float smoothSpeed = 0.25f;
+    public float smoothSpeed = 0.25f; 
     public Vector3 offset;
 
     /*public float leftEdge;

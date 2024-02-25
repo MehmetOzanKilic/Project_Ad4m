@@ -6,16 +6,13 @@ using UnityEngine.UI;
 public class MovementController : MonoBehaviour
 {
     //movement
-    public float moveSpeed = 5f;
-    //public float rotationSpeed = 20f;
+    [SerializeField] private float moveSpeed = 5f;
 
-    //jumping
-    public float jumpForce = 2f;
-    public bool isOnGround;
+    private Vector2 inputVector;
+    private Vector3 mousePos;
 
     private Rigidbody rb;
 
-    [SerializeField] private LayerMask groundMask;
     private Camera mainCamera;
 
     void Start()
@@ -27,82 +24,46 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        Aim();
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        inputVector = new Vector2(h,v);
+        
 
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
-        {
-            //Jump();
-        }
+        mousePos = Input.mousePosition;
 
     }
 
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        var targetVector = new Vector3(inputVector.x, 0, inputVector.y);
+        Debug.Log("1:"+targetVector);
+        MoveTowardsTarget(targetVector);
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
-        Debug.Log(movement);
-
-        movement = Camera.main.transform.TransformDirection(movement);
-        movement.y = 0.0f;
-
-        //Debug.Log(movement);
-
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        //RotatePlayer(movement);
+        RotateTowardsMouse();
     }
 
-    /*void RotatePlayer(Vector3 movement)
-    {
-        if (movement != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
-            rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime));
-        }
-    }*/
 
-    /*void Jump()
+    private void MoveTowardsTarget(Vector3 targetVector)
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        isOnGround = false;
-    }*/
+        var speed=moveSpeed * Time.deltaTime;
 
-    void OnCollisionEnter(Collision collision)
+        targetVector = Quaternion.Euler(0, mainCamera.gameObject.transform.eulerAngles.y, 0) * targetVector;
+        Debug.Log("2:"+targetVector);
+        var targetPosition = transform.position + targetVector * speed;
+        transform.position = targetPosition;
+    }
+
+    private void RotateTowardsMouse()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+
+        if(Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
-            isOnGround = true;
+            var target = hitInfo.point;
+            target.y = transform.position.y;
+            transform.LookAt(target);
         }
     }
 
-    private (bool success, Vector3 position) GetMousePosition()
-    {
-        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if(Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
-        {
-            return(success: true, position: hitInfo.point);
-        }
-
-        else
-        {
-            return(success: false, position: Vector3.zero);
-        }
-    }
-
-    private void Aim()
-    {
-        var(success,position) = GetMousePosition();
-        if(success)
-        {
-            var direction = position - transform.position;
-            
-            direction.y=0;
-
-            transform.forward = direction; 
-        }
-    }
 
 }
