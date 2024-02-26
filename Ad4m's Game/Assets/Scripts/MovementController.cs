@@ -68,15 +68,14 @@ public class MovementController : MonoBehaviour
 
     */
 
-    public float moveSpeed = 4f; // Speed of player movement
-    public float rotationSpeed = 5f; // Speed of player rotation
+    public float moveSpeed = 3f;
+    public float rotationSpeed = 5f;
 
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // Lock cursor to center of screen
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -84,15 +83,16 @@ public class MovementController : MonoBehaviour
     {
         // Player Rotation
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
-
-        // Rotate the player only around the Y-axis
         transform.Rotate(Vector3.up * mouseX);
 
+        /*// Player Movement
+        float moveVertical = Input.GetAxisRaw("Vertical");
+        Vector3 movement = transform.forward * moveVertical * moveSpeed * Time.deltaTime;
+        rb.MovePosition(transform.position + movement);*/
+
         // Player Movement
-        if (Input.GetKey(KeyCode.W))
-        {
-            Vector3 movement = transform.forward * moveSpeed * Time.deltaTime;
-            rb.MovePosition(transform.position + movement);
-        }
+        float moveVertical = Input.GetAxisRaw("Vertical");
+        Vector3 movement = transform.forward * moveVertical * moveSpeed * Time.deltaTime;
+        transform.position += movement;
     }
 }
