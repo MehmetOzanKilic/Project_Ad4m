@@ -5,54 +5,86 @@ using UnityEngine.UI;
 
 public class MovementController : MonoBehaviour
 {
+<<<<<<< Updated upstream
     //movement
     [SerializeField] private float moveSpeed = 5f;
 
     private Vector2 inputVector;
+=======
+    private Vector2 inputVector;//wasd
+>>>>>>> Stashed changes
     private Vector3 mousePos;
-
     private Rigidbody rb;
-
     private Camera mainCamera;
+    public float moveSpeed = 3f;
+    public float dashSpeed = 5f;//how fast the dash will go
+    public float dashTime;//how long the dash will last
+    public Vector3 targetVector;
+    private bool isDashing;//flag to stop moving and start dashing
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
+        //Cursor.lockState = CursorLockMode.Locked;
         mainCamera = Camera.main;
+        isDashing = false;
     }
 
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        inputVector = new Vector2(h,v);
-        
-
         mousePos = Input.mousePosition;
+
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        inputVector = new Vector2(h,v);
 
     }
 
     void FixedUpdate()
     {
-        var targetVector = new Vector3(inputVector.x, 0, inputVector.y);
-        Debug.Log("1:"+targetVector);
-        MoveTowardsTarget(targetVector);
+        targetVector = new Vector3(inputVector.x, 0, inputVector.y).normalized;
 
         RotateTowardsMouse();
-    }
 
+        if(!isDashing)
+            MoveTowardsTarget(targetVector);
+        
+        if(isDashing)
+            DashTowardsTarget(targetVector);
+
+    }
 
     private void MoveTowardsTarget(Vector3 targetVector)
     {
         var speed=moveSpeed * Time.deltaTime;
 
+        //adjust the trajectory according to the cameras angle.
         targetVector = Quaternion.Euler(0, mainCamera.gameObject.transform.eulerAngles.y, 0) * targetVector;
-        Debug.Log("2:"+targetVector);
-        var targetPosition = transform.position + targetVector * speed;
-        transform.position = targetPosition;
+
+        transform.position += targetVector*speed;
     }
 
+    public void Dashing()
+    {
+        isDashing = true;
+
+        //Calls the NotDashing() after dashTime seconds.Determines how long the dash lasts.
+        Invoke("NotDashing", dashTime);
+    }
+
+    private void NotDashing()
+    {
+        isDashing = false;
+    }
+
+    private void DashTowardsTarget(Vector3 targetVector)
+    {    
+        var speed=dashSpeed * Time.deltaTime;
+
+        targetVector = Quaternion.Euler(0, mainCamera.gameObject.transform.eulerAngles.y, 0) * targetVector;
+        transform.position += targetVector*speed;
+    }
+
+    //tracks the players rotation by finding the point that the mouse is on and looking at it
     private void RotateTowardsMouse()
     {
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
@@ -64,6 +96,9 @@ public class MovementController : MonoBehaviour
             transform.LookAt(target);
         }
     }
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 }

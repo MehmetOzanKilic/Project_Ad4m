@@ -781,6 +781,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: baeb83a2f4eebec40b25a5b2089b8511, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1785544392}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: baeb83a2f4eebec40b25a5b2089b8511, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1785544394}
   m_SourcePrefab: {fileID: 100100000, guid: baeb83a2f4eebec40b25a5b2089b8511, type: 3}
 --- !u!1 &635637137
 GameObject:
@@ -1369,6 +1372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066644bf9ddef224aa77053e45184e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   camera: {fileID: 330585546}
   shootPoint: {fileID: 1323932656}
   fireRate: 5
@@ -1478,6 +1482,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736078909}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+=======
+  bulletPrefab: {fileID: 4114201434426280131, guid: f915b6a5f1c8df34d9ce3903ed6cf318, type: 3}
+  bulletSpawnPoint: {fileID: 1825903387}
+  bulletSpeed: 30
+  bulletLifetime: 3
+>>>>>>> Stashed changes
 --- !u!1 &1785544386 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: baeb83a2f4eebec40b25a5b2089b8511, type: 3}
@@ -1557,6 +1567,43 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 3.2765963, z: 1}
   m_Center: {x: 0, y: 1.785128, z: 0}
+<<<<<<< Updated upstream
+=======
+--- !u!114 &1785544393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785544386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff49004d0a0a324b81e5b16cb17e134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  dashSpeed: 30
+  dashTime: 0.1
+  targetVector: {x: 0, y: 0, z: 0}
+--- !u!114 &1785544394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785544386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87e686315df677489619b1a18d71c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashCoolDown: 2
+--- !u!4 &1825903387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3559286343677711050, guid: e9ec365ce94a925448ae0006c3bf9164, type: 3}
+  m_PrefabInstance: {fileID: 1596376805812999323}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1 &1963902349
 GameObject:
   m_ObjectHideFlags: 0
