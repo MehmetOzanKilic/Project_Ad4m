@@ -1228,7 +1228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4114201434426280131, guid: f915b6a5f1c8df34d9ce3903ed6cf318, type: 3}
   bulletSpawnPoint: {fileID: 1825903387}
-  bulletSpeed: 10
+  bulletSpeed: 30
   bulletLifetime: 3
 --- !u!1 &1785544386 stripped
 GameObject:
@@ -1308,8 +1308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff49004d0a0a324b81e5b16cb17e134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  rotationSpeed: 5
+  moveSpeed: 7
+  dashSpeed: 30
+  dashTime: 0.1
 --- !u!114 &1785544394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,6 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87e686315df677489619b1a18d71c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashCoolDown: 1
 --- !u!4 &1825903387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3559286343677711050, guid: e9ec365ce94a925448ae0006c3bf9164, type: 3}
