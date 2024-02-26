@@ -71,11 +71,8 @@ public class MovementController : MonoBehaviour
     public float moveSpeed = 3f;
     public float rotationSpeed = 5f;
 
-    private Rigidbody rb;
-
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -84,11 +81,6 @@ public class MovementController : MonoBehaviour
         // Player Rotation
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
         transform.Rotate(Vector3.up * mouseX);
-
-        /*// Player Movement
-        float moveVertical = Input.GetAxisRaw("Vertical");
-        Vector3 movement = transform.forward * moveVertical * moveSpeed * Time.deltaTime;
-        rb.MovePosition(transform.position + movement);*/
 
         // Player Movement
         float moveVertical = Input.GetAxisRaw("Vertical");
