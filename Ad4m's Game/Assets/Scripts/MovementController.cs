@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MovementController : MonoBehaviour
 {
+    /*
     //movement
     [SerializeField] private float moveSpeed = 5f;
 
@@ -65,5 +66,33 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    */
 
+    public float moveSpeed = 4f; // Speed of player movement
+    public float rotationSpeed = 5f; // Speed of player rotation
+
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        // Lock cursor to center of screen
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void Update()
+    {
+        // Player Rotation
+        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
+
+        // Rotate the player only around the Y-axis
+        transform.Rotate(Vector3.up * mouseX);
+
+        // Player Movement
+        if (Input.GetKey(KeyCode.W))
+        {
+            Vector3 movement = transform.forward * moveSpeed * Time.deltaTime;
+            rb.MovePosition(transform.position + movement);
+        }
+    }
 }
