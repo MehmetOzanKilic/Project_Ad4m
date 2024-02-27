@@ -13,6 +13,7 @@ public class MovementController : MonoBehaviour
     private bool isDashing;
     public float dashSpeed = 30f;
     public float dashTime = 0.1f;
+    public Vector3 target;
 
     void Start()
     {
@@ -70,13 +71,14 @@ public class MovementController : MonoBehaviour
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
     }
-    private void RotateTowardsMouse()
+    public void RotateTowardsMouse()
     {
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
 
         if(Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
-            var target = hitInfo.point;
+            target = hitInfo.point;
+            //Debug.Log(target);
             target.y = transform.position.y;
             transform.LookAt(target);
         }
