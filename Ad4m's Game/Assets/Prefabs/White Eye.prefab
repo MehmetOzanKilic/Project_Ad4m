@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e55a11a05aa141af9f3be5e921cc003, type: 2}
+  - {fileID: 2100000, guid: 61731bf38a6fa4d66b536bc03fc8eb3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e55a11a05aa141af9f3be5e921cc003, type: 2}
+  - {fileID: 2100000, guid: 61731bf38a6fa4d66b536bc03fc8eb3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -224,8 +224,8 @@ GameObject:
   - component: {fileID: 9167392970271039551}
   - component: {fileID: 271692645472027882}
   m_Layer: 0
-  m_Name: Eye 1
-  m_TagString: Untagged
+  m_Name: White Eye
+  m_TagString: Eye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1aa34c8f746ab248967e2039a6fdd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 1
   adam: {fileID: 0}
   deathTime: 1
   errorMargin: 0.5
