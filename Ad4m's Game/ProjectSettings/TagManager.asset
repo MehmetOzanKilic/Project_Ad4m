@@ -7,6 +7,9 @@ TagManager:
   - Wall
   - Ground
   - Bullet
+  - Mobs
+  - Weapon
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -16,8 +19,8 @@ TagManager:
   - UI
   - Mobs
   - Player
-  - 
-  - 
+  - Bullet
+  - Weapon
   - 
   - 
   - 

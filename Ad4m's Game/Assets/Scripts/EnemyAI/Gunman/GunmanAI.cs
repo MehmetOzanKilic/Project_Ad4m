@@ -4,59 +4,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class GunmannAI : MonoBehaviour
 {
     public NavMeshAgent agent; //variable for the Enemy navMesh.
     public Transform player; //variable for the Player game object.
     public LayerMask whatIsGround, whatIsPlayer; //to select the ground and player layers.
     public float health; //health of the Enemy. Unused for now as there is no way to deal damage.
 
-    //Patrolling
-    public Vector3 walkPoint;  //the point where the enemy will walk to.
-    bool walkPointSet;
-    public float walkPointRange; //the range of the patrolling area.
-
     //Attacking
-    public float timeBetweenAttacks; 
+    public float timeBetweenAttacks;
     bool hasAttacked;
     public GameObject projectile; //the projectile model.
+    private float dodgeTimer;
+
 
     //States
-    public float sightRange, attackRange; 
-    public bool playerInSightRange, playerInAttackRange;
+    public float  attackRange;
+    public bool  playerInAttackRange;
 
-    private void Awake()
+    private void Start()
     {
         player = GameObject.Find("PlayerGameObj").transform; //sets the Player.
         agent = GetComponent<NavMeshAgent>(); //sets the agent.
+
     }
- 
+
     private void Update()
     {
         //Check for sight and attack range every frame
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patrolling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if (!playerInAttackRange) ChasePlayer();
+        if (playerInAttackRange) AttackPlayer();
     }
 
-    private void Patrolling()
-    {
-        if (!walkPointSet) SearchWalkPoint();
-    }
-    private void SearchWalkPoint()
-    {
-        //Calculate random point in range
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ); //walk to the random point.
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) //if the random point is beneath ground don't update walkpoint
-            walkPointSet = true;
-    }
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
@@ -64,15 +45,20 @@ public class EnemyAI : MonoBehaviour
     private void AttackPlayer()
     {
         ///WIP
-        //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
+        ///Make sure enemy doesn't move
+        //agent.SetDestination(transform.position);
         
         transform.LookAt(player);
 
         if (!hasAttacked)
         {
-            ///Attack code here
-            GameObject projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity);
+            //Attack code here
+            float spawnOffset = 0.0f;
+
+            // Calculate the spawn position
+            Vector3 spawnPosition = transform.position + transform.forward * spawnOffset;
+
+            GameObject projectileInstance = Instantiate(projectile, spawnPosition, Quaternion.identity);
             Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
             if (rb != null)
             {
@@ -82,13 +68,25 @@ public class EnemyAI : MonoBehaviour
             else
             {
                 Debug.LogError("The instantiated projectile does not have a Rigidbody component.");
-            } //this is placeholder code to simulate damage
-            ///End of attack code
+            }
+            Dodge();
+
+            //End of attack code
 
             hasAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+    private void Dodge()
+    {
+        dodgeTimer += Time.deltaTime;
+        if (dodgeTimer > Random.Range(3, 7))
+        {
+            agent.SetDestination(transform.position + (Random.insideUnitSphere * 5));
+            dodgeTimer = 0;
+        }
+    }
+
     private void ResetAttack()
     {
         hasAttacked = false;
@@ -108,8 +106,6 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 
 

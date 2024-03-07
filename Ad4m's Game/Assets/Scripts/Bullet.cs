@@ -67,4 +67,5 @@ public class Bullet : MonoBehaviour
 
         time += Time.deltaTime;
     }
+    
 }
