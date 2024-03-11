@@ -7,4 +7,5 @@ public class CardData : ScriptableObject
     public int health;
     public int attack;
     public string abilitytxt;
+    public int symboltype =0;
 }
