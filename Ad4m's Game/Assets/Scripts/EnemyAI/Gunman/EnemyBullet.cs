@@ -19,7 +19,7 @@ public class EnemyBullet : MonoBehaviour
         }
         if (hitTransform.CompareTag("Mobs") || hitTransform.CompareTag("Ground"))
         {
-            Debug.Log("hit mob!");
+            //Debug.Log("hit mob!");
         }
         else { Destroy(gameObject); }
         

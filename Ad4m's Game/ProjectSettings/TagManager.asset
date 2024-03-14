@@ -10,6 +10,7 @@ TagManager:
   - Mobs
   - Weapon
   - EnemyBullet
+  - EnemyWeapon
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Player
   - Bullet
   - Weapon
-  - 
-  - 
+  - EnemyBullet
+  - EnemyWeapon
   - 
   - 
   - 

@@ -6,16 +6,15 @@ using UnityEngine.AI;
 
 public class GunmannAI : MonoBehaviour
 {
-    public NavMeshAgent agent; //variable for the Enemy navMesh.
-    public Transform player; //variable for the Player game object.
+    private NavMeshAgent agent; //variable for the Enemy navMesh.
+    private Transform player; //variable for the Player game object.
     public LayerMask whatIsGround, whatIsPlayer; //to select the ground and player layers.
-    public float health; //health of the Enemy. Unused for now as there is no way to deal damage.
 
     //Attacking
     public float timeBetweenAttacks;
     bool hasAttacked;
     public GameObject projectile; //the projectile model.
-    private float dodgeTimer;
+    public bool isDodging;
 
 
     //States
@@ -24,9 +23,9 @@ public class GunmannAI : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("PlayerGameObj").transform; //sets the Player.
+        player = GameObject.Find("PlayerGameObj").transform; //sets the Player
         agent = GetComponent<NavMeshAgent>(); //sets the agent.
-
+        
     }
 
     private void Update()
@@ -34,8 +33,11 @@ public class GunmannAI : MonoBehaviour
         //Check for sight and attack range every frame
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange) AttackPlayer();
+        if (playerInAttackRange)
+            AttackPlayer();
+        else if (!playerInAttackRange && !isDodging)
+            ChasePlayer();
+
     }
 
     private void ChasePlayer()
@@ -58,11 +60,11 @@ public class GunmannAI : MonoBehaviour
             // Calculate the spawn position
             Vector3 spawnPosition = transform.position + transform.forward * spawnOffset;
 
-            GameObject projectileInstance = Instantiate(projectile, spawnPosition, Quaternion.identity);
-            Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
+            GameObject projectileInstance = Instantiate(projectile, spawnPosition, Quaternion.identity); //spawns a bullet GameObject
+            Rigidbody rb = projectileInstance.GetComponent<Rigidbody>(); //rigidbody of the bullet GameObject
             if (rb != null)
             {
-                rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+                rb.AddForce(transform.forward * 32f, ForceMode.Impulse); //speed of the spawned projectile
                 rb.AddForce(transform.up * 8f, ForceMode.Impulse);
             }
             else
@@ -79,28 +81,17 @@ public class GunmannAI : MonoBehaviour
     }
     private void Dodge()
     {
-        dodgeTimer += Time.deltaTime;
-        if (dodgeTimer > Random.Range(3, 7))
-        {
-            agent.SetDestination(transform.position + (Random.insideUnitSphere * 5));
-            dodgeTimer = 0;
-        }
+        isDodging = true;
+        agent.SetDestination(transform.position + (Random.insideUnitSphere * 5));
+        isDodging = false;
+        
     }
 
     private void ResetAttack()
     {
         hasAttacked = false;
     }
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
-    }
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
-    }
 
     private void OnDrawGizmosSelected()
     {
