@@ -9,12 +9,21 @@ public class GunController : MonoBehaviour
     public Transform bulletSpawnPoint;
     public float bulletSpeed = 10f;
     public float bulletLifetime = 1f;
+    private float reloadSpeed;
+    private float shotAmount;
+    private int shotCount =0;
+    private bool canShoot;
+    private PlayerAttributeController playerAttributeController;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        canShoot = true;
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
+        reloadSpeed = playerAttributeController.reloadSpeed;
+        shotAmount = playerAttributeController.shotAmount;
     }
 
     // Update is called once per frame
@@ -22,13 +31,28 @@ public class GunController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Shoot();
+            if (shotCount < shotAmount && canShoot)
+            {
+                Shoot();
+            }
+            else
+            {
+                canShoot = false;
+                StartCoroutine(WaitForTemp());
+            }
         }
+    }
+    IEnumerator WaitForTemp()
+    {
+        yield return new WaitForSeconds(reloadSpeed);
+        shotCount = 0; // Reset the shot count after waiting
+        canShoot = true;
     }
 
     void Shoot()
-    {
+    { 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        shotCount++;
         Destroy(bullet, bulletLifetime);
     }
 

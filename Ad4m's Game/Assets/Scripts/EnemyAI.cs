@@ -72,9 +72,17 @@ public class EnemyAI : MonoBehaviour
         if (!hasAttacked)
         {
             ///Attack code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse); //this is placeholder code to simulate damage
+            GameObject projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity);
+            Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+                rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.LogError("The instantiated projectile does not have a Rigidbody component.");
+            } //this is placeholder code to simulate damage
             ///End of attack code
 
             hasAttacked = true;
