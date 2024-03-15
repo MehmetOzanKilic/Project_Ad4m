@@ -12,7 +12,7 @@ public class EyesAI : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("PlayerGameObj").transform; //sets the Player.
+        player = GameObject.Find("Ad4m").transform; //sets the Player.
         agent = GetComponent<NavMeshAgent>(); //sets the agent.
     }
 

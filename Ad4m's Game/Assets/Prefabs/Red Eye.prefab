@@ -332,11 +332,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc362128e805f64f91485323f11c534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
   diesIn: 5
   adam: {fileID: 0}
   deathTime: 0.3
   errorMargin: 0.5
   seeAng: 50
+  range: 15
 --- !u!195 &8807101670213358017
 NavMeshAgent:
   m_ObjectHideFlags: 0
