@@ -9,6 +9,9 @@ public class GunmanHealth : MonoBehaviour
     public float bulletDamage;
     public float meleeDamage;
     private PlayerAttributeController playerAttributeController;
+    private GameObject playerObject;
+
+
     private void OnCollisionEnter(Collision collision)
     {
         Transform hitTransform = collision.transform;
@@ -21,10 +24,14 @@ public class GunmanHealth : MonoBehaviour
         }
 
     }
+    private void Awake()
+    {
+        playerObject = GameObject.Find("Ad4m");
+    }
 
     private void Start()
     {
-        GameObject playerObject = GameObject.FindWithTag("Player");
+        
         health = maxHealth;
         Debug.Log(health);
         // Get the PlayerDamageController component from the player GameObject

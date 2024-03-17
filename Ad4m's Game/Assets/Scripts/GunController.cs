@@ -14,13 +14,17 @@ public class GunController : MonoBehaviour
     private int shotCount =0;
     private bool canShoot;
     private PlayerAttributeController playerAttributeController;
+    private GameObject playerObject;
 
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        playerObject = GameObject.Find("Ad4m");
+    }
     void Start()
     {
         canShoot = true;
-        GameObject playerObject = GameObject.FindWithTag("Player");
         playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
         reloadSpeed = playerAttributeController.reloadSpeed;
         shotAmount = playerAttributeController.shotAmount;
@@ -29,8 +33,9 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            Debug.Log("bambam");
             if (shotCount < shotAmount && canShoot)
             {
                 Shoot();

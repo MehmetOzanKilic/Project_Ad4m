@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GunmannAI : MonoBehaviour
+public class v  : MonoBehaviour
 {
     private NavMeshAgent agent; //variable for the Enemy navMesh.
     private Transform player; //variable for the Player game object.
@@ -23,7 +23,7 @@ public class GunmannAI : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("PlayerGameObj").transform; //sets the Player
+        player = GameObject.Find("Ad4m").transform; //sets the Player
         agent = GetComponent<NavMeshAgent>(); //sets the agent.
         
     }
@@ -39,10 +39,21 @@ public class GunmannAI : MonoBehaviour
             ChasePlayer();
 
     }
+    public void getAdam(Transform temp)
+    {
+        player = temp;
+    }
 
     private void ChasePlayer()
-    {
-        agent.SetDestination(player.position);
+    {   
+        //prevents the gunman to touch the player.
+        if(Vector3.Distance(transform.position,player.position)>5)
+        {
+            agent.isStopped=false;
+            agent.SetDestination(player.position);
+        }
+        else
+            agent.isStopped=true; 
     }
     private void AttackPlayer()
     {
