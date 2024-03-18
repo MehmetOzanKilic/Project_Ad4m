@@ -88,9 +88,9 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
-    void HandleSlotSelectionPhase() //SLOT SELECTION PHASE
+    /*void HandleSlotSelectionPhase() //SLOT SELECTION
     {
-        Vector3 targetPosition = GetGridSlotPosition(selectedGridIndex);
+        Vector3 targetPosition = GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
         MoveCardToPosition(selectedCardIndex, targetPosition);
         cards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 
@@ -115,8 +115,72 @@ public class CardGameManager : MonoBehaviour
         {
             currentPhase = GamePhase.Action;
         }
+    }*/
+
+
+    void HandleSlotSelectionPhase()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            currentPhase = GamePhase.Action;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            MoveUp();
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            MoveDown();
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            MoveLeftOnGrid();
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            MoveRightOnGrid();
+        }
+
+        Vector3 targetPosition = GetInitialSlotPosition();
+        MoveCardToPosition(selectedCardIndex, targetPosition);
+        cards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
     }
 
+    Vector3 GetInitialSlotPosition()
+    {
+        //If the middle slot is unoccupied, put the card in the middle slot.
+        if (!gridSlots[selectedGridIndex].GetComponent<SlotController>().isOccupied)
+        {
+            return GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
+        }
+        else if(gridSlots[selectedGridIndex].GetComponent<SlotController>().isOccupied) //If the middle slot is occupied, put it on an unoccupied adjacent slot
+        {
+            int[] adjacentSlots = { selectedGridIndex - 1, selectedGridIndex + 1, selectedGridIndex - 3, selectedGridIndex + 3 };
+            foreach (int index in adjacentSlots)
+            {
+                if (index >= 0 && index < 9 && !gridSlots[index].GetComponent<SlotController>().isOccupied)
+                {
+                    return GetGridSlotPosition(index) + new Vector3(0f, 1f, 0f);
+                }
+            }
+        }
+        else
+        {
+            // Check corner slots
+            int[] cornerSlots = { 0, 2, 6, 8 };
+            foreach (int index in cornerSlots)
+            {
+                if (!gridSlots[index].GetComponent<SlotController>().isOccupied)
+                {
+                    return GetGridSlotPosition(index) + new Vector3(0f, 1f, 0f);
+                }
+            }
+        }
+
+
+        return GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
+    }
 
     void HandleActionPhase() //ACTION PHASE
     {
@@ -183,7 +247,7 @@ public class CardGameManager : MonoBehaviour
     void MoveUp()
     {
         int newIndex = selectedGridIndex - 3;
-        if (newIndex >= 0)
+        if (newIndex >= 0 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
         {
             selectedGridIndex = newIndex;
         }
@@ -192,7 +256,7 @@ public class CardGameManager : MonoBehaviour
     void MoveDown()
     {
         int newIndex = selectedGridIndex + 3;
-        if (newIndex < 9)
+        if (newIndex < 9 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
         {
             selectedGridIndex = newIndex;
         }
@@ -201,7 +265,7 @@ public class CardGameManager : MonoBehaviour
     void MoveLeftOnGrid()
     {
         int newIndex = selectedGridIndex - 1;
-        if (newIndex >= 0 && newIndex / 3 == selectedGridIndex / 3)
+        if (newIndex >= 0 && newIndex / 3 == selectedGridIndex / 3 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
         {
             selectedGridIndex = newIndex;
         }
@@ -210,7 +274,7 @@ public class CardGameManager : MonoBehaviour
     void MoveRightOnGrid()
     {
         int newIndex = selectedGridIndex + 1;
-        if (newIndex < 9 && newIndex / 3 == selectedGridIndex / 3)
+        if (newIndex < 9 && newIndex / 3 == selectedGridIndex / 3 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
         {
             selectedGridIndex = newIndex;
         }
