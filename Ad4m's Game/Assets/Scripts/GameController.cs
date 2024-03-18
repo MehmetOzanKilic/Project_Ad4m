@@ -36,8 +36,8 @@ public class GameController : MonoBehaviour
     {
         eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
         mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
-        eyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
-        //mobsPresent = GameObject.FindGameObjectsWithTag("ProjectileEye");
+        spawnerEyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
+        projectileEyesPresent = GameObject.FindGameObjectsWithTag("ProjectileEye");
 
         if(horrorSection)
         {
@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour
         if(shooterSection)
         {   
             //only one spawnerEye is allowed
-            if(spawnerEyesPresent==null)
+            if(spawnerEyesPresent.Length==0)
             {
                 //spawn time for spawnerEyes are 3 times the normal amount
                 if(spawnerEyeTimer>=eyeSpawnTime*3)
@@ -107,7 +107,7 @@ public class GameController : MonoBehaviour
         if(dodgerSection)
         {
             //only max 2 projectileEyes are allowed.
-            if(projectileEyesPresent==null || projectileEyesPresent.Length<2)
+            if(projectileEyesPresent.Length<4)
             {   
                 //spawn time for spawnerEyes are 3 times the normal amount
                 if(projectileEyeTimer>=eyeSpawnTime*2)
@@ -147,7 +147,7 @@ public class GameController : MonoBehaviour
     float mobTimer=0f;
     private void shooterSpawn()
     {
-        if(!horrorSection && !dodgerSection)
+        if(horrorSection==false && dodgerSection==false)
         {
             if(mobsPresent.Length<10)
             {
@@ -159,7 +159,7 @@ public class GameController : MonoBehaviour
                 else mobTimer+=Time.deltaTime;
             }
         }
-        if(!horrorSection && dodgerSection)
+        if(horrorSection==false && dodgerSection==true)
         {
             if(mobsPresent.Length<10)
             {

@@ -9,6 +9,11 @@ TagManager:
   - Bullet
   - Spawner
   - Eye
+  - SpawnerEye
+  - Mobs
+  - EnemyBullet
+  - Weapon
+  - ProjectileEye
   layers:
   - Default
   - TransparentFX

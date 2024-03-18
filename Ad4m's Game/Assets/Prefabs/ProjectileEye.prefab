@@ -223,8 +223,8 @@ GameObject:
   - component: {fileID: 8615996711705489997}
   - component: {fileID: 9167392970271039551}
   m_Layer: 0
-  m_Name: SpawnerEye
-  m_TagString: SpawnerEye
+  m_Name: ProjectileEye
+  m_TagString: ProjectileEye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,7 +274,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79809b4fc57ad41b982c1dd5ceb812b2, type: 2}
+  - {fileID: 2100000, guid: 3e55a11a05aa141af9f3be5e921cc003, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

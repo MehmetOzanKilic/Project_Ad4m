@@ -12,6 +12,7 @@ public class SpawnerController : MonoBehaviour
     [SerializeField]private GameObject whiteEye;
     [SerializeField]private GameObject spawnerEye;
     [SerializeField]private GameObject redEye;
+    [SerializeField]private GameObject projectileEye;
     [SerializeField]private GameObject yellowEye;
     [SerializeField]private GameObject gunMan;
     [SerializeField]private GameObject swordMan; 
@@ -95,12 +96,12 @@ public class SpawnerController : MonoBehaviour
         else upperLimit=mobProb[1];
 
         var random = rnd.Next(0,upperLimit);
-
+        Debug.Log(temp+"upperLimit:"+upperLimit+random);
         if(0<=random && random<=mobProb[0])
         {
             insSwordMan();
         }
-        else if(eyeProb[0]<random && random<=eyeProb[1])
+        else if(mobProb[0]<random && random<=mobProb[1])
         {
             insGunMan();
         }
@@ -118,7 +119,7 @@ public class SpawnerController : MonoBehaviour
         {
             insSwordMan(pos);
         }
-        else if(eyeProb[0]<random && random<=eyeProb[1])
+        else if(mobProb[0]<random && random<=mobProb[1])
         {
             insGunMan(pos);
         }
@@ -163,6 +164,7 @@ public class SpawnerController : MonoBehaviour
     }
     public void insProjectileEye()
     {
+        Instantiate(projectileEye,randomPos(),Quaternion.identity);
         Debug.Log("insProjectileEye()");
     }
 }
