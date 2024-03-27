@@ -7,6 +7,10 @@ TagManager:
   - Wall
   - Ground
   - Bullet
+  - Spawner
+  - VegasSphere
+  - Arena
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -14,7 +18,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - PlaneGround
   - 
   - 
   - 

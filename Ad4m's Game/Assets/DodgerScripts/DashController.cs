@@ -19,7 +19,6 @@ public class DashController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.LeftShift) && counter > dashCoolDown)
         {
-            movementController.Dashing();
             counter=0;
         }
     }
