@@ -224,7 +224,8 @@ GameObject:
   - component: {fileID: 9167392970271039551}
   - component: {fileID: 3208662677368341051}
   - component: {fileID: 1461993244727720764}
-  - component: {fileID: -4224325616068366180}
+  - component: {fileID: 8371019852403379839}
+  - component: {fileID: 6573210894768015308}
   m_Layer: 0
   m_Name: Yellow Eye
   m_TagString: Eye
@@ -332,11 +333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c6a3ae95ff15e42b8d86c49718729a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adam: {fileID: 0}
-  deathTime: 2
-  errorMargin: 0.5
-  seeAng: 50
-  deneme: 80
+  stopDis: 1
+  range: 0
+  sightDistance: 8
 --- !u!195 &1461993244727720764
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -359,23 +358,33 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-4224325616068366180
+--- !u!114 &8371019852403379839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7417140091224587864}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b57423232695e4586cc8c47f5ac368, type: 3}
+  m_Script: {fileID: 11500000, guid: 46c6a3ae95ff15e42b8d86c49718729a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
+  stopDis: 1
+  range: 5
+  sightDistance: 8
+--- !u!114 &6573210894768015308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7417140091224587864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb7761456546f246a3d308cba4a411c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopDis: 1
+  range: 5
+  sightDistance: 8

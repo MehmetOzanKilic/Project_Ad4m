@@ -54,14 +54,14 @@ public class SpawnerController : MonoBehaviour
 
     private Vector3 randomPos()
     {
-        float distance = rnd.Next(7,10);
+        float distance = rnd.Next(12,16);
         float angle = rnd.Next(0,360) * Mathf.Deg2Rad;
 
         return new Vector3(Mathf.Cos(angle) * distance, 0.5f, Mathf.Sin(angle) * distance)+adam.transform.position;
     }
     private Vector3 randomPos(int a)
     {
-        float distance = rnd.Next(7,10)*a;
+        float distance = rnd.Next(12,16)*a;
         float angle = rnd.Next(0,360) * Mathf.Deg2Rad;
 
         return new Vector3(Mathf.Cos(angle) * distance, 0.5f, Mathf.Sin(angle) * distance)+adam.transform.position;
@@ -96,7 +96,7 @@ public class SpawnerController : MonoBehaviour
         else upperLimit=mobProb[1];
 
         var random = rnd.Next(0,upperLimit);
-        Debug.Log(temp+"upperLimit:"+upperLimit+random);
+
         if(0<=random && random<=mobProb[0])
         {
             insSwordMan();
@@ -127,12 +127,10 @@ public class SpawnerController : MonoBehaviour
     public void insWhiteEye()
     {
         var temp=(GameObject)Instantiate(whiteEye,randomPos(),Quaternion.identity);
-        temp.GetComponent<WhiteEyeController>().getAdam(adam);
     }
     public void insRedEye()
     {
         var temp=(GameObject)Instantiate(redEye,randomPos(),Quaternion.identity);
-        temp.GetComponent<RedEyeController>().getAdam(adam);
     }
     public void insYellowEye()
     {
@@ -160,11 +158,9 @@ public class SpawnerController : MonoBehaviour
     public void insSpawnerEye()
     {
         Instantiate(spawnerEye,randomPos(),Quaternion.identity);
-        Debug.Log("insSpawnerEye()");
     }
     public void insProjectileEye()
     {
         Instantiate(projectileEye,randomPos(),Quaternion.identity);
-        Debug.Log("insProjectileEye()");
     }
 }

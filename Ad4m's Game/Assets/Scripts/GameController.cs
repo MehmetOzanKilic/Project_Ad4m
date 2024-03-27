@@ -6,7 +6,6 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField]private GameObject adam;
-    [SerializeField]private bool isHorrorActive=false;
     [SerializeField]private SpawnerController spawner;
 
     private GameObject[] eyesPresent;
@@ -15,6 +14,7 @@ public class GameController : MonoBehaviour
     private GameObject[] projectileEyesPresent;
 
     //SerilizeFields will be removed later.
+    [SerializeField]private bool spawn=true;
     [SerializeField]private bool horrorSection;
     [SerializeField]private bool shooterSection;
     [SerializeField]private bool dodgerSection;
@@ -39,14 +39,18 @@ public class GameController : MonoBehaviour
         spawnerEyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
         projectileEyesPresent = GameObject.FindGameObjectsWithTag("ProjectileEye");
 
-        if(horrorSection)
+        if(spawn)
         {
-            horrorSpawn();
+            if(horrorSection)
+            {
+                horrorSpawn();
+            }
+            if(shooterSection)
+            {
+                shooterSpawn();
+            }
         }
-        if(shooterSection)
-        {
-            shooterSpawn();
-        }
+        
     }
 
     public GameObject sendAdam()
@@ -77,7 +81,6 @@ public class GameController : MonoBehaviour
 
             else if(spawnerEyesPresent.Length!=0)
             {   
-                Debug.Log("spawnereyespawn");
                 if(mobsPresent.Length<10)
                 {
                     if(mobTimer>=mobSpawnTime)

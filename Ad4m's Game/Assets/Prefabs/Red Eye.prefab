@@ -222,9 +222,9 @@ GameObject:
   - component: {fileID: 2125470516294664421}
   - component: {fileID: 8615996711705489997}
   - component: {fileID: 9167392970271039551}
-  - component: {fileID: 8142493334847642452}
   - component: {fileID: 8807101670213358017}
-  - component: {fileID: -4454699273592068911}
+  - component: {fileID: 6234741075476414021}
+  - component: {fileID: 8755681795774025404}
   m_Layer: 0
   m_Name: Red Eye
   m_TagString: Eye
@@ -320,31 +320,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8142493334847642452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417140091224587864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc362128e805f64f91485323f11c534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
-  diesIn: 5
-  adam: {fileID: 0}
-  deathTime: 0.3
-  errorMargin: 0.5
-  seeAng: 50
-  range: 15
 --- !u!195 &8807101670213358017
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -355,7 +330,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -367,23 +342,38 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-4454699273592068911
+--- !u!114 &6234741075476414021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7417140091224587864}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b57423232695e4586cc8c47f5ac368, type: 3}
+  m_Script: {fileID: 11500000, guid: dcc362128e805f64f91485323f11c534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
+  stopDis: 1
+  movementRange: 10
+  sightDistance: 15
+  eyeColor: 0.14
+  errorMargin: 1
+  attackDis: 5
+  deathTime: 1
+  diesIn: 10
+--- !u!114 &8755681795774025404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7417140091224587864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb7761456546f246a3d308cba4a411c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopDis: 1
+  movementRange: 0
+  sightDistance: 8

@@ -17,10 +17,10 @@ public class ProjectilePool : MonoBehaviour
 
     void Awake()
     {
-        projectilePrefabs = GameObject.FindGameObjectsWithTag("Projectile");
-        spawningPlane = GameObject.FindWithTag("Spawner").transform;
-        arena = GameObject.FindWithTag("Arena").transform;
-        vegasSphere = GameObject.FindWithTag("VegasSphere");
+        //projectilePrefabs = GameObject.FindGameObjectsWithTag("Projectile");
+        //spawningPlane = GameObject.FindWithTag("Spawner").transform;
+        //arena = GameObject.FindWithTag("Arena").transform;
+        //vegasSphere = GameObject.FindWithTag("VegasSphere");
     }
 
     bool IsInPlaneSpawnArea(Vector3 projectilePosition)
