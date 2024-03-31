@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -29,23 +30,28 @@ public class SpecificCamera : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            currentMode = 0; // top-down
-            SetCameraMode(currentMode);
+            //side view
+            SetCameraMode(1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            currentMode = 1; // isometric
-            SetCameraMode(currentMode);
+            //top-down
+            SetCameraMode(2);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            currentMode = 2; // tps
-            SetCameraMode(currentMode);
+            //isometric
+            SetCameraMode(3);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            currentMode = 3; // fps
-            SetCameraMode(currentMode);
+            //tps
+            SetCameraMode(4);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            //fps
+            SetCameraMode(5);
         }
     }
 
@@ -53,19 +59,23 @@ public class SpecificCamera : MonoBehaviour
     {
         switch (mode)
         {
-            case 0:
+            case 1:
+                transform.rotation = Quaternion.Euler(20f, 0f, 0f);
+                offset = new Vector3(0f, 10f, -10f);
+                break;
+            case 2:
                 transform.rotation = Quaternion.Euler(90f, 0f, 0f);
                 offset = new Vector3(0f, 20f, 0f);
                 break;
-            case 1:
+            case 3:
                 transform.rotation = Quaternion.Euler(45f, -45f, 0f);
                 offset = new Vector3(8, 15f, -6f);
                 break;
-            case 2:
+            case 4:
                 transform.rotation = Quaternion.Euler(30f, 0f, 0f);
                 offset = new Vector3(0f, 5f, -5f);
                 break;
-            case 3:
+            case 5:
                 transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 offset = new Vector3(0f, 2.5f, 1.5f);
                 break;
