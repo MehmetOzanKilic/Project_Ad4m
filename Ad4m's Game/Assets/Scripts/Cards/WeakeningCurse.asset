@@ -17,3 +17,4 @@ MonoBehaviour:
   attack: 0
   abilitytxt: Decrease attack of all adjacent enemy cards by 1.
   symboltype: 0
+  type: 3

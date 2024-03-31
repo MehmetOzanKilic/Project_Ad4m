@@ -17,3 +17,4 @@ MonoBehaviour:
   attack: 0
   abilitytxt: Heal all adjacent friendly cards by 1 health each turn.
   symboltype: 0
+  type: 1

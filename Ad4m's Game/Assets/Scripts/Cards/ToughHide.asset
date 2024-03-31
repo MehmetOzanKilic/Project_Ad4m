@@ -17,3 +17,4 @@ MonoBehaviour:
   attack: 0
   abilitytxt: This card takes 1 less damage from all sources.
   symboltype: 0
+  type: 4

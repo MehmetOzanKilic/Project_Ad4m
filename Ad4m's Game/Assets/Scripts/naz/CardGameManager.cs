@@ -23,6 +23,7 @@ public class CardGameManager : MonoBehaviour
     public Transform opponentHandParent;
     public List<GameObject> opponentCards;
     public GameObject[] opponentCardsPositions;
+    public EnemyController enemyController;
 
     public GameObject[] gridSlots;
 
@@ -54,7 +55,7 @@ public class CardGameManager : MonoBehaviour
                 HandleTurnPhase();
                 break;
             case GamePhase.EnemyTurn:
-                EnemyTurnHandler();
+                enemyController.EnemyTurnHandler();
                 break;
             case GamePhase.SlotSelection:
                 HandleSlotSelectionPhase();
@@ -334,7 +335,7 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
-    void SwitchCamera()
+    public void SwitchCamera()
     {
         if (currentPhase == GamePhase.PlayerTurn || currentPhase == GamePhase.EnemyTurn)
         {
@@ -348,9 +349,4 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
-
-    void EnemyTurnHandler()
-    {
-
-    }
 }

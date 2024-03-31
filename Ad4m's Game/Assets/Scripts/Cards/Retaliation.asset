@@ -17,3 +17,4 @@ MonoBehaviour:
   attack: 1
   abilitytxt: Deal 1 damage to the attacking card after being attacked.
   symboltype: 0
+  type: 5

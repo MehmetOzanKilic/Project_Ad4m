@@ -18,3 +18,4 @@ MonoBehaviour:
   abilitytxt: When this card is destroyed, deal 3 damage to the card that destroyed
     it.
   symboltype: 0
+  type: 6

@@ -17,3 +17,4 @@ MonoBehaviour:
   attack: 0
   abilitytxt: All damage dealt to adjacent friendly cards is reduced by 1.
   symboltype: 0
+  type: 4
