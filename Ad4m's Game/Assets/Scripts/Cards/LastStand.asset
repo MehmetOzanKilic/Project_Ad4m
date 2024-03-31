@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: LastStand
   m_EditorClassIdentifier: 
+  CardName: Last Stand
   health: 3
   attack: 1
   abilitytxt: When this card is destroyed, deal 3 damage to the card that destroyed
     it.
+  symboltype: 0

@@ -8,22 +8,29 @@ public class CardGameManager : MonoBehaviour
 {
     public enum GamePhase
     {
-        Turn,
+        PlayerTurn,
+        EnemyTurn,
         SlotSelection,
         Action
     }
 
-    public GamePhase currentPhase = GamePhase.Turn;
+    public GamePhase currentPhase = GamePhase.PlayerTurn;
 
     public Transform playerHandParent;
-    public GameObject[] cards;
+    public List<GameObject> playerCards;
+    public GameObject[] playerCardsPositions;
+
+    public Transform opponentHandParent;
+    public List<GameObject> opponentCards;
+    public GameObject[] opponentCardsPositions;
+
     public GameObject[] gridSlots;
 
     private int selectedCardIndex = 0;
     private int selectedGridIndex = 4;
     public float movementSpeed = 5f;
-    
-    
+
+    int playedCardCount = 0;
 
     public CinemachineVirtualCamera deckViewCam;
     public CinemachineVirtualCamera topViewCam;
@@ -32,9 +39,10 @@ public class CardGameManager : MonoBehaviour
     public float hoverSpeed = 2f;
     private bool isPlacingCard = false;
 
+    public GameDeckController gameDeckController;
+
     void Start()
     {
-        InitializePlayerHand();
         SwitchCamera();
     }
 
@@ -42,8 +50,11 @@ public class CardGameManager : MonoBehaviour
     {
         switch (currentPhase)
         {
-            case GamePhase.Turn:
+            case GamePhase.PlayerTurn:
                 HandleTurnPhase();
+                break;
+            case GamePhase.EnemyTurn:
+                EnemyTurnHandler();
                 break;
             case GamePhase.SlotSelection:
                 HandleSlotSelectionPhase();
@@ -56,18 +67,59 @@ public class CardGameManager : MonoBehaviour
         Hover();
     }
 
-    void InitializePlayerHand()
+    public void InitializePlayerHand()
     {
-        List<GameObject> cardObjects = new List<GameObject>();
-        foreach (Transform cardPos in playerHandParent)
-        {
-            if (cardPos.childCount > 0)
-            {
-                cardObjects.Add(cardPos.GetChild(0).gameObject);
-            }
+         for (int i = 0; i < 3; i++)
+         {
+            playerCards.Add(gameDeckController.deckCards[i]);
+            gameDeckController.deckCards.Remove(gameDeckController.deckCards[i]);
+            playerCards[i].transform.parent = null;
+
+            playerCards[i].transform.rotation = Quaternion.Euler(0f, 0f, 45f);
+            playerCards[i].transform.position = playerCardsPositions[i].transform.position;
+
+            playerCards[i].transform.parent = playerCardsPositions[i].transform;
+
+            // Get the target position and rotation
+            //Vector3 targetPosition = cardsPositions[i].transform.position;
+            //Quaternion targetRotation = Quaternion.Euler(0f, 0f, 45f);
+
+            // Smoothly move and rotate
+
+            /*float smoothMovementSpeed = 10f;
+            float smoothRotationSpeed = 10f;
+            cards.Add(gameDeckController.deckCards[i]);
+            gameDeckController.deckCards.Remove(gameDeckController.deckCards[i]);
+            cards[i].transform.parent = null;
+
+            cards[i].transform.position = Vector3.Lerp(cards[i].transform.position, targetPosition, smoothMovementSpeed * Time.deltaTime);
+            cards[i].transform.rotation = Quaternion.Lerp(cards[i].transform.rotation, targetRotation, smoothRotationSpeed * Time.deltaTime);
+
+            cards[i].transform.parent = cardsPositions[i].transform;*/
+
         }
-        cards = cardObjects.ToArray();
+
+
     }
+
+    public void InitializeOpponentHand()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            opponentCards.Add(gameDeckController.deckCards[i]);
+            gameDeckController.deckCards.Remove(gameDeckController.deckCards[i]);
+            opponentCards[i].transform.parent = null;
+
+            opponentCards[i].transform.rotation = Quaternion.Euler(0f, 180f, 45f);
+            opponentCards[i].transform.position = opponentCardsPositions[i].transform.position;
+
+            opponentCards[i].transform.parent = opponentCardsPositions[i].transform;
+        }
+
+
+    }
+
+
 
 
     void HandleTurnPhase() //TURN PHASE
@@ -88,41 +140,14 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
-    /*void HandleSlotSelectionPhase() //SLOT SELECTION
-    {
-        Vector3 targetPosition = GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
-        MoveCardToPosition(selectedCardIndex, targetPosition);
-        cards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            MoveUp();
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            MoveDown();
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            MoveLeftOnGrid();
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            MoveRightOnGrid();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            currentPhase = GamePhase.Action;
-        }
-    }*/
-
-
     void HandleSlotSelectionPhase()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentPhase = GamePhase.Action;
+            playedCardCount++;
+            
+            //Debug.Log(playedCardCount);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -144,7 +169,7 @@ public class CardGameManager : MonoBehaviour
 
         Vector3 targetPosition = GetInitialSlotPosition();
         MoveCardToPosition(selectedCardIndex, targetPosition);
-        cards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
     }
 
     Vector3 GetInitialSlotPosition()
@@ -182,28 +207,57 @@ public class CardGameManager : MonoBehaviour
         return GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
     }
 
-    void HandleActionPhase() //ACTION PHASE
+    void HandleActionPhase()
     {
         isPlacingCard = false;
         Vector3 targetPosition = GetGridSlotPosition(selectedGridIndex);
 
         MoveCardToPosition(selectedCardIndex, targetPosition);
-        cards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        cards[selectedCardIndex].transform.SetParent(gridSlots[selectedGridIndex].transform);
+        playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        playerCards[selectedCardIndex].transform.SetParent(gridSlots[selectedGridIndex].transform);
 
-        List<GameObject> cardList = new List<GameObject>(cards);
-        cardList.RemoveAt(selectedCardIndex);
-        cards = cardList.ToArray();
+        //List<GameObject> cardList = new List<GameObject>(cards);
+        playerCards.Remove(playerCards[selectedCardIndex]);
+        //cards = cardList.ToArray();
 
-        currentPhase = GamePhase.Turn;
+        // Rearrange the player's deck
+        RearrangePlayerHand();
+
+        // Call the AddCardToDeck method before rearranging the player's deck
+        //AddCardToDeck();
+        if (playedCardCount == 2)
+        {
+            currentPhase = GamePhase.EnemyTurn;
+            playedCardCount = 0;
+        }
+        else
+        {
+            currentPhase = GamePhase.PlayerTurn;
+        }
+
+        
         SwitchCamera();
+    }
+
+    void RearrangePlayerHand()
+    {
+        //float smoothMovementSpeed = 5f;
+        for (int i = 0; i < playerCards.Count; i++)
+        {
+            playerCards[i].transform.parent = null;
+            playerCards[i].transform.position = playerCardsPositions[i].transform.position;
+            playerCards[i].transform.parent = playerCardsPositions[i].transform;
+            /*cards[i].transform.parent = null;
+            cards[i].transform.position = Vector3.Lerp(cards[i].transform.position, cardsPositions[i].transform.position, smoothMovementSpeed * Time.deltaTime);
+            cards[i].transform.parent = cardsPositions[i].transform;*/
+        }
     }
 
     void Hover() //hovering
     {
-        for (int i = 0; i < cards.Length; i++)
+        for (int i = 0; i < playerCards.Count; i++)
         {
-            Vector3 targetPosition = cards[i].transform.localPosition;
+            Vector3 targetPosition = playerCards[i].transform.localPosition;
             if (i == selectedCardIndex && !isPlacingCard)
             {
                 targetPosition.y = hoverHeight;
@@ -212,7 +266,7 @@ public class CardGameManager : MonoBehaviour
             {
                 targetPosition.y = 0f;
             }
-            cards[i].transform.localPosition = Vector3.Lerp(cards[i].transform.localPosition, targetPosition, hoverSpeed * Time.deltaTime);
+            playerCards[i].transform.localPosition = Vector3.Lerp(playerCards[i].transform.localPosition, targetPosition, hoverSpeed * Time.deltaTime);
         }
     }
 
@@ -230,18 +284,18 @@ public class CardGameManager : MonoBehaviour
 
     void MoveCardToPosition(int cardIndex, Vector3 targetPosition)
     {
-        cards[cardIndex].transform.position = Vector3.MoveTowards(cards[cardIndex].transform.position, targetPosition, movementSpeed * Time.deltaTime);
+        playerCards[cardIndex].transform.position = Vector3.MoveTowards(playerCards[cardIndex].transform.position, targetPosition, movementSpeed * Time.deltaTime);
     }
 
 
     void MoveRight()
     {
-        selectedCardIndex = (selectedCardIndex + 1) % cards.Length;
+        selectedCardIndex = (selectedCardIndex + 1) % playerCards.Count;
     }
 
     void MoveLeft()
     {
-        selectedCardIndex = (selectedCardIndex - 1 + cards.Length) % cards.Length;
+        selectedCardIndex = (selectedCardIndex - 1 + playerCards.Count) % playerCards.Count;
     }
 
     void MoveUp()
@@ -282,7 +336,7 @@ public class CardGameManager : MonoBehaviour
 
     void SwitchCamera()
     {
-        if (currentPhase == GamePhase.Turn)
+        if (currentPhase == GamePhase.PlayerTurn || currentPhase == GamePhase.EnemyTurn)
         {
             topViewCam.Priority = 0;
             deckViewCam.Priority = 10;
@@ -292,5 +346,11 @@ public class CardGameManager : MonoBehaviour
             deckViewCam.Priority = 0;
             topViewCam.Priority = 10;
         }
+    }
+
+
+    void EnemyTurnHandler()
+    {
+
     }
 }

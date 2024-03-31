@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: StrengthBoost
   m_EditorClassIdentifier: 
+  CardName: Strength Boost
   health: 2
   attack: 0
   abilitytxt: Increase attack of all adjacent friendly cards by 1.
+  symboltype: 0

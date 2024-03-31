@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: GuardianShield
   m_EditorClassIdentifier: 
+  CardName: Guardian Shield
   health: 3
   attack: 0
   abilitytxt: All damage dealt to adjacent friendly cards is reduced by 1.
+  symboltype: 0

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: WeakeningCurse
   m_EditorClassIdentifier: 
+  CardName: Weakening Curse
   health: 2
   attack: 0
   abilitytxt: Decrease attack of all adjacent enemy cards by 1.
+  symboltype: 0

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: ExplosiveSacrifice
   m_EditorClassIdentifier: 
+  CardName: Explosive Sacrifice
   health: 1
   attack: 2
   abilitytxt: Destroy this card to deal 2 damage to all cards adjacent to it.
+  symboltype: 0

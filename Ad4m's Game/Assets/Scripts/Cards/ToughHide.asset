@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: ToughHide
   m_EditorClassIdentifier: 
+  CardName: Tough Hide
   health: 4
   attack: 0
   abilitytxt: This card takes 1 less damage from all sources.
+  symboltype: 0

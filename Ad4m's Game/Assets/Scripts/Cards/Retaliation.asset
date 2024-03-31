@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: Retaliation
   m_EditorClassIdentifier: 
+  CardName: Retaliation
   health: 2
   attack: 1
   abilitytxt: Deal 1 damage to the attacking card after being attacked.
+  symboltype: 0

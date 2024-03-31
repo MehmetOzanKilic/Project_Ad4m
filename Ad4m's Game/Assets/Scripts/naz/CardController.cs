@@ -13,7 +13,7 @@ public class CardController : MonoBehaviour
     {
         if (card != null && card_info_txt != null)
         {
-            this.card_info_txt.text = $"Health: {card.health}\nAttack: {card.attack}\n{card.abilitytxt}";
+            this.card_info_txt.text = $"{card.name}\nHealth: {card.health}\nAttack: {card.attack}\n{card.abilitytxt}";
         }
     }
 

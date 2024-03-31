@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: HealingAura
   m_EditorClassIdentifier: 
+  CardName: Healing Aura
   health: 2
   attack: 0
   abilitytxt: Heal all adjacent friendly cards by 1 health each turn.
+  symboltype: 0

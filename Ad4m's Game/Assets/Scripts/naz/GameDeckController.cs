@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class GameDeckController : MonoBehaviour
 {
-    public Transform gameDeckParent;
-    public  List<Transform> deckCards = new List<Transform>();
+    public  List<GameObject> deckCards = new List<GameObject>();
+    public CardGameManager cardGameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameDeckParent = transform;
-
-        foreach (Transform cardTransform in gameDeckParent)
+        for (int i = 0; i < gameObject.transform.childCount; i++)
         {
-            deckCards.Add(cardTransform);
+            deckCards.Add(gameObject.transform.GetChild(i).gameObject);
         }
 
         StackCards();
+        ShuffleDeck();
+        cardGameManager.InitializePlayerHand();
+        cardGameManager.InitializeOpponentHand();
+
     }
 
     // Update is called once per frame
@@ -29,9 +31,9 @@ public class GameDeckController : MonoBehaviour
     void StackCards()
     {
         float yOffset = 0f;
-        foreach (Transform cardTransform in deckCards)
+        foreach (GameObject card in deckCards)
         {
-            cardTransform.localPosition = new Vector3(0f, yOffset, 0f);
+            card.transform.localPosition = new Vector3(0f, yOffset, 0f);
             yOffset += 0.035f;
         }
     }
@@ -41,7 +43,7 @@ public class GameDeckController : MonoBehaviour
         for (int i = 0; i < deckCards.Count; i++)
         {
             int randomIndex = Random.Range(i, deckCards.Count);
-            Transform temp = deckCards[randomIndex];
+            GameObject temp = deckCards[randomIndex];
             deckCards[randomIndex] = deckCards[i];
             deckCards[i] = temp;
         }

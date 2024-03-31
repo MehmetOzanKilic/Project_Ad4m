@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: Regeneration
   m_EditorClassIdentifier: 
+  CardName: Regeneration
   health: 3
   attack: 0
   abilitytxt: Heal 1 health at the beginning of each turn.
+  symboltype: 0

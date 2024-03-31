@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb75da8cc663b194aa70f9b7b9c2167c, type: 3}
   m_Name: ArrowShot
   m_EditorClassIdentifier: 
+  CardName: Arrow Shot
   health: 2
   attack: 1
   abilitytxt: Deal 1 damage to the card directly to the right of this card.
+  symboltype: 0
