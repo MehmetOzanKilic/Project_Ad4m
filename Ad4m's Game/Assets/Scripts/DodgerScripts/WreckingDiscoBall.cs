@@ -8,10 +8,13 @@ public class WreckingDiscoBall : MonoBehaviour
     Vector3 position;
     float yPosition = 20f;
     float discoBallCooldownDelay = 10f;
+    MeshRenderer meshRenderer;
+    float fadeDuration = 2f;
 
     void Awake()
     {
         vegasSphere = GameObject.FindWithTag("VegasSphere");
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     Vector3 GetPosition()
@@ -68,6 +71,30 @@ public class WreckingDiscoBall : MonoBehaviour
     IEnumerator DiscoBallCooldown()
     {
         yield return new WaitForSeconds(discoBallCooldownDelay);
+        // StartCoroutine(FadeOutAndDeactivate());
+        DeactivateDiscoBall();
+    }
+
+    IEnumerator FadeOutAndDeactivate()
+    {
+        Material material = meshRenderer.material;
+        Color initialColor = material.color;
+
+        float fadeSpeed = 1f / fadeDuration;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            float newAlpha = Mathf.Lerp(initialColor.a, 0f, elapsedTime * fadeSpeed);
+            Color newColor = new Color(initialColor.r, initialColor.g, initialColor.b, newAlpha);
+            material.color = newColor;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        material.color = new Color(initialColor.r, initialColor.g, initialColor.b, 0f);
+
         DeactivateDiscoBall();
     }
 }

@@ -20,6 +20,8 @@ public class SpawnerController : MonoBehaviour
     [SerializeField]private int[] eyeProb;
     [SerializeField]private int[] mobProb;
 
+    [SerializeField]private GameObject[] dodgerProjectiles;
+
     private System.Random rnd;
     private GameObject[]  eyesPresent;
     private GameObject[]  mobsPresent;

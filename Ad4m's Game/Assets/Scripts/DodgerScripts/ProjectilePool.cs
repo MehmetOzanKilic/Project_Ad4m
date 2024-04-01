@@ -10,17 +10,17 @@ public class ProjectilePool : MonoBehaviour
     List<GameObject> projectilePool;
     float waitDelay = 1f;
 
-    public float force = 50f;
-    public Transform spawningPlane;
-    public Transform arena;
+    float force = 50f;
+    Transform spawningPlane;
+    Transform arena;
     GameObject vegasSphere;
 
     void Awake()
     {
-        //projectilePrefabs = GameObject.FindGameObjectsWithTag("Projectile");
-        //spawningPlane = GameObject.FindWithTag("Spawner").transform;
-        //arena = GameObject.FindWithTag("Arena").transform;
-        //vegasSphere = GameObject.FindWithTag("VegasSphere");
+        projectilePrefabs = GameObject.FindGameObjectsWithTag("Projectile");
+        spawningPlane = GameObject.FindWithTag("Spawner").transform;
+        arena = GameObject.FindWithTag("Ground").transform;
+        vegasSphere = GameObject.FindWithTag("VegasSphere");
     }
 
     bool IsInPlaneSpawnArea(Vector3 projectilePosition)
@@ -80,7 +80,7 @@ public class ProjectilePool : MonoBehaviour
             GameObject selectedProjectilePrefab = projectilePrefabs[Random.Range(0, projectilePrefabs.Length)];
             GameObject projectile = Instantiate(selectedProjectilePrefab, projectilePosition, Quaternion.identity, transform);
             projectile.GetComponent<Projectiles>().SetStartingPos(projectilePosition);
-            
+
             projectile.SetActive(false);
             projectilePool.Add(projectile);
         }
