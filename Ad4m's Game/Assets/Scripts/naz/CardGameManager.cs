@@ -265,6 +265,8 @@ public class CardGameManager : MonoBehaviour
         return GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
     }
 
+
+
     void HandleActionPhase()
     {
         SwitchCamera();

@@ -72,15 +72,21 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        if (emptySlots.Count > 0)
+        // If there are no empty slots, return null
+        if (emptySlots.Count == 0)
         {
-            int randomIndex = Random.Range(0, emptySlots.Count);
-            return emptySlots[randomIndex];
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, emptySlots.Count);
+        GameObject selectedSlot = emptySlots[randomIndex];
+        if (selectedSlot.GetComponent<SlotController>().isOccupied)
+        {
+            return ChooseSlotToPlaceCard();
         }
         else
         {
-            // No empty slots
-            return null;
+            return selectedSlot;
         }
     }
 
