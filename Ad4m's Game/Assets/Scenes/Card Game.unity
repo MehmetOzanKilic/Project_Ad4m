@@ -400,6 +400,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 232256978}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &51166302
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -809,6 +813,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 263947589}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &89327645
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2361,6 +2369,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 769938880}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &333330591
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3026,6 +3038,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 578394798}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &382564472
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3609,6 +3625,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1169508880}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &493687314
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4102,6 +4122,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1395976549}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &607810006
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4327,6 +4351,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1615175949}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &626009423
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4718,6 +4746,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1127356776}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &680821216
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5109,6 +5141,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1276197887}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &715186010
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5439,6 +5475,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 700893790}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &747368291
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6200,6 +6240,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1825123137}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &814777606
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7096,6 +7140,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 535349659}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &929979361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7219,6 +7267,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 66832559}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &993944813
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7543,6 +7595,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 649212835}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1043203907
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7799,6 +7855,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 148237818}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1083375910
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8617,6 +8677,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 759545663}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1194844554
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9221,6 +9285,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 913987641}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1263350886
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9528,6 +9596,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 674999191}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1286210761
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9918,6 +9990,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1643581161}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1342275864
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10562,6 +10638,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1320437637}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1396530011
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10787,6 +10867,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1511626054}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1435613009
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11659,6 +11743,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1534922403}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1635991274
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11947,6 +12035,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 694239553}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1656418111
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12070,6 +12162,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1987441209}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1656909542
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12397,6 +12493,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 408033795}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1693556816
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12520,6 +12620,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 798195227}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1696714765
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12929,6 +13033,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1362291259}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1756074435
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13052,6 +13160,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1955605003}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1764907618
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13495,6 +13607,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 765345995}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1855304965
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13668,6 +13784,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 856813434}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1898173484
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14027,6 +14147,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 376388933}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &1964490642
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14284,6 +14408,10 @@ MonoBehaviour:
   card_info_txt: {fileID: 1710961448}
   cardGameManager: {fileID: 0}
   cardGridPos: {fileID: 0}
+  rightOfThisCard: {fileID: 0}
+  leftOfThisCard: {fileID: 0}
+  frontOfThisCard: {fileID: 0}
+  behindThisCard: {fileID: 0}
 --- !u!23 &2076817900
 MeshRenderer:
   m_ObjectHideFlags: 0

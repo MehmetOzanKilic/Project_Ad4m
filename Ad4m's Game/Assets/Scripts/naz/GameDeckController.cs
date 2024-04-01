@@ -49,4 +49,11 @@ public class GameDeckController : MonoBehaviour
 
         StackCards();
     }
+
+    public void GiveCard(List<GameObject> whichPlayersDeck) //NOT BEING USED RN
+    {
+        whichPlayersDeck.Add(deckCards[0]);
+        deckCards.Remove(deckCards[0]);
+        StackCards();
+    }
 }

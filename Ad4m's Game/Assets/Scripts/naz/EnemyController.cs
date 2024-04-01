@@ -28,8 +28,11 @@ public class EnemyController : MonoBehaviour
 
             if (cardToPlace != null && slotToPlaceCard != null)
             {
-                yield return new WaitForSeconds(cardPlacementDelay); // Introduce delay
+                yield return new WaitForSeconds(cardPlacementDelay);
                 yield return StartCoroutine(PlaceCard(slotToPlaceCard, cardToPlace));
+
+                cardGameManager.cardsPlayed.Enqueue(cardToPlace); // ENQUEUE
+
                 playedCardCount++;
             }
         }
@@ -39,7 +42,6 @@ public class EnemyController : MonoBehaviour
             yield return new WaitForSeconds(cardPlacementDelay);
             cardGameManager.currentPhase = CardGameManager.GamePhase.Action;
             playedCardCount = 0;
-            
         }
 
         isPlacingCard = false;
@@ -77,17 +79,32 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            // No empty slots available
+            // No empty slots
             return null;
         }
     }
 
+
     IEnumerator PlaceCard(GameObject slot, GameObject card)
     {
+        if (slot.GetComponent<SlotController>().isOccupied)
+        {
+            GameObject newSlot = ChooseSlotToPlaceCard();
+            if (newSlot != null)
+            {
+                slot = newSlot;
+            }
+            else
+            {
+                // No empty slots available, return
+                yield break;
+            }
+        }
+
         cardGameManager.opponentCards.Remove(card);
         card.transform.parent = null;
         card.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        Vector3 targetPosition = slot.transform.position + Vector3.up * 1f; // Adjust the height as needed
+        Vector3 targetPosition = slot.transform.position + Vector3.up * 1f;
         Vector3 initialPosition = card.transform.position;
         float elapsedTime = 0f;
         float smoothTime = 1f;

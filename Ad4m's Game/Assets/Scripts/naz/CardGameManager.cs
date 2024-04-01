@@ -3,6 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEditor;
+
+[CustomEditor(typeof(CardGameManager))]
+public class CardGameManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        CardGameManager cardGameManager = (CardGameManager)target;
+
+        GUILayout.Space(10);
+
+        GUILayout.Label("Cards Played Queue", EditorStyles.boldLabel);
+
+        foreach (GameObject card in cardGameManager.cardsPlayed)
+        {
+            EditorGUILayout.ObjectField(card, typeof(GameObject), true);
+        }
+    }
+}
 
 public class CardGameManager : MonoBehaviour
 {
@@ -25,7 +46,7 @@ public class CardGameManager : MonoBehaviour
     public GameObject[] opponentCardsPositions;
     public EnemyController enemyController;
 
-    public GameObject[] gridSlots;
+    public List<GameObject> gridSlots;
 
     private int selectedCardIndex = 0;
     private int selectedGridIndex = 4;
@@ -44,6 +65,7 @@ public class CardGameManager : MonoBehaviour
     public GameDeckController gameDeckController;
 
     public Queue<GameObject> cardsPlayed = new Queue<GameObject>();
+    bool isExecutingAction = false;
 
     void Start()
     {
@@ -69,9 +91,6 @@ public class CardGameManager : MonoBehaviour
         }
 
         Hover();
-
-        
-
     }
 
     public void InitializePlayerHand()
@@ -103,10 +122,7 @@ public class CardGameManager : MonoBehaviour
             cards[i].transform.rotation = Quaternion.Lerp(cards[i].transform.rotation, targetRotation, smoothRotationSpeed * Time.deltaTime);
 
             cards[i].transform.parent = cardsPositions[i].transform;*/
-
         }
-
-
     }
 
     public void InitializeOpponentHand()
@@ -174,7 +190,9 @@ public class CardGameManager : MonoBehaviour
                 Vector3 targetPositionGrid = GetGridSlotPosition(selectedGridIndex);
                 MoveCardToPosition(selectedCardIndex, targetPositionGrid);
 
-                
+                cardsPlayed.Enqueue(playerCards[selectedCardIndex]); //ENQUEUE
+
+
                 playerCards[selectedCardIndex].transform.SetParent(gridSlots[selectedGridIndex].transform);
                 playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 
@@ -250,6 +268,7 @@ public class CardGameManager : MonoBehaviour
     void HandleActionPhase()
     {
         SwitchCamera();
+
     }
 
     void RearrangePlayerHand()
@@ -370,3 +389,5 @@ public class CardGameManager : MonoBehaviour
     }
 
 }
+
+
