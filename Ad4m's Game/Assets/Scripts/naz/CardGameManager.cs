@@ -140,6 +140,8 @@ public class CardGameManager : MonoBehaviour
 
     void HandleSlotSelectionPhase()
     {
+        playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             MoveUp();

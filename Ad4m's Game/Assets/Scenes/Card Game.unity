@@ -398,6 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 91eeec802dab22445975bcebf507ef45, type: 2}
   card_info_txt: {fileID: 232256978}
+  cardGameManager: {fileID: 0}
 --- !u!23 &51166302
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -805,6 +806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 7971749ec41745641a5063925a7d50e2, type: 2}
   card_info_txt: {fileID: 263947589}
+  cardGameManager: {fileID: 0}
 --- !u!23 &89327645
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2355,6 +2357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 2d423eb1ce227c3458dafbf145b5a18c, type: 2}
   card_info_txt: {fileID: 769938880}
+  cardGameManager: {fileID: 0}
 --- !u!23 &333330591
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3018,6 +3021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: e3a586ae0eb9ab54093f53e42a3d8d2e, type: 2}
   card_info_txt: {fileID: 578394798}
+  cardGameManager: {fileID: 0}
 --- !u!23 &382564472
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3599,6 +3603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 264893712e2a16942a8412c7218de736, type: 2}
   card_info_txt: {fileID: 1169508880}
+  cardGameManager: {fileID: 0}
 --- !u!23 &493687314
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4090,6 +4095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: a2260b15ff0f80d4aa360d3e2f59a5ff, type: 2}
   card_info_txt: {fileID: 1395976549}
+  cardGameManager: {fileID: 0}
 --- !u!23 &607810006
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4313,6 +4319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: a2260b15ff0f80d4aa360d3e2f59a5ff, type: 2}
   card_info_txt: {fileID: 1615175949}
+  cardGameManager: {fileID: 0}
 --- !u!23 &626009423
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4702,6 +4709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: a2260b15ff0f80d4aa360d3e2f59a5ff, type: 2}
   card_info_txt: {fileID: 1127356776}
+  cardGameManager: {fileID: 0}
 --- !u!23 &680821216
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5091,6 +5099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 72a53da03d93c234a90f439767a76b20, type: 2}
   card_info_txt: {fileID: 1276197887}
+  cardGameManager: {fileID: 0}
 --- !u!23 &715186010
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5419,6 +5428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: dcec59d348ed872428ca697da5b085a2, type: 2}
   card_info_txt: {fileID: 700893790}
+  cardGameManager: {fileID: 0}
 --- !u!23 &747368291
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6178,6 +6188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 7971749ec41745641a5063925a7d50e2, type: 2}
   card_info_txt: {fileID: 1825123137}
+  cardGameManager: {fileID: 0}
 --- !u!23 &814777606
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7072,6 +7083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: feeaad72715c92a44be499b892a9424b, type: 2}
   card_info_txt: {fileID: 535349659}
+  cardGameManager: {fileID: 0}
 --- !u!23 &929979361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7193,6 +7205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 264893712e2a16942a8412c7218de736, type: 2}
   card_info_txt: {fileID: 66832559}
+  cardGameManager: {fileID: 0}
 --- !u!23 &993944813
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7515,6 +7528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 06cbed22e4fe7164cbb04b24fa01829e, type: 2}
   card_info_txt: {fileID: 649212835}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1043203907
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7769,6 +7783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: dcec59d348ed872428ca697da5b085a2, type: 2}
   card_info_txt: {fileID: 148237818}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1083375910
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8467,6 +8482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: feeaad72715c92a44be499b892a9424b, type: 2}
   card_info_txt: {fileID: 759545663}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1194844554
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9069,6 +9085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 91eeec802dab22445975bcebf507ef45, type: 2}
   card_info_txt: {fileID: 913987641}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1263350886
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9374,6 +9391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 85388e5319c804f4a8cac3e20d62fb2d, type: 2}
   card_info_txt: {fileID: 674999191}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1286210761
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9762,6 +9780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 85388e5319c804f4a8cac3e20d62fb2d, type: 2}
   card_info_txt: {fileID: 1643581161}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1342275864
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10404,6 +10423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: e3a586ae0eb9ab54093f53e42a3d8d2e, type: 2}
   card_info_txt: {fileID: 1320437637}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1396530011
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10627,6 +10647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 06cbed22e4fe7164cbb04b24fa01829e, type: 2}
   card_info_txt: {fileID: 1511626054}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1435613009
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10981,7 +11002,8 @@ MonoBehaviour:
   - {fileID: 1878764701}
   - {fileID: 139496771}
   - {fileID: 851769643}
-  movementSpeed: 15
+  movementSpeed: 12
+  selectedCard: {fileID: 0}
   deckViewCam: {fileID: 411107690}
   topViewCam: {fileID: 324331163}
   hoverHeight: 0.5
@@ -11496,6 +11518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 264893712e2a16942a8412c7218de736, type: 2}
   card_info_txt: {fileID: 1534922403}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1635991274
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11782,6 +11805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 5991080081e07024fbb7633bf14b5b6b, type: 2}
   card_info_txt: {fileID: 694239553}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1656418111
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11903,6 +11927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 72a53da03d93c234a90f439767a76b20, type: 2}
   card_info_txt: {fileID: 1987441209}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1656909542
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12228,6 +12253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 4841128b78dbcca47973f1e368d59018, type: 2}
   card_info_txt: {fileID: 408033795}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1693556816
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12349,6 +12375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 4841128b78dbcca47973f1e368d59018, type: 2}
   card_info_txt: {fileID: 798195227}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1696714765
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12756,6 +12783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: dcec59d348ed872428ca697da5b085a2, type: 2}
   card_info_txt: {fileID: 1362291259}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1756074435
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12877,6 +12905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 72a53da03d93c234a90f439767a76b20, type: 2}
   card_info_txt: {fileID: 1955605003}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1764907618
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13318,6 +13347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 06cbed22e4fe7164cbb04b24fa01829e, type: 2}
   card_info_txt: {fileID: 765345995}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1855304965
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13489,6 +13519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 5991080081e07024fbb7633bf14b5b6b, type: 2}
   card_info_txt: {fileID: 856813434}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1898173484
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13846,6 +13877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 2d423eb1ce227c3458dafbf145b5a18c, type: 2}
   card_info_txt: {fileID: 376388933}
+  cardGameManager: {fileID: 0}
 --- !u!23 &1964490642
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14101,6 +14133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: feeaad72715c92a44be499b892a9424b, type: 2}
   card_info_txt: {fileID: 1710961448}
+  cardGameManager: {fileID: 0}
 --- !u!23 &2076817900
 MeshRenderer:
   m_ObjectHideFlags: 0
