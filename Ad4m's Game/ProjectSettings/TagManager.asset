@@ -14,6 +14,9 @@ TagManager:
   - EnemyBullet
   - Weapon
   - ProjectileEye
+  - VegasSphere
+  - Arena
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -23,7 +26,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - DodgerProjectileSpawner
   - 
   - 
   - 
