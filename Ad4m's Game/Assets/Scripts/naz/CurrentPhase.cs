@@ -16,6 +16,9 @@ public class CurrentPhase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        phasetextinfo.text = $"Current Phase: {cardGameManager.currentPhase}";
+        if (cardGameManager != null)
+        {
+            phasetextinfo.text = $"Current Phase: {cardGameManager.currentPhase}";
+        }
     }
 }

@@ -43,6 +43,8 @@ public class CardGameManager : MonoBehaviour
 
     public GameDeckController gameDeckController;
 
+    public Queue<GameObject> cardsPlayed = new Queue<GameObject>();
+
     void Start()
     {
         SwitchCamera();
@@ -67,6 +69,9 @@ public class CardGameManager : MonoBehaviour
         }
 
         Hover();
+
+        
+
     }
 
     public void InitializePlayerHand()
@@ -176,6 +181,7 @@ public class CardGameManager : MonoBehaviour
                 playerCards.RemoveAt(selectedCardIndex);
 
                 RearrangePlayerHand();
+                selectedCardIndex = 0;
 
                 //AddCardToDeck();
 

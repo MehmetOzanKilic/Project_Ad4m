@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     public CardGameManager cardGameManager;
     private int playedCardCount = 0;
     private bool isPlacingCard = false;
-    public float cardPlacementDelay = 1.5f; // Adjust as needed
+    public float cardPlacementDelay = 1.5f; 
 
     void Update()
     {
@@ -36,9 +36,10 @@ public class EnemyController : MonoBehaviour
         else
         {
             // End the enemy's turn
-            /*cardGameManager.currentPhase = CardGameManager.GamePhase.PlayerTurn;
+            yield return new WaitForSeconds(cardPlacementDelay);
+            cardGameManager.currentPhase = CardGameManager.GamePhase.Action;
             playedCardCount = 0;
-            cardGameManager.SwitchCamera(); // Assuming you have a method to switch cameras or UI to indicate turn change*/
+            
         }
 
         isPlacingCard = false;

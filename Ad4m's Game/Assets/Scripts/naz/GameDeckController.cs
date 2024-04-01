@@ -15,11 +15,10 @@ public class GameDeckController : MonoBehaviour
             deckCards.Add(gameObject.transform.GetChild(i).gameObject);
         }
 
-        StackCards();
         ShuffleDeck();
         cardGameManager.InitializePlayerHand();
         cardGameManager.InitializeOpponentHand();
-
+        StackCards();
     }
 
     // Update is called once per frame
@@ -34,7 +33,7 @@ public class GameDeckController : MonoBehaviour
         foreach (GameObject card in deckCards)
         {
             card.transform.localPosition = new Vector3(0f, yOffset, 0f);
-            yOffset += 0.035f;
+            yOffset += 0.03f;
         }
     }
 

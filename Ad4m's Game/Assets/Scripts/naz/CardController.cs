@@ -11,6 +11,8 @@ public class CardController : MonoBehaviour
 
     public CardGameManager cardGameManager;
 
+    public Transform cardGridPos;
+
     // Start is called before the first frame update
     void Start()
     {
