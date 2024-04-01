@@ -30,6 +30,7 @@ public class CardGameManager : MonoBehaviour
     private int selectedCardIndex = 0;
     private int selectedGridIndex = 4;
     public float movementSpeed = 5f;
+    public GameObject selectedCard;
 
     int playedCardCount = 0;
 
@@ -70,8 +71,8 @@ public class CardGameManager : MonoBehaviour
 
     public void InitializePlayerHand()
     {
-         for (int i = 0; i < 3; i++)
-         {
+        for (int i = 0; i < 3; i++)
+        {
             playerCards.Add(gameDeckController.deckCards[i]);
             gameDeckController.deckCards.Remove(gameDeckController.deckCards[i]);
             playerCards[i].transform.parent = null;
@@ -116,12 +117,7 @@ public class CardGameManager : MonoBehaviour
 
             opponentCards[i].transform.parent = opponentCardsPositions[i].transform;
         }
-
-
     }
-
-
-
 
     void HandleTurnPhase() //TURN PHASE
     {
@@ -129,6 +125,7 @@ public class CardGameManager : MonoBehaviour
         {
             currentPhase = GamePhase.SlotSelection;
             SwitchCamera();
+            selectedCard = playerCards[selectedCardIndex];// FOR DEBUG
         }
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -143,14 +140,6 @@ public class CardGameManager : MonoBehaviour
 
     void HandleSlotSelectionPhase()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            currentPhase = GamePhase.Action;
-            playedCardCount++;
-            
-            //Debug.Log(playedCardCount);
-        }
-
         if (Input.GetKeyDown(KeyCode.W))
         {
             MoveUp();
@@ -168,10 +157,52 @@ public class CardGameManager : MonoBehaviour
             MoveRightOnGrid();
         }
 
-        Vector3 targetPosition = GetInitialSlotPosition();
-        MoveCardToPosition(selectedCardIndex, targetPosition);
-        playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (playerCards.Count > 0 && selectedCardIndex < playerCards.Count)
+            {
+                playedCardCount++;
+                isPlacingCard = false;
+
+                Vector3 targetPositionGrid = GetGridSlotPosition(selectedGridIndex);
+                MoveCardToPosition(selectedCardIndex, targetPositionGrid);
+
+                
+                playerCards[selectedCardIndex].transform.SetParent(gridSlots[selectedGridIndex].transform);
+                playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+
+                playerCards.RemoveAt(selectedCardIndex);
+
+                RearrangePlayerHand();
+
+                //AddCardToDeck();
+
+                if (playedCardCount == 2)
+                {
+                    currentPhase = GamePhase.EnemyTurn;
+                    playedCardCount = 0;
+                    SwitchCamera();
+                }
+                else
+                {
+                    currentPhase = GamePhase.PlayerTurn;
+                    SwitchCamera();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("invalid card index.");
+            }
+        }
+        else
+        {
+            Vector3 targetPosition = GetInitialSlotPosition();
+            MoveCardToPosition(selectedCardIndex, targetPosition);
+        }
     }
+
+
+
 
     Vector3 GetInitialSlotPosition()
     {
@@ -180,7 +211,7 @@ public class CardGameManager : MonoBehaviour
         {
             return GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
         }
-        else if(gridSlots[selectedGridIndex].GetComponent<SlotController>().isOccupied) //If the middle slot is occupied, put it on an unoccupied adjacent slot
+        else if (gridSlots[selectedGridIndex].GetComponent<SlotController>().isOccupied) //If the middle slot is occupied, put it on an unoccupied adjacent slot
         {
             int[] adjacentSlots = { selectedGridIndex - 1, selectedGridIndex + 1, selectedGridIndex - 3, selectedGridIndex + 3 };
             foreach (int index in adjacentSlots)
@@ -210,33 +241,6 @@ public class CardGameManager : MonoBehaviour
 
     void HandleActionPhase()
     {
-        isPlacingCard = false;
-        Vector3 targetPosition = GetGridSlotPosition(selectedGridIndex);
-
-        MoveCardToPosition(selectedCardIndex, targetPosition);
-        playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        playerCards[selectedCardIndex].transform.SetParent(gridSlots[selectedGridIndex].transform);
-
-        //List<GameObject> cardList = new List<GameObject>(cards);
-        playerCards.Remove(playerCards[selectedCardIndex]);
-        //cards = cardList.ToArray();
-
-        // Rearrange the player's deck
-        RearrangePlayerHand();
-
-        // Call the AddCardToDeck method before rearranging the player's deck
-        //AddCardToDeck();
-        if (playedCardCount == 2)
-        {
-            currentPhase = GamePhase.EnemyTurn;
-            playedCardCount = 0;
-        }
-        else
-        {
-            currentPhase = GamePhase.PlayerTurn;
-        }
-
-        
         SwitchCamera();
     }
 
@@ -285,7 +289,14 @@ public class CardGameManager : MonoBehaviour
 
     void MoveCardToPosition(int cardIndex, Vector3 targetPosition)
     {
-        playerCards[cardIndex].transform.position = Vector3.MoveTowards(playerCards[cardIndex].transform.position, targetPosition, movementSpeed * Time.deltaTime);
+        if (cardIndex >= 0 && cardIndex < playerCards.Count) // Check if index is within range
+        {
+            playerCards[cardIndex].transform.position = Vector3.MoveTowards(playerCards[cardIndex].transform.position, targetPosition, movementSpeed * Time.deltaTime);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid card index: " + cardIndex);
+        }
     }
 
 
@@ -298,6 +309,7 @@ public class CardGameManager : MonoBehaviour
     {
         selectedCardIndex = (selectedCardIndex - 1 + playerCards.Count) % playerCards.Count;
     }
+
 
     void MoveUp()
     {
