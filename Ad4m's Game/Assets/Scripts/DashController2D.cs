@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashController : MonoBehaviour
+public class DashController2D : MonoBehaviour
 {
-    MovementController3D movementController;
+    MovementController movementController;
     public float dashCoolDown=1f;
     private float counter;
     void Start()
     {
-        movementController = GetComponent<MovementController3D>();
+        movementController = GetComponent<MovementController>();
         counter=dashCoolDown;
     }
 

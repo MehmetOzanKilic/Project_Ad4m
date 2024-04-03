@@ -155,7 +155,7 @@ public class SpawnerController : MonoBehaviour
     {
         Instantiate(swordMan,randomPos(pos),Quaternion.identity);
     }
-    public void insSpawnerEye()
+    public void     insSpawnerEye()
     {
         Instantiate(spawnerEye,randomPos(),Quaternion.identity);
     }

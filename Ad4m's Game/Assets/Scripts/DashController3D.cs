@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashController : MonoBehaviour
+public class DashController3D : MonoBehaviour
 {
     MovementController3D movementController;
     public float dashCoolDown=1f;
