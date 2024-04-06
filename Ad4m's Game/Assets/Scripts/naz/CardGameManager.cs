@@ -49,7 +49,7 @@ public class CardGameManager : MonoBehaviour
     public List<GameObject> gridSlots;
 
     private int selectedCardIndex = 0;
-    public int selectedGridIndex = 4;
+    private int selectedGridIndex = 4;
     public float movementSpeed = 5f;
     public GameObject selectedCard;
 
@@ -144,6 +144,7 @@ public class CardGameManager : MonoBehaviour
             opponentCards[i].transform.position = opponentCardsPositions[i].transform.position;
 
             opponentCards[i].transform.parent = opponentCardsPositions[i].transform;
+            opponentCards[i].GetComponent<CardController>().isFriendlyCard = false;
         }
     }
 
@@ -279,7 +280,6 @@ public class CardGameManager : MonoBehaviour
     void HandleActionPhase()
     {
         SwitchCamera();
-
     }
 
     void RearrangePlayerHand()

@@ -15,6 +15,8 @@ MonoBehaviour:
   CardName: Healing Aura
   health: 2
   attack: 0
+  healingAmount: 1
+  buffingAmount: 0
   abilitytxt: Heal all adjacent friendly cards by 1 health each turn.
   symboltype: 0
   type: 1

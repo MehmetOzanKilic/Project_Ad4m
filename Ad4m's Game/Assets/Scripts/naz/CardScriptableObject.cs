@@ -5,10 +5,15 @@ using TMPro;
 public class CardData : ScriptableObject
 {
     public string CardName;
+
     public int health;
     public int attack;
+    public int healingAmount;
+    public int buffingAmount;
+
+
     public string abilitytxt;
-    public int symboltype =0;
+    public int symboltype = 0;
 
     [System.Serializable]
     public enum CardType

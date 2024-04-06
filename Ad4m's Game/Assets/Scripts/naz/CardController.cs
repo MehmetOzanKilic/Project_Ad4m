@@ -19,21 +19,24 @@ public class CardController : MonoBehaviour
     public GameObject leftOfThisCard;
     public GameObject frontOfThisCard;
     public GameObject behindThisCard;
+    public List<GameObject> CardsOnTheSameRow;
 
     int thisCardAtk;
     int thisCardHlt;
 
     private bool isExecutingAbility = false;
+    public bool isFriendlyCard = true;
 
     // Start is called before the first frame update
     void Start()
     {
         if (card != null && card_info_txt != null)
         {
-            this.card_info_txt.text = $"{card.name}\nHealth: {card.health}\nAttack: {card.attack}\n{card.abilitytxt}";
             thisCardAtk = card.attack;
             thisCardHlt = card.health;
         }
+        
+       
 
         cardGameManager = FindObjectOfType<CardGameManager>();
     }
@@ -53,7 +56,10 @@ public class CardController : MonoBehaviour
             }
         }
 
-        
+        if (card != null && card_info_txt != null)
+        {
+            this.card_info_txt.text = $"{card.name}\nHealth: {thisCardHlt}\nAttack: {thisCardAtk}\n{card.abilitytxt}";
+        }
     }
 
     IEnumerator ExecuteCardAbility()
@@ -66,16 +72,47 @@ public class CardController : MonoBehaviour
             case CardData.CardType.DirectDamage:
                 if (card.CardName == "ArrowShot")
                 {
-                    attackCard(rightOfThisCard);
+                    if(rightOfThisCard != null)
+                    {
+                        attackCard(rightOfThisCard);
+                    }
                     isExecutingAbility = true;
                 }
                 if (card.CardName == "Fireball")
                 {
-                    attackCard(frontOfThisCard);
+                    if(frontOfThisCard != null)
+                    {
+                        attackCard(frontOfThisCard);
+                    }
                     isExecutingAbility = true;
                 }
                 break;
-                /*......*/
+            case CardData.CardType.AOEDmg:
+                if(card.CardName == "Explosion")
+                {
+                    if(frontOfThisCard != null)
+                    {
+                        attackCard(frontOfThisCard);
+                    }
+                    if (behindThisCard != null)
+                    {
+                        attackCard(behindThisCard);
+                    }
+                    if (leftOfThisCard != null)
+                    {
+                        attackCard(leftOfThisCard);
+                    }
+                    if (rightOfThisCard != null)
+                    {
+                        attackCard(rightOfThisCard);
+                    }
+                }
+                if(card.CardName == "Thunderstorm")
+                {
+                    attackAOE();
+                }
+                break;
+
         }
 
         isExecutingAbility = false;
@@ -119,6 +156,39 @@ public class CardController : MonoBehaviour
                     behindThisCard = cardGameManager.gridSlots[index + 3].GetComponent<SlotController>().occupiedCardObject;
                 }
             }
+
+
+            if (cardGameManager.gridSlots[index].name.StartsWith("(1,"))
+            {
+                for (int i = 0; i <= 2; i++)
+                {
+                    if (cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject != null)
+                    {
+                        CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+                    }
+                }
+
+            }
+            else if (cardGameManager.gridSlots[index].name.StartsWith("(2,"))
+            {
+                for (int i = 3; i <= 5; i++)
+                {
+                    if (cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject != null)
+                    {
+                        CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+                    }
+                }
+            }
+            else if (cardGameManager.gridSlots[index].name.StartsWith("(3,"))
+            {
+                for (int i = 6; i <= 8; i++)
+                {
+                    if (cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject != null)
+                    {
+                        CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+                    }
+                }
+            }
         }
 
         hasSurroundingInfo = true;
@@ -127,25 +197,28 @@ public class CardController : MonoBehaviour
 
     public void attackCard(GameObject targetcard)
     {
-        if (frontOfThisCard != null)
-        {
             int dmgAmount = thisCardAtk;
             targetcard.GetComponent<CardController>().thisCardHlt -= dmgAmount;
-            Debug.Log(dmgAmount + "of damage has been dealt to" + targetcard.name + "by" + gameObject.name);
+            Debug.Log(dmgAmount + " of damage has been dealt to " + targetcard.name + " by " + gameObject.name);
             if (targetcard.GetComponent<CardController>().thisCardHlt <= 0)
             {
                 Debug.Log(targetcard + "has been destroyed");
             }
-        }
-        else
-        {
-            Debug.LogError("frontOfThisCard has not been assigned");
-        }
     }
 
-    public void attackAOECard()
+    public void attackAOE()
     {
-
+        if(CardsOnTheSameRow.Count > 0)
+        {
+            for (int i = 0; i < CardsOnTheSameRow.Count; i++)
+            {
+                if (CardsOnTheSameRow[i] != this.gameObject)
+                {
+                    attackCard(CardsOnTheSameRow[i]);
+                }
+            }
+        }
+ 
     }
 
     public void healCard()
