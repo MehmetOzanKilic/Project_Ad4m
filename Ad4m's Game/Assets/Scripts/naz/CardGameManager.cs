@@ -49,7 +49,7 @@ public class CardGameManager : MonoBehaviour
     public List<GameObject> gridSlots;
 
     private int selectedCardIndex = 0;
-    private int selectedGridIndex = 4;
+    public int selectedGridIndex = 4;
     public float movementSpeed = 5f;
     public GameObject selectedCard;
 
@@ -67,9 +67,16 @@ public class CardGameManager : MonoBehaviour
     public Queue<GameObject> cardsPlayed = new Queue<GameObject>();
     bool isExecutingAction = false;
 
+    public List<GameObject> emptySlots;
+
     void Start()
     {
         SwitchCamera();
+
+        for (int i = 0; i < gridSlots.Count; i++)
+        {
+            emptySlots.Add(gridSlots[i]);
+        }
     }
 
     void Update()
@@ -186,6 +193,7 @@ public class CardGameManager : MonoBehaviour
             {
                 playedCardCount++;
                 isPlacingCard = false;
+                emptySlots.Remove(gridSlots[selectedGridIndex]);
 
                 Vector3 targetPositionGrid = GetGridSlotPosition(selectedGridIndex);
                 MoveCardToPosition(selectedCardIndex, targetPositionGrid);
@@ -229,7 +237,6 @@ public class CardGameManager : MonoBehaviour
 
 
 
-
     Vector3 GetInitialSlotPosition()
     {
         //If the middle slot is unoccupied, put the card in the middle slot.
@@ -244,6 +251,7 @@ public class CardGameManager : MonoBehaviour
             {
                 if (index >= 0 && index < 9 && !gridSlots[index].GetComponent<SlotController>().isOccupied)
                 {
+                    selectedGridIndex = index;
                     return GetGridSlotPosition(index) + new Vector3(0f, 1f, 0f);
                 }
             }
@@ -256,6 +264,7 @@ public class CardGameManager : MonoBehaviour
             {
                 if (!gridSlots[index].GetComponent<SlotController>().isOccupied)
                 {
+                    selectedGridIndex = index;
                     return GetGridSlotPosition(index) + new Vector3(0f, 1f, 0f);
                 }
             }

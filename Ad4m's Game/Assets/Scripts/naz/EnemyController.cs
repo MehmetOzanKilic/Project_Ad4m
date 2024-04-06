@@ -23,15 +23,12 @@ public class EnemyController : MonoBehaviour
 
         if (playedCardCount < 2)
         {
-            GameObject cardToPlace = ChooseCardFromHand();
-            GameObject slotToPlaceCard = ChooseSlotToPlaceCard();
-
-            if (cardToPlace != null && slotToPlaceCard != null)
+            if (ChooseCardFromHand() != null && ChooseSlotToPlaceCard() != null)
             {
                 yield return new WaitForSeconds(cardPlacementDelay);
-                yield return StartCoroutine(PlaceCard(slotToPlaceCard, cardToPlace));
+                yield return StartCoroutine(PlaceCard(ChooseSlotToPlaceCard(), ChooseCardFromHand()));
 
-                cardGameManager.cardsPlayed.Enqueue(cardToPlace); // ENQUEUE
+                cardGameManager.cardsPlayed.Enqueue(ChooseCardFromHand()); // ENQUEUE
 
                 playedCardCount++;
             }
@@ -62,30 +59,16 @@ public class EnemyController : MonoBehaviour
 
     GameObject ChooseSlotToPlaceCard()
     {
-        List<GameObject> emptySlots = new List<GameObject>();
-
-        foreach (GameObject slot in cardGameManager.gridSlots)
-        {
-            if (!slot.GetComponent<SlotController>().isOccupied)
-            {
-                emptySlots.Add(slot);
-            }
-        }
-
         // If there are no empty slots, return null
-        if (emptySlots.Count == 0)
+        if (cardGameManager.emptySlots.Count == 0)
         {
             return null;
         }
-
-        int randomIndex = Random.Range(0, emptySlots.Count);
-        GameObject selectedSlot = emptySlots[randomIndex];
-        if (selectedSlot.GetComponent<SlotController>().isOccupied)
-        {
-            return ChooseSlotToPlaceCard();
-        }
         else
         {
+            int randomIndex = Random.Range(0, cardGameManager.emptySlots.Count);
+            GameObject selectedSlot = cardGameManager.emptySlots[randomIndex];
+            cardGameManager.emptySlots.Remove(selectedSlot);
             return selectedSlot;
         }
     }
@@ -93,22 +76,10 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator PlaceCard(GameObject slot, GameObject card)
     {
-        if (slot.GetComponent<SlotController>().isOccupied)
-        {
-            GameObject newSlot = ChooseSlotToPlaceCard();
-            if (newSlot != null)
-            {
-                slot = newSlot;
-            }
-            else
-            {
-                // No empty slots available, return
-                yield break;
-            }
-        }
-
         cardGameManager.opponentCards.Remove(card);
+        
         card.transform.parent = null;
+
         card.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
         Vector3 targetPosition = slot.transform.position + Vector3.up * 1f;
         Vector3 initialPosition = card.transform.position;
