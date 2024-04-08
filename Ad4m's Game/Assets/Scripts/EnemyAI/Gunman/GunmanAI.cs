@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class v  : MonoBehaviour
+public class GunmanAI  : MonoBehaviour
 {
     private NavMeshAgent agent; //variable for the Enemy navMesh.
     private Transform player; //variable for the Player game object.
@@ -31,22 +31,17 @@ public class v  : MonoBehaviour
     private void Update()
     {
         //Check for sight and attack range every frame
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer); //checks for attack range in a sphere around the agent with the radius attackRange
 
         if (playerInAttackRange)
             AttackPlayer();
         else if (!playerInAttackRange && !isDodging)
             ChasePlayer();
-
-    }
-    public void getAdam(Transform temp)
-    {
-        player = temp;
     }
 
     private void ChasePlayer()
     {   
-        //prevents the gunman to touch the player.
+        //if the distance between the player and agent is more than 5, move towards the player.
         if(Vector3.Distance(transform.position,player.position)>5)
         {
             agent.isStopped=false;
@@ -57,22 +52,24 @@ public class v  : MonoBehaviour
     }
     private void AttackPlayer()
     {
-        ///WIP
-        ///Make sure enemy doesn't move
-        //agent.SetDestination(transform.position);
-        
         transform.LookAt(player);
 
         if (!hasAttacked)
         {
-            //Attack code here
             float spawnOffset = 0.0f;
 
             // Calculate the spawn position
+            //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
             Vector3 spawnPosition = transform.position + transform.forward * spawnOffset;
 
             GameObject projectileInstance = Instantiate(projectile, spawnPosition, Quaternion.identity); //spawns a bullet GameObject
             Rigidbody rb = projectileInstance.GetComponent<Rigidbody>(); //rigidbody of the bullet GameObject
+            //||DO NOT DO IT LIKE THIS! THIS IS PLACEHOLDER CODE! CHANGE THIS IF YOU HAVE TIME! THIS WILL FUCK UP OPTIMIZATION SO MUCH! MOVE GETCOMPONENT TO START() ASAP! -ALPER
+            //||DO NOT DO IT LIKE THIS! THIS IS PLACEHOLDER CODE! CHANGE THIS IF YOU HAVE TIME! THIS WILL FUCK UP OPTIMIZATION SO MUCH! MOVE GETCOMPONENT TO START() ASAP! -ALPER
+            //||DO NOT DO IT LIKE THIS! THIS IS PLACEHOLDER CODE! CHANGE THIS IF YOU HAVE TIME! THIS WILL FUCK UP OPTIMIZATION SO MUCH! MOVE GETCOMPONENT TO START() ASAP! -ALPER
+            //||maybe use awake()?
+            //||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
             if (rb != null)
             {
                 rb.AddForce(transform.forward * 32f, ForceMode.Impulse); //speed of the spawned projectile
@@ -93,7 +90,7 @@ public class v  : MonoBehaviour
     private void Dodge()
     {
         isDodging = true;
-        agent.SetDestination(transform.position + (Random.insideUnitSphere * 5));
+        agent.SetDestination(transform.position + (Random.insideUnitSphere * 5)); //randomly selects a point in a range of 5 to make hard to hit
         isDodging = false;
         
     }
@@ -104,7 +101,7 @@ public class v  : MonoBehaviour
     }
 
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected() //draws attack range in editor to make it easier to adjust (not important)
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);

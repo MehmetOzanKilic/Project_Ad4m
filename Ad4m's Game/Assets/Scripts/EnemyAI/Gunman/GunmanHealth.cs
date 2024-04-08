@@ -4,29 +4,27 @@ using UnityEngine;
 
 public class GunmanHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    public float maxHealth = 100f; //health of the enemy
     public float health;
     public float bulletDamage;
     public float meleeDamage;
-    private PlayerAttributeController playerAttributeController;
+    private PlayerAttributeController playerAttributeController; 
     private GameObject playerObject;
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) //checks for collision with bullets and deals appropriate damage. 
     {
         Transform hitTransform = collision.transform;
         if (hitTransform.CompareTag("Bullet"))
         { 
-            health = health - bulletDamage;
+            health = health - bulletDamage; 
             Debug.Log(bulletDamage);
             Debug.Log(health);
-
         }
-
     }
     private void Awake()
     {
-        playerObject = GameObject.Find("Ad4m");
+        playerObject = GameObject.FindWithTag("Player");//sets the game object
     }
 
     private void Start()
@@ -57,7 +55,7 @@ public class GunmanHealth : MonoBehaviour
     private void Update()
     {
         bulletDamage = playerAttributeController.playerBulletDamage;
-        meleeDamage = playerAttributeController.playerMeleeDamage;
+        meleeDamage = playerAttributeController.playerMeleeDamage; //check for new values of bullet damage for upgrades or debuffs while playing
         if (health < 1)
         {
             Destroy(gameObject);
