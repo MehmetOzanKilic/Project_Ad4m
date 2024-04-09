@@ -11,10 +11,11 @@ public class CardController : MonoBehaviour
     public TextMeshProUGUI card_info_txt;
 
     public CardGameManager cardGameManager;
+    public GameObject cardOnTopofQueue;
 
     public GameObject cardGridPos;
 
-    private bool hasSurroundingInfo = false;
+    public bool hasSurroundingInfo = false;
     public GameObject rightOfThisCard;
     public GameObject leftOfThisCard;
     public GameObject frontOfThisCard;
@@ -23,9 +24,18 @@ public class CardController : MonoBehaviour
 
     int thisCardAtk;
     int thisCardHlt;
+    int thisCardHealAmt;
+    int thisCardBuffAmt;
 
-    private bool isExecutingAbility = false;
+    public bool isExecutingAbility = false;
     public bool isFriendlyCard = true;
+    public bool isTheTopCardInQueue = false;
+
+    public bool playedThisRound = false;
+
+    public GameObject lastCardToAttack;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,92 +44,228 @@ public class CardController : MonoBehaviour
         {
             thisCardAtk = card.attack;
             thisCardHlt = card.health;
+            thisCardHealAmt = card.healingAmount;
+            thisCardBuffAmt = card.buffingAmount;
         }
         
        
 
         cardGameManager = FindObjectOfType<CardGameManager>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(cardGameManager.currentPhase == CardGameManager.GamePhase.Action && !hasSurroundingInfo && gameObject.transform.parent.CompareTag("GridSlot"))
+        if (cardGameManager.currentPhase == CardGameManager.GamePhase.Action && !hasSurroundingInfo && gameObject.transform.parent.CompareTag("GridSlot"))
         {
             cardGridPos = gameObject.transform.parent.gameObject;
             getSurroundingCardsInfo();
-            Debug.Log("card have recieved surrounding info");
 
-            if (!isExecutingAbility && cardGameManager.currentPhase == CardGameManager.GamePhase.Action)
+            //cardOnTopofQueue = cardGameManager.cardsPlayed.First();
+
+            if (isTheTopCardInQueue && !isExecutingAbility && !playedThisRound)
             {
+                Debug.Log("Starting ExecuteCardAbility coroutine for " + card.name);
                 StartCoroutine(ExecuteCardAbility());
             }
-        }
 
+        }
         if (card != null && card_info_txt != null)
         {
             this.card_info_txt.text = $"{card.name}\nHealth: {thisCardHlt}\nAttack: {thisCardAtk}\n{card.abilitytxt}";
         }
     }
 
+
+
     IEnumerator ExecuteCardAbility()
     {
-        
-        yield return new WaitForSeconds(1f);
-
+        //yield return new WaitForSeconds(1f);
+        Debug.Log("retreiving card type and executing action...");
         switch (card.type)
         {
             case CardData.CardType.DirectDamage:
                 if (card.CardName == "ArrowShot")
                 {
-                    if(rightOfThisCard != null)
+                    if (rightOfThisCard != null && rightOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
                     {
                         attackCard(rightOfThisCard);
                     }
-                    isExecutingAbility = true;
+
                 }
                 if (card.CardName == "Fireball")
                 {
-                    if(frontOfThisCard != null)
+                    if (frontOfThisCard != null && frontOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
                     {
                         attackCard(frontOfThisCard);
                     }
-                    isExecutingAbility = true;
+
                 }
                 break;
             case CardData.CardType.AOEDmg:
-                if(card.CardName == "Explosion")
+                if (card.CardName == "Explosion")
                 {
-                    if(frontOfThisCard != null)
+                    if (frontOfThisCard != null && frontOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
                     {
                         attackCard(frontOfThisCard);
                     }
-                    if (behindThisCard != null)
+
+                    if (behindThisCard != null && behindThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
                     {
                         attackCard(behindThisCard);
                     }
-                    if (leftOfThisCard != null)
+                    if (leftOfThisCard != null && leftOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
                     {
                         attackCard(leftOfThisCard);
                     }
-                    if (rightOfThisCard != null)
+                    if (rightOfThisCard != null && rightOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
                     {
                         attackCard(rightOfThisCard);
                     }
                 }
-                if(card.CardName == "Thunderstorm")
+                if (card.CardName == "Thunderstorm")
                 {
                     attackAOE();
                 }
                 break;
+            case CardData.CardType.Healing:
+                if (card.CardName == "Healing Aura")
+                {
+                    if (frontOfThisCard != null && frontOfThisCard.GetComponent<CardController>().isFriendlyCard == isFriendlyCard)
+                    {
+                        healCard(frontOfThisCard);
+                    }
+                    if (behindThisCard != null && behindThisCard.GetComponent<CardController>().isFriendlyCard == isFriendlyCard)
+                    {
+                        healCard(behindThisCard);
+                    }
+                    if (leftOfThisCard != null && leftOfThisCard.GetComponent<CardController>().isFriendlyCard == isFriendlyCard)
+                    {
+                        healCard(leftOfThisCard);
+                    }
+                    if (rightOfThisCard != null && rightOfThisCard.GetComponent<CardController>().isFriendlyCard == isFriendlyCard)
+                    {
+                        healCard(rightOfThisCard);
+                    }
+                }
+                if (card.CardName == "Regeneration")
+                {
+                    healCard(this.gameObject);
+                }
+                break;
+            case CardData.CardType.BuffDebuff:
+                if (card.CardName == "Strength Boost")
+                {
+                    if (frontOfThisCard != null && frontOfThisCard.GetComponent<CardController>().isFriendlyCard == isFriendlyCard)
+                    {
+                        buffDebuffCard(frontOfThisCard);
+                    }
+                    if (behindThisCard != null && behindThisCard.GetComponent<CardController>().isFriendlyCard == isFriendlyCard)
+                    {
+                        buffDebuffCard(behindThisCard);
+                    }
+                    if (leftOfThisCard != null && leftOfThisCard.GetComponent<CardController>().isFriendlyCard == isFriendlyCard)
+                    {
+                        buffDebuffCard(leftOfThisCard);
+                    }
+                    if (rightOfThisCard != null && rightOfThisCard.GetComponent<CardController>().isFriendlyCard == isFriendlyCard)
+                    {
+                        buffDebuffCard(rightOfThisCard);
+                    }
+                }
+                if (card.CardName == "Weakening Curse")
+                {
+                    if (frontOfThisCard != null && frontOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
+                    {
+                        buffDebuffCard(frontOfThisCard);
+                    }
+                    if (behindThisCard != null && behindThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
+                    {
+                        buffDebuffCard(behindThisCard);
+                    }
+                    if (leftOfThisCard != null && leftOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
+                    {
+                        buffDebuffCard(leftOfThisCard);
+                    }
+                    if (rightOfThisCard != null && rightOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
+                    {
+                        buffDebuffCard(rightOfThisCard);
+                    }
+                }
+                break;
+            case CardData.CardType.CounterAttack:
+                if (card.CardName == "Retaliation")
+                {
+                    if (lastCardToAttack != null)
+                    {
+                        attackCard(lastCardToAttack);
 
+                    }
+                }
+                break;
+            case CardData.CardType.CardSacrifice:
+                if(card.name == "Explosive Sacrifice")
+                {
+                    if (frontOfThisCard != null && frontOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
+                    {
+                        attackCard(frontOfThisCard);
+                    }
+
+                    if (behindThisCard != null && behindThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
+                    {
+                        attackCard(behindThisCard);
+                    }
+                    if (leftOfThisCard != null && leftOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
+                    {
+                        attackCard(leftOfThisCard);
+                    }
+                    if (rightOfThisCard != null && rightOfThisCard.GetComponent<CardController>().isFriendlyCard != isFriendlyCard)
+                    {
+                        attackCard(rightOfThisCard);
+                    }
+                    destroyCard(gameObject);
+                }
+                if(card.name == "Last Stand")
+                {
+                    attackCard(lastCardToAttack);
+                    destroyCard(gameObject);
+                }
+                break;
+            case CardData.CardType.Blocking:
+                if(card.name == "Guardian Shield")
+                {
+                    //code for dmg blocking
+                }
+                break;
         }
+        yield return new WaitForSeconds(1f);
+        Debug.Log(name + "has executed its ability");
+        playedThisRound = true;
+        Debug.Log("moving card..");
 
-        isExecutingAbility = false;
+        yield return new WaitForSeconds(2f);
+        cardGameManager.cardsPlayed.Enqueue(cardGameManager.cardsPlayed.First());
+        cardGameManager.cardsPlayed.First().GetComponent<CardController>().isTheTopCardInQueue = false;
+        cardGameManager.cardsPlayed.Dequeue();
+        Debug.Log("card moved");
+        cardGameManager.cardsPlayed.First().GetComponent<CardController>().isTheTopCardInQueue = true;
+
+        foreach (GameObject cardGameObject in cardGameManager.cardsPlayed)
+        {
+            cardGameObject.GetComponent<CardController>().cardOnTopofQueue = cardGameManager.cardsPlayed.First();
+            cardGameObject.GetComponent<CardController>().hasSurroundingInfo = false;
+
+            
+        }
     }
+
+
+        
 
     public void getSurroundingCardsInfo()
     {
+
         int[] slotsWithAvailableRightSlots = { 0, 1, 3, 4, 6, 7 };
         int[] slotsWithAvailableLeftSlots = { 1, 2, 4, 5, 7, 8 };
         int[] slotsWithAvailableForwardSlots = { 3, 4, 5, 6, 7, 8 };
@@ -164,7 +310,11 @@ public class CardController : MonoBehaviour
                 {
                     if (cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject != null)
                     {
-                        CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+                        if (!CardsOnTheSameRow.Contains(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject))
+                        {
+                            CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+
+                        }
                     }
                 }
 
@@ -175,7 +325,11 @@ public class CardController : MonoBehaviour
                 {
                     if (cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject != null)
                     {
-                        CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+                        if (!CardsOnTheSameRow.Contains(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject))
+                        {
+                            CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+
+                        }
                     }
                 }
             }
@@ -185,7 +339,11 @@ public class CardController : MonoBehaviour
                 {
                     if (cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject != null)
                     {
-                        CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+                        if (!CardsOnTheSameRow.Contains(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject))
+                        {
+                            CardsOnTheSameRow.Add(cardGameManager.gridSlots[i].GetComponent<SlotController>().occupiedCardObject);
+
+                        }
                     }
                 }
             }
@@ -199,11 +357,18 @@ public class CardController : MonoBehaviour
     {
             int dmgAmount = thisCardAtk;
             targetcard.GetComponent<CardController>().thisCardHlt -= dmgAmount;
+            targetcard.GetComponent<CardController>().lastCardToAttack = gameObject;
+            isExecutingAbility = true;
+
             Debug.Log(dmgAmount + " of damage has been dealt to " + targetcard.name + " by " + gameObject.name);
             if (targetcard.GetComponent<CardController>().thisCardHlt <= 0)
             {
-                Debug.Log(targetcard + "has been destroyed");
-            }
+            Debug.Log(targetcard + "has been destroyed");
+            destroyCard(targetcard);
+           
+        }
+
+ 
     }
 
     public void attackAOE()
@@ -212,7 +377,7 @@ public class CardController : MonoBehaviour
         {
             for (int i = 0; i < CardsOnTheSameRow.Count; i++)
             {
-                if (CardsOnTheSameRow[i] != this.gameObject)
+                if (CardsOnTheSameRow[i] != this.gameObject && !CardsOnTheSameRow[i].GetComponent<CardController>().isFriendlyCard)
                 {
                     attackCard(CardsOnTheSameRow[i]);
                 }
@@ -221,27 +386,37 @@ public class CardController : MonoBehaviour
  
     }
 
-    public void healCard()
+    public void healCard(GameObject targetcard)
     {
+        int healAmount = thisCardHealAmt;
+        targetcard.GetComponent<CardController>().thisCardHlt += healAmount;
+        isExecutingAbility = true;
+
+        Debug.Log(healAmount + " of health has been healed to " + targetcard.name + " by " + gameObject.name);
 
     }
 
-    public void buffDebuffCard()
+    public void buffDebuffCard(GameObject targetcard)
     {
+        int buffdebuffamt = thisCardBuffAmt;
+        targetcard.GetComponent<CardController>().thisCardAtk += buffdebuffamt;
+        isExecutingAbility = true;
 
+        Debug.Log(buffdebuffamt + " of atk has been buffed to " + targetcard.name + " by " + gameObject.name);
     }
     public void blockDmg()
     {
 
     }
 
-    public void counterattack()
+    public void destroyCard(GameObject targetcard)
     {
+        targetcard.transform.parent = null;
 
+        cardGameManager.cardsPlayed = new Queue<GameObject>(cardGameManager.cardsPlayed.Where(x => x.gameObject != targetcard));
+        
+        Destroy(targetcard);
+        
     }
 
-    public void sacrifice()
-    {
-
-    }
 }

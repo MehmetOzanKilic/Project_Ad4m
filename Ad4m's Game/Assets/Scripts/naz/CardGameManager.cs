@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEditor;
+using System.Linq;
 
 [CustomEditor(typeof(CardGameManager))]
 public class CardGameManagerEditor : Editor
@@ -65,7 +66,7 @@ public class CardGameManager : MonoBehaviour
     public GameDeckController gameDeckController;
 
     public Queue<GameObject> cardsPlayed = new Queue<GameObject>();
-    bool isExecutingAction = false;
+    //public GameObject currentCardExecutingAbility;
 
     public List<GameObject> emptySlots;
 
@@ -236,8 +237,6 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
-
-
     Vector3 GetInitialSlotPosition()
     {
         //If the middle slot is unoccupied, put the card in the middle slot.
@@ -275,11 +274,28 @@ public class CardGameManager : MonoBehaviour
         return GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
     }
 
-
-
     void HandleActionPhase()
     {
         SwitchCamera();
+        cardsPlayed.First().GetComponent<CardController>().isTheTopCardInQueue = true;
+
+        if (checkIfAllCardsPlayed())
+        {
+            
+            //
+        }
+    }
+
+    bool checkIfAllCardsPlayed()
+    {
+        foreach (GameObject cardGameObject in cardsPlayed)
+        {
+            if (!cardGameObject.GetComponent<CardController>().playedThisRound)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     void RearrangePlayerHand()
@@ -387,15 +403,15 @@ public class CardGameManager : MonoBehaviour
 
     public void SwitchCamera()
     {
-        if (currentPhase == GamePhase.PlayerTurn || currentPhase == GamePhase.EnemyTurn)
-        {
-            topViewCam.Priority = 0;
-            deckViewCam.Priority = 10;
-        }
-        else
+        if (currentPhase == GamePhase.SlotSelection || currentPhase == GamePhase.Action)
         {
             deckViewCam.Priority = 0;
             topViewCam.Priority = 10;
+        }
+        else if(currentPhase == GamePhase.PlayerTurn || currentPhase == GamePhase.EnemyTurn) 
+        {
+            deckViewCam.Priority = 10;
+            topViewCam.Priority = 0;
         }
     }
 

@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     public CardGameManager cardGameManager;
     private int playedCardCount = 0;
     private bool isPlacingCard = false;
-    public float cardPlacementDelay = 1.5f; 
+    public float cardPlacementDelay = 1f; 
 
     void Update()
     {
@@ -27,16 +27,11 @@ public class EnemyController : MonoBehaviour
             {
                 yield return new WaitForSeconds(cardPlacementDelay);
                 yield return StartCoroutine(PlaceCard(ChooseSlotToPlaceCard(), ChooseCardFromHand()));
-
-                cardGameManager.cardsPlayed.Enqueue(ChooseCardFromHand()); // ENQUEUE
-
                 playedCardCount++;
             }
         }
         else
         {
-            // End the enemy's turn
-            yield return new WaitForSeconds(cardPlacementDelay);
             cardGameManager.currentPhase = CardGameManager.GamePhase.Action;
             playedCardCount = 0;
         }
@@ -79,8 +74,8 @@ public class EnemyController : MonoBehaviour
         cardGameManager.opponentCards.Remove(card);
         
         card.transform.parent = null;
-
         card.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+
         Vector3 targetPosition = slot.transform.position + Vector3.up * 1f;
         Vector3 initialPosition = card.transform.position;
         float elapsedTime = 0f;
@@ -93,8 +88,12 @@ public class EnemyController : MonoBehaviour
             yield return null;
         }
 
+        cardGameManager.cardsPlayed.Enqueue(card); // ENQUEUE
+
         card.transform.position = targetPosition;
+       
         card.transform.SetParent(slot.transform);
         slot.GetComponent<SlotController>().isOccupied = true;
+        
     }
 }
