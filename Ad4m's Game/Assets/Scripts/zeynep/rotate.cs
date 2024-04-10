@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class rotate : MonoBehaviour
 {
+    float rotationValue = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    float rotationValue = 0;
+    
 
     void OnMouseDown()
     {
@@ -23,16 +25,16 @@ public class rotate : MonoBehaviour
         rotationValue = transform.rotation.eulerAngles.y;
         Debug.Log(rotationValue);
 
-        if (rotationValue == rotationAnswer)
+        /*if (rotationValue == rotationAnswer)
         {
             Debug.Log("Correct");
-            
+
             Debug.Log(GameObject.Find("GameComplete").GetComponent<TileGameComplete>().totalCorrectTiles));
 
         }
         else
         {
             Debug.Log("Wrong");
-        }
+        }*/
     }
-    }
+}

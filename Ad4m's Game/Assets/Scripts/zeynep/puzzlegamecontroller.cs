@@ -1,31 +1,33 @@
+using System.Collections.Generic;
 using UnityEngine;
-public class puzzlegamecontroller: MonoBehaviour
+using Cinemachine;
+public class puzzlegamecontroller : MonoBehaviour
 {
+    //mousela parca seccez 
+    //mouse, tagi "puzzlepiece" olan bir parcanin uzerine geldiginde parca koyu mavi rengini alsin
+    
+    //secilen parca defaulltan ortadaki slota yerlescek (doluysa en yakin bos slot)
+    //wasd ile dogru yeri secicez
+    //space basinca parcayi yerlestircez
+    //(belki) e ile 90 derece rotate ettir
+    //space e tekrar basica parcayi koy
 
-    [SerializeField] public Transform empty = null;
-    private Camera _camera;
+    public List<GameObject> puzzleSlots = new List<GameObject>();
+    public Material puzzleSelectedMat;
+
+    public CinemachineVirtualCamera FarCam;
+    public CinemachineVirtualCamera NearCam;
+    
     // Start is called before the first frame update
     void Start()
     {
-        _camera = Camera.main;
+        //puzzleSlots[4].transform.GetChild(0).GetComponent<puzzlepiececontroller>().isSelected = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit)
-            {
-                if (Vector2.Distance(a: empty.position, b: hit.transform.position) < 1)
-                {
-                    Vector2 lastemptyposition = empty.position;
-                    empty.position = hit.transform.position;
-                    hit.transform.position = lastemptyposition;
-                }
-            }
-        }
+        
 
     }
+}
