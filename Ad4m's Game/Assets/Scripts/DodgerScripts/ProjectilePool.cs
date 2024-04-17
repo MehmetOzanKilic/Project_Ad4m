@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ProjectilePool : MonoBehaviour
 {
     GameObject[] projectilePrefabs;
@@ -116,5 +115,33 @@ public class ProjectilePool : MonoBehaviour
 
         rb.AddForce(directionToArena * force, ForceMode.Impulse);
         StartCoroutine(projectile.GetComponent<Projectiles>().DeactivateProjectile());
+    }
+
+    public void ProjectileEyeApplyForce(GameObject projectile, Vector3 playerPos, Vector3 eyePos)
+    {
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+
+        Vector3 direction = (playerPos - eyePos).normalized;
+
+        rb.AddForce(direction * force, ForceMode.Impulse);
+        StartCoroutine(projectile.GetComponent<Projectiles>().DeactivateProjectile());
+    }
+
+    public void ProjectileEye()
+    {
+        int randomIndex = Random.Range(0, projectilePool.Count);
+        GameObject randomProjectile = projectilePool[randomIndex];
+
+        if (!randomProjectile.activeInHierarchy)
+        {
+            randomProjectile.SetActive(true);
+
+            // values are placeholders, replace it with actual player position and eye position.
+            ProjectileEyeApplyForce(randomProjectile, new Vector3(0, 0, 0), new Vector3(50, 0, 50));
+        }
+        else
+        {
+            Debug.Log("call ProjectileEye() again.");
+        }
     }
 }

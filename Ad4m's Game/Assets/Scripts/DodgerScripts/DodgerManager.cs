@@ -22,9 +22,4 @@ public class DodgerManager : MonoBehaviour
         wreckingDiscoBall.PrepareDiscoBall();
         StartCoroutine(pizzaSlice.TakeASlice());
     }
-
-    void Update()
-    {
-
-    }
 }
