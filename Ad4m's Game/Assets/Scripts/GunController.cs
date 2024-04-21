@@ -65,7 +65,7 @@ public class GunController : MonoBehaviour
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {
-            bullet.transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
+            bullet.transform.Translate(bulletSpeed * Time.deltaTime * Vector3.forward);
         }
     }
 }

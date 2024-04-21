@@ -42,12 +42,18 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public Vector3 move;
     [SerializeField] private float speed;
     private float time = 0.0f;
-
+    private PlayerAttributeController playerAttributeController;
+    private GameObject playerObject;
+    private void Awake()
+    {
+        playerObject = GameObject.FindWithTag("Player"); //sets the game object
+    }
     // Start is called before the first frame update
     void Start()
     {
         BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
         boxCollider.isTrigger = true;
+        playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
     }
 
     // Update is called once per frame
@@ -71,10 +77,13 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (speed != playerAttributeController.bulletSpeed)
+        {
+            speed = playerAttributeController.bulletSpeed;
+        }
         // Only move in the x and z axes
         Vector3 movement = new Vector3(move.x, 0f, move.z);
-        transform.position += movement * speed * Time.deltaTime;
-
+        transform.position += speed * Time.deltaTime * movement;
         time += Time.deltaTime;
     }
 

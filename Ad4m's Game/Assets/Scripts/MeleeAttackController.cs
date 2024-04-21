@@ -5,11 +5,25 @@ using UnityEngine;
 public class MeleeAttackController : MonoBehaviour
 {
     public GameObject weapon;
+    private GameObject playerObject;
+    private PlayerAttributeController playerAttributeController;
     public bool canAttack = true;
-    public float attackCooldown = 1f;
+    public float attackCooldown;
+    Animator anim;
+
+    private void Awake()
+    {
+        playerObject = GameObject.FindWithTag("Player"); //sets the game object
+        anim = weapon.GetComponent<Animator>();
+        playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
+    }
 
     void Update()
     {
+        if (attackCooldown != playerAttributeController.meleeAttackCooldown)
+        {
+            attackCooldown = playerAttributeController.meleeAttackCooldown;
+        }
         if (Input.GetMouseButtonDown(1))
         {
             if (canAttack)
@@ -17,12 +31,11 @@ public class MeleeAttackController : MonoBehaviour
                 MeleeAttack();
             }
         }
-
     }
     public void MeleeAttack()
     {
         canAttack = false;
-        Animator anim = weapon.GetComponent<Animator>();
+        
         anim.SetTrigger("Attack");
         StartCoroutine(ResetAttackCooldown());
     }

@@ -7,7 +7,9 @@ using UnityEngine.AI;
 public class GunmanAI  : MonoBehaviour
 {
     private NavMeshAgent agent; //variable for the Enemy navMesh.
-    private Transform player; //variable for the Player game object.
+    private Transform player; //variable for the Player game object
+    private GameObject playerObject;
+    private PlayerAttributeController playerAttributeController;
     public LayerMask whatIsGround, whatIsPlayer; //to select the ground and player layers.
 
     //Attacking
@@ -16,16 +18,20 @@ public class GunmanAI  : MonoBehaviour
     public GameObject projectile; //the projectile model.
     public bool isDodging;
 
-
     //States
     public float  attackRange;
     public bool  playerInAttackRange;
+    private float timeSlowMultiplier;
 
+    private void Awake()
+    {
+        player = GameObject.FindWithTag("Player").transform; //sets the Player
+        playerObject = GameObject.FindWithTag("Player"); //sets the Player
+        agent = GetComponent<NavMeshAgent>(); //sets the agent.
+    }
     private void Start()
     {
-        player = GameObject.Find("Ad4m").transform; //sets the Player
-        agent = GetComponent<NavMeshAgent>(); //sets the agent.
-        
+        playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
     }
 
     private void Update()
@@ -69,11 +75,14 @@ public class GunmanAI  : MonoBehaviour
             //||DO NOT DO IT LIKE THIS! THIS IS PLACEHOLDER CODE! CHANGE THIS IF YOU HAVE TIME! THIS WILL FUCK UP OPTIMIZATION SO MUCH! MOVE GETCOMPONENT TO START() ASAP! -ALPER
             //||maybe use awake()?
             //||\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
+            if (timeSlowMultiplier != playerAttributeController.timeSlowMultiplier)
+            {
+                timeSlowMultiplier = playerAttributeController.timeSlowMultiplier;
+            }
             if (rb != null)
             {
-                rb.AddForce(transform.forward * 32f, ForceMode.Impulse); //speed of the spawned projectile
-                rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+                rb.AddForce(transform.forward * (32f*timeSlowMultiplier), ForceMode.Impulse); //speed of the spawned projectile
+                rb.AddForce(transform.up * (8f*timeSlowMultiplier), ForceMode.Impulse);
             }
             else
             {

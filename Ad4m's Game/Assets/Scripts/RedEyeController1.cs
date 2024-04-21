@@ -20,13 +20,13 @@ public class RedEyeController : EyeController
         counter=0f;
     }
 
-    private void Update()
+    /*private void Update()
     {
 
-    }
+    }*/
     private void FixedUpdate()
     {
-        distance = Vector3.Distance(adam.transform.position, transform.position);
+        distance = Vector3.Distance(playerObject.transform.position, transform.position);
         xDif=Math.Abs(movementController.target.x-transform.position.x);
         zDif=Math.Abs(movementController.target.z-transform.position.z);
 
@@ -77,7 +77,7 @@ public class RedEyeController : EyeController
 
     private void Die()
     {
-        Debug.Log("red eyec died");
+        Debug.Log("red eye died");
         Destroy(gameObject);
     }
 }

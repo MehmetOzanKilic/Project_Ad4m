@@ -7,15 +7,24 @@ public class DashController : MonoBehaviour
     MovementController movementController;
     public float dashCoolDown=1f;
     private float counter;
+    private PlayerAttributeController playerAttributeController;
+
     void Start()
     {
         movementController = GetComponent<MovementController>();
-        counter=dashCoolDown;
+        playerAttributeController = GetComponent<PlayerAttributeController>();
+        dashCoolDown = playerAttributeController.dashCoolDown;
+        counter = dashCoolDown;
     }
 
     void Update()
     {
-        counter+=Time.deltaTime;
+        if (dashCoolDown != playerAttributeController.dashCoolDown) {
+            dashCoolDown = playerAttributeController.dashCoolDown;
+            counter = dashCoolDown;
+        }
+
+        counter +=Time.deltaTime;
 
         if(Input.GetKeyDown(KeyCode.LeftShift) && counter > dashCoolDown)
         {

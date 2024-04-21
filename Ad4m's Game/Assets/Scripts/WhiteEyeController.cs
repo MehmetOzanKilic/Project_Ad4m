@@ -22,14 +22,14 @@ public class WhiteEyeController : EyeController
         counter=0f;
     }
 
-    void Update()
+    /*void Update()
     {
 
-    }
+    }*/
 
     void FixedUpdate()
     {
-        distance = Vector3.Distance(adam.transform.position, transform.position);
+        distance = Vector3.Distance(playerObject.transform.position, transform.position);
         xDif=Math.Abs(movementController.target.x-transform.position.x);
         zDif=Math.Abs(movementController.target.z-transform.position.z);
         

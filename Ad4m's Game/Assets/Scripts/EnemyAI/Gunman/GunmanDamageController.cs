@@ -14,7 +14,7 @@ public class GunmanDamageController : MonoBehaviour
     {
         if (other.tag == "Weapon" || other.tag == "Bullet")
         {
-            other.GetComponent<Animator>().SetTrigger("Hit");
+            other.GetComponent<Animator>().SetTrigger("Hit"); 
             Debug.Log(other.name);
             Instantiate(hitParticle, new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z), other.transform.rotation);
         }

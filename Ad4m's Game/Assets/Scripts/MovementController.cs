@@ -6,20 +6,28 @@ using UnityEngine.UI;
 public class MovementController : MonoBehaviour
 {
     //movement
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed;
     private Vector2 inputVector;
     private Vector3 mousePos;
     private Camera mainCamera;
     private bool isDashing;
-    public float dashSpeed = 30f;
-    public float dashTime = 0.1f;
+    public float dashSpeed;
+    public float dashTime;
     public Vector3 target;
+    private PlayerAttributeController playerAttributeController;
+    private GameObject playerObject;
 
+    private void Awake()
+    {
+        playerObject = GameObject.FindWithTag("Player"); //sets the game object
+    }
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
         mainCamera = Camera.main;
         isDashing = false;
+        // Get the PlayerDamageController component from the player GameObject
+        playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
     }
 
     void Update()
@@ -41,6 +49,19 @@ public class MovementController : MonoBehaviour
             DashTowardsTarget(targetVector);
 
         RotateTowardsMouse();
+
+        if (moveSpeed != playerAttributeController.moveSpeed)
+        {
+            moveSpeed = playerAttributeController.moveSpeed;
+        }
+        if (dashSpeed != playerAttributeController.dashSpeed)
+        {
+            dashSpeed = playerAttributeController.dashSpeed;
+        }
+        if (dashTime != playerAttributeController.dashTime)
+        {
+            dashTime = playerAttributeController.dashTime;
+        }
     }
 
     private void MoveTowardsTarget(Vector3 targetVector)
