@@ -14,6 +14,8 @@ TagManager:
   - EnemyBullet
   - Weapon
   - ProjectileEye
+  - GridSlot
+  - Card
   layers:
   - Default
   - TransparentFX
