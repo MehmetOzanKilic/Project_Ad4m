@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField]private int levelNo=1;
     [SerializeField]private GameObject adam;
+    [SerializeField]private Camera mainCam;
     [SerializeField]private SpawnerController spawner;
 
     private GameObject[] eyesPresent;
@@ -18,6 +21,7 @@ public class GameController : MonoBehaviour
     [SerializeField]private bool horrorSection;
     [SerializeField]private bool shooterSection;
     [SerializeField]private bool dodgerSection;
+    [SerializeField]private GameObject[] vCams; 
 
 
     [SerializeField]private float eyeSpawnTime=2f;
@@ -25,11 +29,14 @@ public class GameController : MonoBehaviour
 
     
     
-    
+    [SerializeField]private bool camPersFlag;
+    private int tempLevel;
     void Start()
     {   
-
-
+        mainCam = Camera.main;
+        camPersFlag=false;
+        tempLevel = levelNo;
+        controllCamera();
     }
     
     void Update()
@@ -49,6 +56,13 @@ public class GameController : MonoBehaviour
             {
                 shooterSpawn();
             }
+        }
+
+        //being able to switch levels in runtime for testing. Can be removed later.
+        if(tempLevel!=levelNo)
+        {
+            tempLevel=levelNo;
+            controllCamera();
         }
         
     }
@@ -173,6 +187,67 @@ public class GameController : MonoBehaviour
                 }
                 else mobTimer+=Time.deltaTime;
             }
+        }
+    }
+
+    //sets every levels spesific parameters and cams
+    private void controllCamera()
+    {
+        setCamsFalse();
+        switch(levelNo)
+        {
+            case 1:
+            vCams[0].SetActive(true);
+            mainCam.orthographic = true;
+            adam.GetComponent<MovementController>().enabled=true;
+            adam.GetComponent<MovementController3D>().enabled=false;
+            adam.GetComponent<DashController2D>().enabled=true;
+            adam.GetComponent<DashController3D>().enabled=false;
+            break;
+            
+            case 2:
+            vCams[1].SetActive(true);
+            mainCam.orthographic = true;
+            adam.GetComponent<MovementController>().enabled=true;
+            adam.GetComponent<MovementController3D>().enabled=false;
+            adam.GetComponent<DashController2D>().enabled=true;
+            adam.GetComponent<DashController3D>().enabled=false;
+            break;
+
+            case 3:
+            vCams[2].SetActive(true);
+            mainCam.orthographic = true;
+            adam.GetComponent<MovementController>().enabled=true;
+            adam.GetComponent<MovementController3D>().enabled=false;
+            adam.GetComponent<DashController2D>().enabled=true;
+            adam.GetComponent<DashController3D>().enabled=false;
+            break;
+
+            case 4:
+            vCams[3].SetActive(true);
+            mainCam.orthographic = false;
+            adam.GetComponent<MovementController>().enabled=false;
+            adam.GetComponent<MovementController3D>().enabled=true;
+            adam.GetComponent<DashController2D>().enabled=false;
+            adam.GetComponent<DashController3D>().enabled=true;
+            break;
+
+            case 5:
+            vCams[4].SetActive(true);
+            mainCam.orthographic = false;
+            adam.GetComponent<MovementController>().enabled=false;
+            adam.GetComponent<MovementController3D>().enabled=true;
+            adam.GetComponent<DashController2D>().enabled=false;
+            adam.GetComponent<DashController3D>().enabled=true;
+            break;
+        }
+    }
+
+    private void setCamsFalse()
+    {
+        foreach(var v in vCams)
+        {
+            v.SetActive(false);
         }
     }
 }
