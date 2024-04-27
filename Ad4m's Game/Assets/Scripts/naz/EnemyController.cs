@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            cardGameManager.currentPhase = CardGameManager.GamePhase.Action;
+            cardGameManager.currentPhase = CardGameManager.GamePhase.FightingStage;
             playedCardCount = 0;
         }
 

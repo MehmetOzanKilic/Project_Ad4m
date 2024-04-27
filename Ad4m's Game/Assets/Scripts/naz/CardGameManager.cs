@@ -2,9 +2,9 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 using UnityEditor;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 [CustomEditor(typeof(CardGameManager))]
 public class CardGameManagerEditor : Editor
@@ -32,11 +32,12 @@ public class CardGameManager : MonoBehaviour
     {
         PlayerTurn,
         EnemyTurn,
+        FightingStage,
         SlotSelection,
         Action
     }
 
-    public GamePhase currentPhase = GamePhase.PlayerTurn;
+    public GamePhase currentPhase ;
 
     public Transform playerHandParent;
     public List<GameObject> playerCards;
@@ -71,13 +72,19 @@ public class CardGameManager : MonoBehaviour
     public List<GameObject> emptySlots;
 
     void Start()
-    {
+    {   getPhase();
         SwitchCamera();
 
         for (int i = 0; i < gridSlots.Count; i++)
         {
             emptySlots.Add(gridSlots[i]);
         }
+    }
+
+    void getPhase()
+    {
+        currentPhase = (GamePhase)System.Enum.Parse(typeof(GamePhase), StateController.gamePhase);
+        print("current pahse is: " + currentPhase);
     }
 
     void Update()
@@ -89,6 +96,10 @@ public class CardGameManager : MonoBehaviour
                 break;
             case GamePhase.EnemyTurn:
                 enemyController.EnemyTurnHandler();
+                break;
+            case GamePhase.FightingStage:
+                Invoke("FightingStagePhase", 2);
+                print("switching to fighting stage");
                 break;
             case GamePhase.SlotSelection:
                 HandleSlotSelectionPhase();
@@ -166,6 +177,12 @@ public class CardGameManager : MonoBehaviour
         {
             MoveRight();
         }
+    }
+    [SerializeField] private GameObject turnOnOff;
+    void FightingStagePhase()
+    {
+        print("fightingStage");
+        SceneManager.LoadScene("Level1");
     }
 
     void HandleSlotSelectionPhase()

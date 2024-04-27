@@ -60,7 +60,7 @@ public class SnapController : MonoBehaviour
         //the section is placed in the snapper
         if(distance <= snapRange && sectionLimit > sectionCount)
         {
-            char sec = draggable.name[0];
+            int sec = draggable.name[0] - '0';
             //to store sections currently in the snapper
             currentSections.text = currentSections.text + sec;
             sectionCount++;
@@ -69,6 +69,7 @@ public class SnapController : MonoBehaviour
             //cancelButton is set active
             cancelButton.SetActive(true);
         }
+        SelectedSections.sections = int.Parse(currentSections.text);
     }
 
     //called when the cancelButton is clicked. Resets everything
@@ -83,9 +84,10 @@ public class SnapController : MonoBehaviour
         }
         currentSections.text = "";
         cancelButton.SetActive(false);
+        SelectedSections.reset();
     }
 
-    //to find the originaş position of each section.
+    //to find the original position of each section.
     private void find()   
     {
         int index = 0;

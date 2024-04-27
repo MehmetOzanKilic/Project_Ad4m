@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
     [SerializeField]private bool horrorSection;
     [SerializeField]private bool shooterSection;
     [SerializeField]private bool dodgerSection;
+    [SerializeField]private bool prepareStage=false;
     [SerializeField]private GameObject[] vCams; 
 
 
@@ -41,6 +43,11 @@ public class GameController : MonoBehaviour
     
     void Update()
     {
+        if(prepareStage)
+        {
+            StateController.gamePhase = "PlayerTurn";
+            SceneManager.LoadScene("Card Game");
+        }
         eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
         mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
         spawnerEyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
