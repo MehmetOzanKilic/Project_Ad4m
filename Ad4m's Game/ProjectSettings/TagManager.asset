@@ -16,6 +16,9 @@ TagManager:
   - ProjectileEye
   - GridSlot
   - Card
+  - VegasSphere
+  - Arena
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -25,7 +28,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - DodgerProjectileSpawner
   - 
   - 
   - 
