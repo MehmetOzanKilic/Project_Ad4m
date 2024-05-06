@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     [SerializeField]private bool horrorSection;
     [SerializeField]private bool shooterSection;
     [SerializeField]private bool dodgerSection;
+    [SerializeField]private bool puzzleSection;
     [SerializeField]private bool prepareStage=false;
     [SerializeField]private GameObject[] vCams; 
 
@@ -35,10 +36,15 @@ public class GameController : MonoBehaviour
     private int tempLevel;
     void Start()
     {   
+        levelNo=SelectedSections.returnCount();
         mainCam = Camera.main;
         camPersFlag=false;
         tempLevel = levelNo;
         controllCamera();
+        horrorSection=SelectedSections.isHorrorPresent;
+        shooterSection=SelectedSections.isShooterPresent;
+        dodgerSection=SelectedSections.isDodgerPresent;
+        puzzleSection=SelectedSections.isPuzzlePresent;
     }
     
     void Update()

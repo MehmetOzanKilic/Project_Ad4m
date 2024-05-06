@@ -79,6 +79,9 @@ public class CardGameManager : MonoBehaviour
         {
             emptySlots.Add(gridSlots[i]);
         }
+
+        //for debugging
+        SelectedSections.printAllSections();
     }
 
     void getPhase()

@@ -16,5 +16,43 @@ public class SelectedSections : MonoBehaviour
     {
         sections=0;
         print(sections);
+
+        isCardPresent=false;
+        isHorrorPresent=false;
+        isShooterPresent=false;
+        isPuzzlePresent=false;
+        isDodgerPresent=false;
     }
+
+    public static bool fightingStagePresent()
+    {
+        if(isHorrorPresent || isShooterPresent || isDodgerPresent)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    public static void printAllSections()
+    {
+        print(isHorrorPresent);
+        print(isCardPresent);
+        print(isShooterPresent);
+        print(isDodgerPresent);
+        print(isPuzzlePresent);
+    }
+
+    public static int returnCount()
+    {
+        int counter=0;
+
+        if(isHorrorPresent) counter++;
+        if(isCardPresent) counter++;
+        if(isShooterPresent) counter++;
+        if(isDodgerPresent) counter++;
+        if(isPuzzlePresent) counter++;
+
+        return counter;
+
+    } 
 }

@@ -53,7 +53,6 @@ public class SnapController : MonoBehaviour
     private void OnDragEnded(SectionCarrier draggable)
     {
         float distance = Vector3.Distance(transform.position,Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        Debug.Log("snap:" + distance);
 
         //if the distance is smaller then than the snapRange and 
         //sectionCount does not exceed the sectionLimit,
@@ -64,7 +63,6 @@ public class SnapController : MonoBehaviour
             //to store sections currently in the snapper
             currentSections.text = currentSections.text + sec;
             sectionCount++;
-            Debug.Log("in");
             draggable.transform.position = transform.position;
             //cancelButton is set active
             cancelButton.SetActive(true);
@@ -85,6 +83,19 @@ public class SnapController : MonoBehaviour
         currentSections.text = "";
         cancelButton.SetActive(false);
         SelectedSections.reset();
+    }
+
+    public void returnSnap()
+    {
+        int index = 0;
+        sectionCount=0;
+        foreach(SectionCarrier draggable in draggableObjects)
+        {
+            draggable.transform.position = originalPositions[index];
+            index++;
+        }
+        currentSections.text = "";
+        cancelButton.SetActive(false);
     }
 
     //to find the original position of each section.

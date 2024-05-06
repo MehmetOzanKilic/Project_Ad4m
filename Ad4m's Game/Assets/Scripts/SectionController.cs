@@ -1,26 +1,52 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SectionController : MonoBehaviour
 {
+    private SnapController snap;
+    bool[] sectionsPresent = new bool[5];
     // Start is called before the first frame update
     void Start()
     {
+        Invoke("findSnap",0.4f);
+        for(int i = 0;i<5;i++)
+        {
+            sectionsPresent[i]=false;
+        }
+
+        print("loop ended");
         
     }
 
+    private void findSnap()
+    {
+        snap = GameObject.Find("Snap").GetComponent<SnapController>();
+        if(snap!=null)
+        {
+            print("everything fine");
+        }
+
+    }
+
+    [SerializeField]private bool canPrint=false;
     // Update is called once per frame
     void Update()
-    {
-        
+    { 
+        //for debugging
+        if(canPrint)
+        {
+            printSections();
+            canPrint=false;
+        }
     }
-
+    
     private int[] seperatedSecs = new int[5];
     public void createGame()
     {
-        print("create game");
         int final = SelectedSections.sections;
         int counter=0;
         
@@ -38,15 +64,10 @@ public class SectionController : MonoBehaviour
             counter++;
         }
 
-        print(seperatedSecs[0]);
-        print(seperatedSecs[1]);
-        print(seperatedSecs[2]);
-        print(seperatedSecs[3]);
-        print(seperatedSecs[4]);
-
         manageSectionSelection();
     }
 
+    
     private void manageSectionSelection()
     {
         SelectedSections.isHorrorPresent = false;
@@ -83,11 +104,75 @@ public class SectionController : MonoBehaviour
             }
         }
 
-        print(SelectedSections.isHorrorPresent);
-        print(SelectedSections.isCardPresent);
-        print(SelectedSections.isShooterPresent);
-        print(SelectedSections.isDodgerPresent);
-        print(SelectedSections.isPuzzlePresent);
+
+        sectionsPresent[0] = SelectedSections.isHorrorPresent;
+        sectionsPresent[1] = SelectedSections.isCardPresent;
+        sectionsPresent[2] = SelectedSections.isShooterPresent;
+        sectionsPresent[3] = SelectedSections.isDodgerPresent;
+        sectionsPresent[4] = SelectedSections.isPuzzlePresent;
+
+    
+        
+        
+        openGame();
 
     }
+
+
+    //tüm senaryoları kontrol et çalışmıyor
+    private void openGame()
+    {
+        int sectionCounter=0;
+
+        foreach(bool temp in sectionsPresent)
+        {
+            if(temp)sectionCounter++;
+        }
+        print("opening game:" + sectionCounter);
+
+        if(sectionCounter == 1)
+        {
+            //single section loader
+            print("working");
+            snap.returnSnap();
+            printSections();
+
+        }
+
+        else if(sectionCounter > 1)
+        {
+            if(SelectedSections.isCardPresent)
+            {
+                SceneManager.LoadScene("Card Game");
+                snap.returnSnap();
+                printSections();
+            }
+
+            else if(SelectedSections.isHorrorPresent || SelectedSections.isShooterPresent || SelectedSections.isDodgerPresent)
+            {
+                SceneManager.LoadScene("Level1");
+                snap.returnSnap();
+                printSections();
+            }
+
+        }
+
+        else
+        {
+            print("error");
+            snap.cancelSnap();
+            printSections();
+        }
+
+    }
+
+
+    void printSections()
+    {
+        foreach(bool temp in sectionsPresent)
+        {
+            print(temp);
+        }
+    }
+
 }
