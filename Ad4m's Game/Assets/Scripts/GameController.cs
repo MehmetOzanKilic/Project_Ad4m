@@ -33,10 +33,14 @@ public class GameController : MonoBehaviour
     
     
     [SerializeField]private bool camPersFlag;
+
+    
     private int tempLevel;
     void Start()
     {   
         levelNo=SelectedSections.returnCount();
+        if(levelNo==0)
+        {levelNo=3;}
         mainCam = Camera.main;
         camPersFlag=false;
         tempLevel = levelNo;

@@ -4,80 +4,182 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RedEyeController : EyeController
+public class RedEyeController : MonoBehaviour
 {
-    [SerializeField]private float eyeColor=0f;
-    [SerializeField]private float errorMargin=1f;
-    [SerializeField]private float attackDis=2f;
-    [SerializeField]private float deathTime=0.7f;
-    [SerializeField]private float diesIn=5f;
-    private float diesInCounter=0f;
+    public NavMeshAgent agent; //variable for the Enemy navMesh.
+    public LayerMask whatIsGround, whatIsPlayer; //to select the ground and player layers.
+
+    //since you cant look at it to kill it there has to be a to make the red eye dissapear, it will be implemented later
+    [SerializeField] private float diesIn=5f;
+    private bool seen;//to determine the start of the things written above
+    public GameObject adam;
+    MovementController movementController;// adam movement controller script
+
+    public float deathTime=1.5f;//how many seconds will it take for the eye to dissapear
+
     private float counter;
-    private float dis;
-    private bool flag=true;
-    private void Start()
+
+    public float errorMargin = 0.5f;//how far can the mouse can be from the eye so that it still dissapears
+
+    private Renderer[] renderers;//renderers of the main body and two eyes
+
+    public float seeAng=30f;//how wide can adam see * 2
+    private bool adamFound=false;
+    private bool walkingPointSet=false;
+    private Vector3 desPoint;
+    [SerializeField] private float range;
+
+
+    void Start()
     {
+        renderers = GetComponentsInChildren<Renderer>();
         counter=0f;
+        seen=false;
+        agent = GetComponent<NavMeshAgent>(); //sets the agent.
+        whatIsGround = LayerMask.NameToLayer("Ground");
+        adam = GameObject.Find("Ad4m");
+        movementController = adam.GetComponent<MovementController>();
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-
-    }
-    private void FixedUpdate()
-    {
-        distance = Vector3.Distance(adam.transform.position, transform.position);
-        xDif=Math.Abs(movementController.target.x-transform.position.x);
-        zDif=Math.Abs(movementController.target.z-transform.position.z);
-
-        if(distance>attackDis)patrol();
-        else if(distance<attackDis)
+        if(adam)
         {
-            if(flag)
+            adamFound=true;
+        }
+
+        if(adamFound)
+        {
+            print("updatedeyiz");
+            //makes the eye look at adam
+            transform.LookAt(adam.transform.position);
+
+            //makes the eye change color over distances from white to red
+            changeColor();
+
+            //navmesh chaseplayer
+            Patrol();
+
+            //visibility of the eyes
+            EyeSight();
+
+            //differences between mouse position and eye position
+            var xDif=Math.Abs(movementController.target.x-transform.position.x);
+            var zDif=Math.Abs(movementController.target.z-transform.position.z);
+
+            //if the differences are small enough scripts checks death
+            if(xDif<errorMargin && zDif<errorMargin)
             {
-                Attack();
-                flag=false;
+                checkDeath();
+                counter+=Time.deltaTime;
             }
+            else
+                counter=0f;
+
+
         }
 
-        changeColor(eyeColor);
-
-        eyeSight();
-
-        if(seen)
-        {
-            diesInCounter+=Time.deltaTime;
-            if(diesInCounter>diesIn)
-            {
-                Die();
-            }
-        }
-
-        if(xDif<errorMargin && zDif<errorMargin)
-        {
-            CheckDeath();
-            counter+=Time.deltaTime;
-        }
-        else
-            counter=0f;
     }
-    
-    private void CheckDeath()
+
+    private void checkDeath()
     {
+        //if enough time passes eye is destroyed
+        //but since red eye is not suppose to be looked at this will be changed with something to damage the player
         if(counter>deathTime)
-            Attack();
-    
+        {
+            death();
+            Debug.Log("You Did Bad!!!!");
+        }
     }
 
-    private void Attack()
+    public void getAdam(GameObject temp)
     {
-        Debug.Log("red eye attacked");
-        Invoke("Die",0.3f);
+        adam = temp;
     }
 
-    private void Die()
+    //will be changed
+    private void death()
     {
-        Debug.Log("red eyec died");
         Destroy(gameObject);
+    }
+
+    //calculates the distance betwenn adam and the eye and changes eyes color from white to red according to that distance
+    private void changeColor()
+    {
+        var distance = Vector3.Distance(adam.transform.position, transform.position);
+        distance = Math.Clamp(distance,2,10);
+        float sat = 100-(10*distance);
+
+        renderers[1].material.color = Color.HSVToRGB(0,sat/100,1);
+        renderers[2].material.color = Color.HSVToRGB(0,sat/100,1);  
+    }
+
+    //navmesh
+    private void ChasePlayer()
+    {
+        agent.destination = adam.transform.position;    
+    }
+    private void Patrol()
+    {
+        if(!walkingPointSet) SearchForDes();
+        if(walkingPointSet) agent.SetDestination(desPoint);
+        if(Vector3.Distance(transform.position,desPoint)<1) walkingPointSet=false;
+    }
+    private void SearchForDes()
+    {
+        float x = UnityEngine.Random.Range(-range,range);
+        float z = UnityEngine.Random.Range(-range,range);
+
+        desPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z +z);
+        print(desPoint);
+
+        if(Physics.Raycast(desPoint, Vector3.down, whatIsGround))
+        {
+            walkingPointSet = true;
+        }    
+    }
+    //visibility of the eyes
+    private void EyeSight()
+    {
+        //counts for body eye1 and eye2
+        var loopCounter=0;
+
+            //speacial case for the body renderer in case we want to be able to see it sooner
+            foreach(var r in renderers)
+            {
+                if(loopCounter==0)
+                {
+                    float angle = Vector3.Angle(adam.transform.forward, transform.position-adam.transform.position);
+                    //seeAngle is increased here for body
+                    if(Math.Abs(angle)<seeAng+70d)
+                    {
+                        renderers[0].enabled=true;
+                    }
+                    else
+                    {   
+                        renderers[0].enabled=false;
+                    }
+                }
+                else
+                {
+                    float angle = Vector3.Angle(adam.transform.forward, transform.GetChild(loopCounter-1).position-adam.transform.position);
+                    //if the eye-adam vector and adam's look direction vector has a angle smaller then the seeAngle eye renderer becomes visible
+                    //and the eye is stopped when invisible
+                    if(Math.Abs(angle)<seeAng)
+                    {
+                        renderers[loopCounter].enabled=true;
+                        agent.isStopped = true;
+                    }
+                    //eye moves if visible
+                    else
+                    {   
+                        renderers[loopCounter].enabled=false;
+                        agent.isStopped = false;
+                    }
+                }
+                loopCounter+=1;
+
+            }
     }
 }

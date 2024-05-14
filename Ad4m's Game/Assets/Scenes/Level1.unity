@@ -263,6 +263,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1927329779}
     m_Modifications:
+    - target: {fileID: 3282498525236526299, guid: 3685207d572798d459d8d4403b828e02, type: 3}
+      propertyPath: eyeProjectile
+      value: 
+      objectReference: {fileID: 1545209252451565977, guid: 0e1dff5f6c1f6cc4e8f58140f4d0880b, type: 3}
     - target: {fileID: 5773949478177414476, guid: 3685207d572798d459d8d4403b828e02, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.016155243
@@ -356,14 +360,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e8687aac50b584dab0078dffbd99c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelNo: 1
+  levelNo: 3
   adam: {fileID: 1785544386}
   mainCam: {fileID: 0}
   spawner: {fileID: 757192493}
-  spawn: 0
-  horrorSection: 1
-  shooterSection: 1
-  dodgerSection: 1
+  spawn: 1
+  horrorSection: 0
+  shooterSection: 0
+  dodgerSection: 0
+  puzzleSection: 0
+  prepareStage: 0
   vCams:
   - {fileID: 978082722}
   - {fileID: 1425744583}
@@ -2245,6 +2251,18 @@ PrefabInstance:
     - target: {fileID: 1581886623978595864, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: movement2D
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517663450656350941, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
+      propertyPath: m_Mass
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517663450656350941, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517663450656350941, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
+      propertyPath: m_AngularDrag
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8615761620283550106, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: m_Name

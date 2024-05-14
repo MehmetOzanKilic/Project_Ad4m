@@ -14,12 +14,15 @@ public class ProjectilePool : MonoBehaviour
     Transform arena;
     GameObject vegasSphere;
 
+    private GameObject adam;
+
     void Awake()
     {
         projectilePrefabs = GameObject.FindGameObjectsWithTag("Projectile");
         spawningPlane = GameObject.FindWithTag("Spawner").transform;
         arena = GameObject.FindWithTag("Ground").transform;
         vegasSphere = GameObject.FindWithTag("VegasSphere");
+        adam= GameObject.Find("Ad4m");
     }
 
     bool IsInPlaneSpawnArea(Vector3 projectilePosition)
@@ -105,6 +108,7 @@ public class ProjectilePool : MonoBehaviour
             randomProjectile.SetActive(true);
             ApplyForce(randomProjectile);
         }
+        Debug.Log("boş activate");
     }
 
     public void ApplyForce(GameObject projectile)

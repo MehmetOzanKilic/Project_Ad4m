@@ -224,7 +224,6 @@ GameObject:
   - component: {fileID: 9167392970271039551}
   - component: {fileID: 8807101670213358017}
   - component: {fileID: 6234741075476414021}
-  - component: {fileID: 8755681795774025404}
   m_Layer: 0
   m_Name: Red Eye
   m_TagString: Eye
@@ -354,26 +353,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc362128e805f64f91485323f11c534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDis: 1
-  movementRange: 10
-  sightDistance: 15
-  eyeColor: 0.14
-  errorMargin: 1
-  attackDis: 5
-  deathTime: 1
+  agent: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
   diesIn: 10
---- !u!114 &8755681795774025404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417140091224587864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cb7761456546f246a3d308cba4a411c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopDis: 1
-  movementRange: 0
-  sightDistance: 8
+  adam: {fileID: 0}
+  deathTime: 1
+  errorMargin: 1
+  seeAng: 30
+  range: 10

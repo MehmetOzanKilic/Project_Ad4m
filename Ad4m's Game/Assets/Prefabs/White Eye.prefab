@@ -224,7 +224,6 @@ GameObject:
   - component: {fileID: 9167392970271039551}
   - component: {fileID: 8794780406098335376}
   - component: {fileID: 6841373992074560294}
-  - component: {fileID: -2110641408366761278}
   m_Layer: 0
   m_Name: White Eye
   m_TagString: Eye
@@ -354,26 +353,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1aa34c8f746ab248967e2039a6fdd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDis: 1
-  movementRange: 10
-  sightDistance: 15
+  agent: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
   moveSpeed: 1
-  chaseDis: 12
-  attackDis: 3
+  adam: {fileID: 0}
   deathTime: 2
   errorMargin: 1
---- !u!114 &-2110641408366761278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417140091224587864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cb7761456546f246a3d308cba4a411c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopDis: 1
-  movementRange: 0
-  sightDistance: 8
+  seeAng: 30
+  range: 10
