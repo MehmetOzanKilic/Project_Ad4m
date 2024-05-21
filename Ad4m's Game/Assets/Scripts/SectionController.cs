@@ -143,7 +143,6 @@ public class SectionController : MonoBehaviour
             {
                 //snap.returnSnap();
                 printSections();
-                Debug.LogError("halt");
                 Invoke("loadCard",0.5f);
             }
 
@@ -151,7 +150,6 @@ public class SectionController : MonoBehaviour
             {
                 //snap.returnSnap();
                 printSections();
-                Debug.LogError("halt");
                 Invoke("loadLevel1",0.5f);
             }
 
