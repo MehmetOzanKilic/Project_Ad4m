@@ -7,15 +7,28 @@ public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
     private float lerpTimer;
-    public float chipSpeed = 2f;
+    public float chipSpeed = 1f;
     private float health;
-    public float maxHealth = 100f; //max health of player, can be changed with upgrades
+    public float maxHealth; //max health of player, can be changed with upgrades
     public Image frontHealthBar;
     public Image backHealthBar;
+    private PlayerAttributeController playerAttributeController;
+    private GameObject playerObject;
+    private float burstHealCount =3;
 
+    private float timerInterval = 2f; // Interval in seconds
+
+    private void Awake()
+    {
+        playerObject = GameObject.FindWithTag("Player"); //sets the game object
+    }
     void Start()
     {
+        playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
+        maxHealth = playerAttributeController.playerHealth;
         health = maxHealth; //sets health to maxhealth
+
+        StartCoroutine(StartTimer());
     }
 
     // Update is called once per frame
@@ -23,8 +36,13 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth); //makes sure health never exceeds 0 or maxhealth
         UpdateHealthUI();
+        
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            BurstHeal();
+        }
         //placeholder code to test healthbar!
-        ////////////////////////////////////////////////////////////
+        /*/////////////////////////////////////////////////////////////
         if(Input.GetKeyDown(KeyCode.P))
         {
             TakeDamage(Random.Range(5, 10));
@@ -38,7 +56,16 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log(health);
         }
         
-        ////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////*/
+        
+    }
+    private void BurstHeal()
+    {
+        if (playerAttributeController.canBurstHeal && burstHealCount > 0)
+        {
+            burstHealCount--;
+            RestoreHealth(maxHealth/2);
+        }
     }
     public void UpdateHealthUI()
     {
@@ -51,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
             backHealthBar.color = Color.red;
             lerpTimer += Time.deltaTime;
             float percentComplete = lerpTimer / chipSpeed;
-            percentComplete = percentComplete * percentComplete;
+            percentComplete *= percentComplete;
             backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
 
         }
@@ -61,7 +88,7 @@ public class PlayerHealth : MonoBehaviour
             backHealthBar.fillAmount = hFraction;
             lerpTimer += Time.deltaTime;
             float percentComplete = lerpTimer / chipSpeed;
-            percentComplete = percentComplete * percentComplete;
+            percentComplete *= percentComplete;
             frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentComplete);
 
         }
@@ -74,7 +101,16 @@ public class PlayerHealth : MonoBehaviour
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
-        lerpTimer = 0f;
 
+        Debug.Log("healed " + healAmount);
+        lerpTimer = 0f;
+    }
+    private IEnumerator StartTimer()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(timerInterval);
+            RestoreHealth(1f);
+        }
     }
 }

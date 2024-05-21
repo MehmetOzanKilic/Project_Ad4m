@@ -67,11 +67,11 @@ public class GameController : MonoBehaviour
         {
             if(horrorSection)
             {
-                horrorSpawn();
+                HorrorSpawn();
             }
             if(shooterSection)
             {
-                shooterSpawn();
+                ShooterSpawn();
             }
             if(dodgerSection)
             {
@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
         
     }
 
-    public GameObject sendAdam()
+    public GameObject SendAdam()
     {
         return adam;
     }
@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour
     float spawnerEyeTimer=0f;
     float projectileEyeTimer=0f;
     //spawn mechanics for horror section
-    private void horrorSpawn()
+    private void HorrorSpawn()
     {
         //if shooter section is present spawner eyes are instantiated
         if(shooterSection)
@@ -183,7 +183,7 @@ public class GameController : MonoBehaviour
         }
     }
     float mobTimer=0f;
-    private void shooterSpawn()
+    private void ShooterSpawn()
     {
         if(horrorSection==false && dodgerSection==false)
         {
