@@ -73,6 +73,10 @@ public class GameController : MonoBehaviour
             {
                 shooterSpawn();
             }
+            if(dodgerSection)
+            {
+                //dodger()
+            }
         }
 
         //being able to switch levels in runtime for testing. Can be removed later.

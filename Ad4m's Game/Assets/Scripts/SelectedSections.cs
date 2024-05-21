@@ -22,6 +22,13 @@ public class SelectedSections : MonoBehaviour
         isShooterPresent=false;
         isPuzzlePresent=false;
         isDodgerPresent=false;
+
+        print("is horror active: false");
+        print("is card active: false");
+        print("is shooter active: false");
+        print("is dodger active: false");
+        print("is puzzle active: false");
+    
     }
 
     public static bool fightingStagePresent()

@@ -96,7 +96,6 @@ public class WhiteEyeController : MonoBehaviour
         float z = UnityEngine.Random.Range(-range,range);
 
         desPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z +z);
-        print(desPoint);
 
         if(Physics.Raycast(desPoint, Vector3.down, whatIsGround))
         {
@@ -108,7 +107,9 @@ public class WhiteEyeController : MonoBehaviour
     {
         //if enough time passes eye is destroyed
         if(counter>deathTime)
+        {    
             Destroy(gameObject);
+            Debug.LogError("the eye was killed and it took " + counter + " seconds");}
     }
 
     public void getAdam(GameObject temp)

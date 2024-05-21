@@ -51,7 +51,6 @@ public class RedEyeController : MonoBehaviour
 
         if(adamFound)
         {
-            print("updatedeyiz");
             //makes the eye look at adam
             transform.LookAt(adam.transform.position);
 

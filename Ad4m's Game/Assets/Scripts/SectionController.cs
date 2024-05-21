@@ -18,7 +18,7 @@ public class SectionController : MonoBehaviour
             sectionsPresent[i]=false;
         }
 
-        print("loop ended");
+        //("loop ended");
         
     }
 
@@ -27,7 +27,7 @@ public class SectionController : MonoBehaviour
         snap = GameObject.Find("Snap").GetComponent<SnapController>();
         if(snap!=null)
         {
-            print("everything fine");
+            //print("everything fine");
         }
 
     }
@@ -54,7 +54,6 @@ public class SectionController : MonoBehaviour
         while(final>10)
         {
             seperatedSecs[counter] = final%10;
-            print(seperatedSecs[counter]);
             final /=10;
             if(final<10)
             {   
@@ -128,12 +127,11 @@ public class SectionController : MonoBehaviour
         {
             if(temp)sectionCounter++;
         }
-        print("opening game:" + sectionCounter);
+        print("opening game level:" + sectionCounter);
 
         if(sectionCounter == 1)
         {
             //single section loader
-            print("working");
             snap.returnSnap();
             printSections();
 
@@ -143,16 +141,18 @@ public class SectionController : MonoBehaviour
         {
             if(SelectedSections.isCardPresent)
             {
-                SceneManager.LoadScene("Card Game");
-                snap.returnSnap();
+                //snap.returnSnap();
                 printSections();
+                Debug.LogError("halt");
+                Invoke("loadCard",0.5f);
             }
 
             else if(SelectedSections.isHorrorPresent || SelectedSections.isShooterPresent || SelectedSections.isDodgerPresent)
             {
-                SceneManager.LoadScene("Level1");
-                snap.returnSnap();
+                //snap.returnSnap();
                 printSections();
+                Debug.LogError("halt");
+                Invoke("loadLevel1",0.5f);
             }
 
         }
@@ -169,10 +169,20 @@ public class SectionController : MonoBehaviour
 
     void printSections()
     {
-        foreach(bool temp in sectionsPresent)
-        {
-            print(temp);
-        }
+        print("is horror active: " + sectionsPresent[0]);
+        print("is card active: " + sectionsPresent[1]);
+        print("is shooter active: " + sectionsPresent[2]);
+        print("is dodger active: " + sectionsPresent[3]);
+        print("is puzzle active: " + sectionsPresent[4]);
     }
 
+    void loadLevel1()
+    {
+        SceneManager.LoadScene("Level1");
+    }
+
+    void loadCard()
+    {
+        SceneManager.LoadScene("Card Game");
+    }
 }
