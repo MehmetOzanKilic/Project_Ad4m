@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField]private GameObject adam;
+    [SerializeField]private GameObject playerObject;
     [SerializeField]private SpawnerController spawner;
 
     private GameObject[] eyesPresent;
@@ -43,26 +43,26 @@ public class GameController : MonoBehaviour
         {
             if(horrorSection)
             {
-                horrorSpawn();
+                HorrorSpawn();
             }
             if(shooterSection)
             {
-                shooterSpawn();
+                ShooterSpawn();
             }
         }
         
     }
 
-    public GameObject sendAdam()
+    public GameObject SendAdam()
     {
-        return adam;
+        return playerObject;
     }
 
     float eyeTimer=0f;
     float spawnerEyeTimer=0f;
     float projectileEyeTimer=0f;
     //spawn mechanics for horror section
-    private void horrorSpawn()
+    private void HorrorSpawn()
     {
         //if shooter section is present spawner eyes are instantiated
         if(shooterSection)
@@ -148,7 +148,7 @@ public class GameController : MonoBehaviour
         }
     }
     float mobTimer=0f;
-    private void shooterSpawn()
+    private void ShooterSpawn()
     {
         if(horrorSection==false && dodgerSection==false)
         {

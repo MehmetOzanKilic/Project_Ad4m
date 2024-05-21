@@ -6,4 +6,8 @@ using UnityEngine;
 public class EnemyAttributeController : MonoBehaviour
 {
     public float gunmanDamage = 10f;
+    public float meleeDamage = 40f;
+    public float gunmanHealth = 100f;
+    public float swordsmanHealth = 80f;
+
 }
