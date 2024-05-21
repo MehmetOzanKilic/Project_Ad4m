@@ -4,34 +4,22 @@ using UnityEngine;
 
 public class GunmanHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    public float maxHealth = 100f; //health of the enemy
     public float health;
     public float bulletDamage;
     public float meleeDamage;
-    private PlayerAttributeController playerAttributeController;
+    private PlayerAttributeController playerAttributeController; 
     private GameObject playerObject;
 
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Transform hitTransform = collision.transform;
-        if (hitTransform.CompareTag("Bullet"))
-        { 
-            health = health - bulletDamage;
-            Debug.Log(bulletDamage);
-            Debug.Log(health);
-
-        }
-
-    }
+    
     private void Awake()
     {
-        playerObject = GameObject.Find("Ad4m");
+        playerObject = GameObject.FindWithTag("Player"); //sets the game object
     }
 
     private void Start()
     {
-        
+
         health = maxHealth;
         Debug.Log(health);
         // Get the PlayerDamageController component from the player GameObject
@@ -56,13 +44,38 @@ public class GunmanHealth : MonoBehaviour
     }
     private void Update()
     {
-        bulletDamage = playerAttributeController.playerBulletDamage;
-        meleeDamage = playerAttributeController.playerMeleeDamage;
-        if (health < 1)
+        if (bulletDamage != playerAttributeController.playerBulletDamage)
+        {
+            bulletDamage = playerAttributeController.playerBulletDamage;
+        }
+        if (meleeDamage != playerAttributeController.playerMeleeDamage)
+        {
+            meleeDamage = playerAttributeController.playerMeleeDamage;
+        }
+        //check for new values of bullet damage for upgrades or debuffs while playing
+        if (health < 0.1)
         {
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision collision) //checks for collision with bullets and deals appropriate damage. 
+    {
+        Transform hitTransform = collision.transform;
+        if (hitTransform.CompareTag("Bullet"))
+        {
+            health -= bulletDamage;
+            Debug.Log(bulletDamage);
+            Debug.Log(health);
+        }
+        /*else if (hitTransform.CompareTag("anything else")
+         * {
+         *  whatever you want
+         * }*/
+    }
+
+    
+    
 
 
 }

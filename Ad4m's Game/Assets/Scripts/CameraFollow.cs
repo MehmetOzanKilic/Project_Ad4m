@@ -80,7 +80,7 @@ public class CameraFollow : MonoBehaviour
             //move the camera, lerp is for smooth movement
             if (isFollowing)
             {
-                Vector3 targetPosition = transform.localPosition + moveDirection * speed * Time.deltaTime;
+                Vector3 targetPosition = transform.localPosition + speed * Time.deltaTime * moveDirection;
                 transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, 0.5f);
             }
         }
