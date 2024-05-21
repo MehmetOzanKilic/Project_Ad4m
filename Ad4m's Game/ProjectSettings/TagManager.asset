@@ -19,6 +19,7 @@ TagManager:
   - VegasSphere
   - Arena
   - Projectile
+  - EnemyMeleeAttackRadius
   layers:
   - Default
   - TransparentFX
@@ -29,6 +30,7 @@ TagManager:
   - Player
   - Enemy
   - DodgerProjectileSpawner
+  - EnemyMeleeAttackRadius
   - 
   - 
   - 

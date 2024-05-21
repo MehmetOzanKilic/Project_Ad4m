@@ -82,7 +82,7 @@ public class Bullet : MonoBehaviour
             speed = playerAttributeController.bulletSpeed;
         }
         // Only move in the x and z axes
-        Vector3 movement = new Vector3(move.x, 0f, move.z);
+        Vector3 movement = new(move.x, 0f, move.z);
         transform.position += speed * Time.deltaTime * movement;
         time += Time.deltaTime;
     }

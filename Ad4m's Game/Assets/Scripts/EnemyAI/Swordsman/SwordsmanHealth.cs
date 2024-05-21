@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunmanHealth : MonoBehaviour
+public class SwordsmanHealth : MonoBehaviour
 {
     public float maxHealth; //health of the enemy
     public float health;
