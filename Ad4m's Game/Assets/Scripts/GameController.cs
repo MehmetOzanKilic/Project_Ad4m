@@ -4,6 +4,7 @@ using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -33,7 +34,9 @@ public class GameController : MonoBehaviour
     
     
     [SerializeField]private bool camPersFlag;
-
+    [SerializeField]private float levelEndTimer=10f;
+    [SerializeField]private Text waveTimeText;
+    private bool endTimerFlag=false;
     
     private int tempLevel;
     void Start()
@@ -49,6 +52,19 @@ public class GameController : MonoBehaviour
         shooterSection=SelectedSections.isShooterPresent;
         dodgerSection=SelectedSections.isDodgerPresent;
         puzzleSection=SelectedSections.isPuzzlePresent;
+
+        if(!puzzleSection)
+        {
+            GameObject.Find("Grid").SetActive(false);
+            GameObject.Find("PuzzlePiecePool").SetActive(false);
+            GameObject.Find("Ad4m").GetComponent<PuzzlePiece>().enabled=false;
+            endTimerFlag=true;
+            print("endTimerFlag: " + endTimerFlag);
+        }
+        else
+        {
+            waveTimeText.enabled=false;
+        }
     }
     
     void Update()
@@ -86,6 +102,26 @@ public class GameController : MonoBehaviour
             controllCamera();
         }
         
+        if(endTimerFlag)
+        {
+            levelEndTimer -= Time.deltaTime;
+            waveTimeText.text=((int)levelEndTimer).ToString();
+
+            if(levelEndTimer <= 0)
+            {
+                Debug.LogError("wave ended");
+                if(SelectedSections.isCardPresent)
+                {
+                    StateController.gamePhase = "PlayerTurn";
+                    SceneManager.LoadScene("Card Game");
+                }
+                else
+                {
+                    //more waves or end level
+                    print("wave end");
+                }
+            }
+        }
     }
 
     public GameObject SendAdam()
@@ -269,6 +305,21 @@ public class GameController : MonoBehaviour
         foreach(var v in vCams)
         {
             v.SetActive(false);
+        }
+    }
+
+    public void puzzleFinished()
+    {
+        Debug.LogError("puzzle complete");
+        if(SelectedSections.isCardPresent)
+        {
+            StateController.gamePhase = "PlayerTurn";
+            SceneManager.LoadScene("Card Game");
+        }
+        else
+        {
+            //more waves or end level
+            print("wave end");
         }
     }
 }

@@ -20,6 +20,10 @@ TagManager:
   - Arena
   - Projectile
   - EnemyMeleeAttackRadius
+  - Grid
+  - SmallPuzzlePiece
+  - PuzzlePiece
+  - Picked
   layers:
   - Default
   - TransparentFX
@@ -31,7 +35,6 @@ TagManager:
   - Enemy
   - DodgerProjectileSpawner
   - EnemyMeleeAttackRadius
-  - 
   - 
   - 
   - 

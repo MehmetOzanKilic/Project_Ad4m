@@ -150,7 +150,8 @@ public class SectionController : MonoBehaviour
             {
                 //snap.returnSnap();
                 printSections();
-                Invoke("loadLevel1",0.5f);
+                string levelString = "loadLevel" + sectionCounter.ToString();
+                Invoke(levelString,0.5f);
             }
 
         }
@@ -178,6 +179,26 @@ public class SectionController : MonoBehaviour
     {
         SceneManager.LoadScene("Level1");
     }
+    void loadLevel2()
+    {
+        SceneManager.LoadScene("Level2");
+    }
+
+    void loadLevel3()
+    {
+        SceneManager.LoadScene("Level3");
+    }
+
+    void loadLevel4()
+    {
+        SceneManager.LoadScene("Level4");
+    }
+
+    void loadLevel5()
+    {
+        SceneManager.LoadScene("Level5");
+    }
+
 
     void loadCard()
     {

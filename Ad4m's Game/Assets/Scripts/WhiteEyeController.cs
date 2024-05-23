@@ -109,7 +109,7 @@ public class WhiteEyeController : MonoBehaviour
         if(counter>deathTime)
         {    
             Destroy(gameObject);
-            Debug.LogError("the eye was killed and it took " + counter + " seconds");}
+        }
     }
 
     public void getAdam(GameObject temp)

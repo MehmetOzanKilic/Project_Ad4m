@@ -9,7 +9,7 @@ public class SelectedSections : MonoBehaviour
     public static bool isHorrorPresent;
     public static bool isShooterPresent;
     public static bool isDodgerPresent;
-    public static bool isPuzzlePresent;
+    public static bool isPuzzlePresent=true;
 
 
     public static void reset()

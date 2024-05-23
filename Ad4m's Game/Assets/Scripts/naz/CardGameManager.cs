@@ -185,7 +185,8 @@ public class CardGameManager : MonoBehaviour
     void FightingStagePhase()
     {
         print("fightingStage");
-        SceneManager.LoadScene("Level1");
+        string levelString = "Level" + SelectedSections.returnCount().ToString();
+        SceneManager.LoadScene(levelString);
     }
 
     void HandleSlotSelectionPhase()
