@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
     private int tempLevel;
     void Start()
     {   
+        levelEndTimer=5f;
         levelNo=SelectedSections.returnCount();
         if(levelNo==0)
         {levelNo=3;}
@@ -119,6 +120,8 @@ public class GameController : MonoBehaviour
                 {
                     //more waves or end level
                     print("wave end");
+                    SelectedSections.gameWon=true;
+                    SceneManager.LoadScene("GameEndScreen");
                 }
             }
         }
@@ -320,6 +323,8 @@ public class GameController : MonoBehaviour
         {
             //more waves or end level
             print("wave end");
+            SelectedSections.gameWon=true;
+            SceneManager.LoadScene("GameEndScreen");
         }
     }
 }

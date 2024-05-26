@@ -24,7 +24,11 @@ public class SectionController : MonoBehaviour
 
     private void findSnap()
     {
-        snap = GameObject.Find("Snap").GetComponent<SnapController>();
+        if(SceneManager.GetActiveScene().ToString() == "The Computer")
+        {
+            snap = GameObject.Find("Snap").GetComponent<SnapController>();
+        }
+        
         if(snap!=null)
         {
             //print("everything fine");
@@ -119,7 +123,7 @@ public class SectionController : MonoBehaviour
 
 
     //tüm senaryoları kontrol et çalışmıyor
-    private void openGame()
+    public void openGame()
     {
         int sectionCounter=0;
 
@@ -165,6 +169,44 @@ public class SectionController : MonoBehaviour
 
     }
 
+    public void openGameEnd()
+    {
+        int sectionCounter = SelectedSections.returnCount();
+        print("opening game level:" + sectionCounter);
+
+        if(sectionCounter == 1)
+        {
+            //single section loader
+            printSections();
+
+        }
+
+        else if(sectionCounter > 1)
+        {
+            if(SelectedSections.isCardPresent)
+            {
+                //snap.returnSnap();
+                printSections();
+                Invoke("loadCard",0.5f);
+            }
+
+            else if(SelectedSections.isHorrorPresent || SelectedSections.isShooterPresent || SelectedSections.isDodgerPresent)
+            {
+                //snap.returnSnap();
+                printSections();
+                string levelString = "loadLevel" + sectionCounter.ToString();
+                Invoke(levelString,0.5f);
+            }
+
+        }
+
+        else
+        {
+            print("error");
+            printSections();
+        }
+
+    }
 
     void printSections()
     {

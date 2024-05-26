@@ -436,6 +436,17 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
+    private void opponentBeaten()
+    {
+        SelectedSections.gameWon=true;
+        SceneManager.LoadScene("GameEndScreen");
+    }
+
+    private void playerBeaten()
+    {
+        SelectedSections.gameWon=false;
+        SceneManager.LoadScene("GameEndScreen");
+    }
 }
 
 
