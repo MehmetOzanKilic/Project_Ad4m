@@ -41,10 +41,11 @@ public class MovementController : MonoBehaviour
         inputVector = new Vector2(h,v);
         
 
-        mousePos = Input.mousePosition;
+        
     }
     void FixedUpdate()
     {
+        mousePos = Input.mousePosition;
         var targetVector = new Vector3(inputVector.x, 0, inputVector.y).normalized;
         
         if(!isDashing)
@@ -96,6 +97,7 @@ public class MovementController : MonoBehaviour
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
     }
+    
     public void RotateTowardsMouse()
     {
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
@@ -106,6 +108,7 @@ public class MovementController : MonoBehaviour
             //Debug.Log(target);
             target.y = transform.position.y;
             transform.LookAt(target);
+            print(hitInfo.collider.gameObject.name);
         }
     }
 }

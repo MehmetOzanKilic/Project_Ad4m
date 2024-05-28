@@ -24,6 +24,7 @@ TagManager:
   - SmallPuzzlePiece
   - PuzzlePiece
   - Picked
+  - ProjectileShooter
   layers:
   - Default
   - TransparentFX
@@ -35,7 +36,7 @@ TagManager:
   - Enemy
   - DodgerProjectileSpawner
   - EnemyMeleeAttackRadius
-  - 
+  - Wall
   - 
   - 
   - 

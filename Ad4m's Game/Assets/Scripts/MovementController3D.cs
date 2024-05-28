@@ -30,6 +30,8 @@ public class MovementController3D : MonoBehaviour
     private float mouseY;
     [SerializeField] private float cameraSensivity = 1f;
     [SerializeField] private Transform cam;
+    [SerializeField] private float upper=320;
+    [SerializeField] private float lower=30;
     void Update()
     {
         h = Input.GetAxisRaw("Horizontal");
@@ -56,8 +58,8 @@ public class MovementController3D : MonoBehaviour
 
         var angle = transform.localEulerAngles.x;    
 
-        if(angle>180 && angle<353) angles.x=353;
-        else if (angle<160 && angle>20) angles.x = 20;
+        if(angle>180 && angle<upper) angles.x=upper;
+        else if (angle<160 && angle>lower) angles.x = lower;
 
         transform.localEulerAngles = angles;
 

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField]private int levelNo=1;
+    [SerializeField]private int levelNo;
     [SerializeField]private GameObject adam;
     [SerializeField]private Camera mainCam;
     [SerializeField]private SpawnerController spawner;
@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     private GameObject[] mobsPresent;
     private GameObject[] spawnerEyesPresent;
     private GameObject[] projectileEyesPresent;
+    private GameObject[] projectileShootersPresent;
 
     //SerilizeFields will be removed later.
     [SerializeField]private bool spawn=true;
@@ -30,21 +31,22 @@ public class GameController : MonoBehaviour
 
     [SerializeField]private float eyeSpawnTime=2f;
     [SerializeField]private float mobSpawnTime=2f;
+    [SerializeField]private float projectileShooterTime=1f;
 
     
     
     [SerializeField]private bool camPersFlag;
-    [SerializeField]private float levelEndTimer=10f;
+    [SerializeField]private float levelEndTimer=100f;
     [SerializeField]private Text waveTimeText;
     private bool endTimerFlag=false;
     
     private int tempLevel;
     void Start()
     {   
-        levelEndTimer=5f;
+        //levelEndTimer=500f;
         levelNo=SelectedSections.returnCount();
         if(levelNo==0)
-        {levelNo=3;}
+        {levelNo=2;}
         mainCam = Camera.main;
         camPersFlag=false;
         tempLevel = levelNo;
@@ -66,8 +68,15 @@ public class GameController : MonoBehaviour
         {
             waveTimeText.enabled=false;
         }
+
+        eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
+        mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
+        spawnerEyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
+        projectileEyesPresent = GameObject.FindGameObjectsWithTag("ProjectileEye");
+        projectileShootersPresent = GameObject.FindGameObjectsWithTag("ProjectileShooter");
     }
     
+    private float enemyCountTimer=0f;
     void Update()
     {
         if(prepareStage)
@@ -75,10 +84,7 @@ public class GameController : MonoBehaviour
             StateController.gamePhase = "PlayerTurn";
             SceneManager.LoadScene("Card Game");
         }
-        eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
-        mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
-        spawnerEyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
-        projectileEyesPresent = GameObject.FindGameObjectsWithTag("ProjectileEye");
+
 
         if(spawn)
         {
@@ -92,7 +98,7 @@ public class GameController : MonoBehaviour
             }
             if(dodgerSection)
             {
-                //dodger()
+                DodgerSpawn();
             }
         }
 
@@ -125,6 +131,21 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+
+        if(enemyCountTimer>10f)
+        {
+            eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
+            mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
+            spawnerEyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
+            projectileEyesPresent = GameObject.FindGameObjectsWithTag("ProjectileEye");
+            projectileShootersPresent = GameObject.FindGameObjectsWithTag("ProjectileShooter");
+            enemyCountTimer = 0;
+        }
+
+        else 
+        {
+            enemyCountTimer+= Time.deltaTime;
+        }
     }
 
     public GameObject SendAdam()
@@ -148,6 +169,7 @@ public class GameController : MonoBehaviour
                 if(spawnerEyeTimer>=eyeSpawnTime*3)
                 {
                     spawner.insSpawnerEye();
+                    spawnerEyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
                     spawnerEyeTimer=0f;
                 }
                 else spawnerEyeTimer+=Time.deltaTime;
@@ -160,6 +182,7 @@ public class GameController : MonoBehaviour
                     if(mobTimer>=mobSpawnTime)
                     {
                         spawner.insMobs(dodgerSection,GameObject.FindGameObjectWithTag("SpawnerEye").transform.position);
+                        mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
                         mobTimer=0.0f;
                     }
                     else mobTimer+=Time.deltaTime;
@@ -173,6 +196,7 @@ public class GameController : MonoBehaviour
                     if(eyeTimer>=eyeSpawnTime)
                     {
                         spawner.insRedEye();
+                        eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
                         eyeTimer=0f;
                     }
                     else eyeTimer+=Time.deltaTime;
@@ -190,6 +214,7 @@ public class GameController : MonoBehaviour
                 if(projectileEyeTimer>=eyeSpawnTime*2)
                 {
                     spawner.insProjectileEye();
+                    projectileEyesPresent = GameObject.FindGameObjectsWithTag("ProjectileEye");
                     projectileEyeTimer=0f;
                 }
                 else projectileEyeTimer+=Time.deltaTime;
@@ -203,6 +228,7 @@ public class GameController : MonoBehaviour
                     if(eyeTimer>=eyeSpawnTime)
                     {
                         spawner.insWhiteEye();
+                        eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
                         eyeTimer=0f;
                     }
                     else eyeTimer+=Time.deltaTime;
@@ -216,6 +242,7 @@ public class GameController : MonoBehaviour
             if(eyesPresent.Length<7 && eyeTimer>=eyeSpawnTime)
             {
                 spawner.insEyes();
+                eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
                 eyeTimer=0.0f;
             }
             else eyeTimer+=Time.deltaTime;
@@ -231,6 +258,7 @@ public class GameController : MonoBehaviour
                 if(mobTimer>=mobSpawnTime)
                 {
                     spawner.insMobs(dodgerSection);
+                    mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
                     mobTimer=0.0f;
                 }
                 else mobTimer+=Time.deltaTime;
@@ -243,9 +271,42 @@ public class GameController : MonoBehaviour
                 if(mobTimer>=mobSpawnTime)
                 {
                     spawner.insMobs(dodgerSection);
+                    mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
                     mobTimer=0f;
                 }
                 else mobTimer+=Time.deltaTime;
+            }
+        }
+    }
+
+    private float projectileShooterTimer=0f;
+    private void DodgerSpawn()
+    {
+        if(!horrorSection && !shooterSection)
+        {
+            if(projectileShootersPresent.Length<10)
+            {
+                if(projectileShooterTimer>=projectileShooterTime)
+                {
+                    spawner.insProjectileShooter();
+                    projectileShootersPresent = GameObject.FindGameObjectsWithTag("ProjectileShooter");
+                    projectileShooterTimer=0.0f;
+                }
+                else projectileShooterTimer+=Time.deltaTime;
+            }
+        }
+
+        if(!horrorSection && shooterSection)
+        {
+            if(projectileShootersPresent.Length<10)
+            {
+                if(projectileShooterTimer>=projectileShooterTime*3)
+                {
+                    spawner.insProjectileShooter();
+                    projectileShootersPresent = GameObject.FindGameObjectsWithTag("ProjectileShooter");
+                    projectileShooterTimer=0.0f;
+                }
+                else projectileShooterTimer+=Time.deltaTime;
             }
         }
     }

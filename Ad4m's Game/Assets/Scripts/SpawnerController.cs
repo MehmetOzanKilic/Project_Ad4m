@@ -16,6 +16,7 @@ public class SpawnerController : MonoBehaviour
     [SerializeField]private GameObject yellowEye;
     [SerializeField]private GameObject gunMan;
     [SerializeField]private GameObject swordMan; 
+    [SerializeField]private GameObject projectileShooter;
     [SerializeField]private int eyesAllowed=5;
     [SerializeField]private int[] eyeProb;
     [SerializeField]private int[] mobProb;
@@ -164,5 +165,10 @@ public class SpawnerController : MonoBehaviour
     public void insProjectileEye()
     {
         Instantiate(projectileEye,randomPos(),Quaternion.identity);
+    }
+
+    public void insProjectileShooter()
+    {
+        Instantiate(projectileShooter,randomPos(),Quaternion.identity);
     }
 }
