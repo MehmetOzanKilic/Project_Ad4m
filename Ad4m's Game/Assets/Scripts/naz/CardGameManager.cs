@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using UnityEngine.SceneManagement;
-
 [CustomEditor(typeof(CardGameManager))]
 public class CardGameManagerEditor : Editor
 {
@@ -448,5 +447,3 @@ public class CardGameManager : MonoBehaviour
         SceneManager.LoadScene("GameEndScreen");
     }
 }
-
-

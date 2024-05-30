@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class MovementController : MonoBehaviour
+public class MovementController_Level1 : MonoBehaviour
 {
     //movement
     [SerializeField] private float moveSpeed;
@@ -105,10 +105,16 @@ public class MovementController : MonoBehaviour
         if(Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
             target = hitInfo.point;
+            print("target: " + target);
             //Debug.Log(target);
-            target.y = transform.position.y;
+            //target.y = transform.position.y;
             transform.LookAt(target);
-            print(hitInfo.collider.gameObject.name);
+            //print(hitInfo.collider.gameObject.name);
         }
+    }
+
+    public Vector3 returnTarget()
+    {
+        return target;
     }
 }
