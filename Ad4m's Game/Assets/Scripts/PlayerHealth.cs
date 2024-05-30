@@ -42,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
             BurstHeal();
         }
         //placeholder code to test healthbar!
-        /*/////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////
         if(Input.GetKeyDown(KeyCode.P))
         {
             TakeDamage(Random.Range(5, 10));

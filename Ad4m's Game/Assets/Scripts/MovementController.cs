@@ -14,9 +14,10 @@ public class MovementController : MonoBehaviour
     public float dashSpeed;
     public float dashTime;
     public Vector3 target;
-    [SerializeField] bool movement2D=false;
+    [SerializeField] bool movement2D = false;
     private PlayerAttributeController playerAttributeController;
     private GameObject playerObject;
+    Animator animator;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class MovementController : MonoBehaviour
         isDashing = false;
         // Get the PlayerDamageController component from the player GameObject
         playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
+        animator = GetComponent<Animator>();
     }
 
     private float h;
@@ -36,22 +38,22 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         h = Input.GetAxisRaw("Horizontal");
-        if(!movement2D)  v = Input.GetAxisRaw("Vertical");
+        if (!movement2D) v = Input.GetAxisRaw("Vertical");
         else v = 0;
-        inputVector = new Vector2(h,v);
-        
+        inputVector = new Vector2(h, v);
 
-        
+        bool isMoving = inputVector.magnitude > 0.01f;
+        animator.SetBool("isRunning", isMoving);
     }
     void FixedUpdate()
     {
         mousePos = Input.mousePosition;
         var targetVector = new Vector3(inputVector.x, 0, inputVector.y).normalized;
-        
-        /*if(!isDashing)
+
+        if (!isDashing)
             MoveTowardsTarget(targetVector);
-        else if(isDashing)
-            DashTowardsTarget(targetVector);*/
+        else if (isDashing)
+            DashTowardsTarget(targetVector);
 
         RotateTowardsMouse();
 
@@ -71,7 +73,7 @@ public class MovementController : MonoBehaviour
 
     private void MoveTowardsTarget(Vector3 targetVector)
     {
-        var speed=moveSpeed * Time.deltaTime;
+        var speed = moveSpeed * Time.deltaTime;
 
         targetVector = Quaternion.Euler(0, mainCamera.gameObject.transform.eulerAngles.y, 0) * targetVector;
         var targetPosition = transform.position + targetVector * speed;
@@ -80,29 +82,29 @@ public class MovementController : MonoBehaviour
 
     public void Dashing()
     {
-        isDashing=true;
+        isDashing = true;
         Invoke("NotDashing", dashTime);
     }
 
     private void NotDashing()
     {
-        isDashing=false;
+        isDashing = false;
     }
 
     private void DashTowardsTarget(Vector3 targetVector)
     {
-        var speed=dashSpeed * Time.deltaTime;
+        var speed = dashSpeed * Time.deltaTime;
 
         targetVector = Quaternion.Euler(0, mainCamera.gameObject.transform.eulerAngles.y, 0) * targetVector;
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
     }
-    
+
     public void RotateTowardsMouse()
     {
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
 
-        if(Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
             target = hitInfo.point;
             //Debug.Log(target);
