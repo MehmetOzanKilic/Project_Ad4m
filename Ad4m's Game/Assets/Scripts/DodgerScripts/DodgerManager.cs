@@ -20,6 +20,6 @@ public class DodgerManager : MonoBehaviour
         projectilePool.InitializePool();
         StartCoroutine(projectilePool.ActivateProjectilesPeriodically());
         wreckingDiscoBall.PrepareDiscoBall();
-        StartCoroutine(pizzaSlice.TakeASlice());
+        //StartCoroutine(pizzaSlice.TakeASlice());
     }
 }
