@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using UnityEngine.SceneManagement;
-[CustomEditor(typeof(CardGameManager))]
+/*[CustomEditor(typeof(CardGameManager))]
 public class CardGameManagerEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -23,7 +23,7 @@ public class CardGameManagerEditor : Editor
             EditorGUILayout.ObjectField(card, typeof(GameObject), true);
         }
     }
-}
+}*/
 
 public class CardGameManager : MonoBehaviour
 {

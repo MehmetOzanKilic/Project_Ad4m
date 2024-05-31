@@ -116,7 +116,6 @@ public class GameController : MonoBehaviour
 
             if(levelEndTimer <= 0)
             {
-                Debug.LogError("wave ended");
                 if(SelectedSections.isCardPresent)
                 {
                     StateController.gamePhase = "PlayerTurn";

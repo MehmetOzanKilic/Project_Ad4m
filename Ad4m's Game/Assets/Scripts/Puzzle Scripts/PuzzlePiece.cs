@@ -5,9 +5,9 @@ using UnityEngine;
 public class PuzzlePiece : MonoBehaviour
 {
     GameObject pickedPiece;
-    GameController gameController;
+    PuzzleController gameController;
     Vector3 negativeFlagVector = new Vector3(-1, -1, -1);
-    PuzzlePiecePool puzzlePiecePool;
+    [SerializeField]private PuzzlePiecePool puzzlePiecePool;
     public int remaningPuzzlePiece = 9;
 
     public List<GameObject> correctPuzzlePieces=new List<GameObject>();
@@ -22,9 +22,8 @@ public class PuzzlePiece : MonoBehaviour
     private void findPuzzlePieces()
     {
         print("findPuzzlePieces start");
-        puzzlePiecePool = GameObject.Find("PuzzlePiecePool").GetComponent<PuzzlePiecePool>();
         puzzlePieces = GameObject.FindGameObjectsWithTag("PuzzlePiece");
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        gameController = GameObject.Find("GameController").GetComponent<PuzzleController>();
         print("findPuzzlePieces finish");
     }
 

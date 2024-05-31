@@ -67,11 +67,20 @@ public class PuzzlePiecePool : MonoBehaviour
     {
         int maxAttempts = 100;
         int attempts = 0;
+        float randomDistance;
 
         while (attempts < maxAttempts)
         {
             float randomAngle = Random.Range(0f, Mathf.PI * 2f);
-            float randomDistance = Random.Range(10f, 20f);
+            if(SelectedSections.returnCount()==1)
+            {
+                randomDistance = Random.Range(5f, 10f);
+            }
+            else
+            {
+                randomDistance = Random.Range(10f, 20f);
+            }
+
             Vector3 newPosition = new Vector3(Mathf.Cos(randomAngle) * randomDistance, 0f, Mathf.Sin(randomAngle) * randomDistance);
 
             bool isValidPosition = true;

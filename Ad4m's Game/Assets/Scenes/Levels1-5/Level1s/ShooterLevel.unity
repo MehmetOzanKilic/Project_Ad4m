@@ -467,10 +467,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 200335482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e6c41cc93287394aa4e12c601f03930, type: 3}
+  m_Script: {fileID: 11500000, guid: 691d5c761be92d64586972b1c20575fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eye: {fileID: 7417140091224587864, guid: 8218d82f2c3414b40b0ad134392cff08, type: 3}
+  target: {fileID: 3014759449459287166, guid: 11e6120cfbd75aa4aa311d88c2516783, type: 3}
   endTimer: 30
   counterText: {fileID: 782956306}
 --- !u!1 &215213120
@@ -591,7 +591,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 7.29, z: -9.12}
+  m_LocalPosition: {x: -0.5, y: 8.24, z: -6.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1545,6 +1545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f7a4ce2b7bb72468ff9e66fbc6784f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePiecePool: {fileID: 0}
   remaningPuzzlePiece: 9
   correctPuzzlePieces: []
 --- !u!114 &1785544413
@@ -1827,7 +1828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8996649608256008992, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.05
+      value: 13.14
       objectReference: {fileID: 0}
     - target: {fileID: 8996649608256008992, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: m_LocalRotation.w

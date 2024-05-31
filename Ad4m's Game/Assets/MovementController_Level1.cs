@@ -105,7 +105,6 @@ public class MovementController_Level1 : MonoBehaviour
         if(Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
             target = hitInfo.point;
-            print("target: " + target);
             //Debug.Log(target);
             //target.y = transform.position.y;
             transform.LookAt(target);

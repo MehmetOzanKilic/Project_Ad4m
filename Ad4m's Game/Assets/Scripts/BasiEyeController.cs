@@ -60,7 +60,7 @@ public class BasiEyeController : MonoBehaviour
     {
         if(!seen)
         {
-            transform.position = Vector3.MoveTowards(transform.position,wallBase.position, 2 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position,wallBase.position, 2  * Time.deltaTime);
         }
     }
 }

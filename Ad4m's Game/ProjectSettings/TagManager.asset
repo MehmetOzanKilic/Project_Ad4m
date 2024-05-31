@@ -25,6 +25,7 @@ TagManager:
   - PuzzlePiece
   - Picked
   - ProjectileShooter
+  - Target
   layers:
   - Default
   - TransparentFX
