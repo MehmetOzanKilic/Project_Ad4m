@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ProjectilePool : MonoBehaviour
 {
-    GameObject[] projectilePrefabs;
-    int poolSize = 30;
+    [SerializeField] GameObject[] projectilePrefabs;
+    [SerializeField] int poolSize;
     List<GameObject> projectilePool;
-    float waitDelay = 1f;
+    [SerializeField] float waitDelay;
+    [SerializeField] float force;
 
-    float force = 50f;
     Transform spawningPlane;
     Transform arena;
     GameObject vegasSphere;
@@ -18,11 +18,10 @@ public class ProjectilePool : MonoBehaviour
 
     void Awake()
     {
-        projectilePrefabs = GameObject.FindGameObjectsWithTag("Projectile");
         spawningPlane = GameObject.FindWithTag("Spawner").transform;
         arena = GameObject.FindWithTag("Ground").transform;
         vegasSphere = GameObject.FindWithTag("VegasSphere");
-        adam= GameObject.Find("Ad4m");
+        adam = GameObject.Find("Ad4m");
     }
 
     bool IsInPlaneSpawnArea(Vector3 projectilePosition)
@@ -100,20 +99,21 @@ public class ProjectilePool : MonoBehaviour
 
     void ActivateRandomProjectile()
     {
-        int randomIndex = Random.Range(0, projectilePool.Count);
-        GameObject randomProjectile = projectilePool[randomIndex];
-
-        if (!randomProjectile.activeInHierarchy)
+        foreach (GameObject projectile in projectilePool)
         {
-            randomProjectile.SetActive(true);
-            ApplyForce(randomProjectile);
+            if (!projectile.activeInHierarchy)
+            {
+                projectile.SetActive(true);
+                ApplyForce(projectile);
+                return;
+            }
         }
-        Debug.Log("boş activate");
     }
 
     public void ApplyForce(GameObject projectile)
     {
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
         Vector3 randomPointInArena = GetRandomPointInArena();
         Vector3 directionToArena = (randomPointInArena - projectile.transform.position).normalized;
 
