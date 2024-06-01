@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNo: 3
-  adam: {fileID: 1785544386}
+  adam: {fileID: 1261255662}
   mainCam: {fileID: 0}
   spawner: {fileID: 757192493}
   spawn: 1
@@ -744,9 +744,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0, y: 0, z: -0.45}
-  VerticalArmLength: 0
+  Damping: {x: 0, y: 0, z: 0}
+  ShoulderOffset: {x: 0, y: 0, z: 0.39}
+  VerticalArmLength: 1.75
   CameraSide: 1
   CameraDistance: 0
   CameraCollisionFilter:
@@ -2004,6 +2004,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 273995304993728209, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077608731397583011, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910964490180419781, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: backHealthBar
+      value: 
+      objectReference: {fileID: 1958848667}
+    - target: {fileID: 2910964490180419781, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: frontHealthBar
+      value: 
+      objectReference: {fileID: 539731046}
+    - target: {fileID: 4091503520278688114, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4229496475537089578, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791567698700803319, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327826922072482977, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585546}
+    - target: {fileID: 5344564814009895604, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5850386854295625213, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6050003169178860687, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.15
@@ -2046,17 +2086,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6394616138299663925, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: m_Name
-      value: myAd4m@T-Pose
+      value: Ad4m
       objectReference: {fileID: 0}
     - target: {fileID: 6394616138299663925, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+--- !u!1 &1261255662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6394616138299663925, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+  m_PrefabInstance: {fileID: 1261255661}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1261255673 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6050003169178860687, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+  m_PrefabInstance: {fileID: 1261255661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1392733974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2639,6 +2689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f7a4ce2b7bb72468ff9e66fbc6784f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePiecePool: {fileID: 0}
   remaningPuzzlePiece: 9
   correctPuzzlePieces: []
 --- !u!114 &1785544403
@@ -2803,7 +2854,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 875848664}
+  m_Follow: {fileID: 1261255673}
   m_Lens:
     FieldOfView: 50
     OrthographicSize: 4.18
@@ -3161,7 +3212,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8615761620283550106, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: m_Name
-      value: Ad4m
+      value: Ad4m_Old
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615761620283550106, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8615761620283550106, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: m_TagString

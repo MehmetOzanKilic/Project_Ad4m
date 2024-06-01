@@ -75,36 +75,36 @@ public class PlayerAttributeController : MonoBehaviour
             {
                 case 0:
 
-                    Debug.Log("Direct Damage");
+                    //Debug.Log("Direct Damage");
                     playerBulletDamage = 50f;
                     playerMeleeDamage = 100f;
                     break;
 
                 case 1:
-                    Debug.Log("Healing");
+                    //Debug.Log("Healing");
                     canBurstHeal = true;
                     break;
 
                 case 2:
-                    Debug.Log("AoE Damage");
+                    //Debug.Log("AoE Damage");
                     reloadSpeed = 0.5f;
                     shotAmount = 20;
                     isMachineGun = true;
                     break;
 
                 case 3:
-                    Debug.Log("Buff");
+                    //Debug.Log("Buff");
                     playerHealth = 150f;
                     break;
 
                 case 4:
-                    Debug.Log("Debuff");
+                    //Debug.Log("Debuff");
                     enemyAttributeController.gunmanHealth = 75f;
                     enemyAttributeController.swordsmanHealth = 60f;
                     break;
 
                 case 5:
-                    Debug.Log("Sacrifice");
+                    //Debug.Log("Sacrifice");
                     //sacrifice logic
                     break;
 
@@ -113,7 +113,7 @@ public class PlayerAttributeController : MonoBehaviour
                     break;*/
 
                 default:
-                    Debug.Log("No Upgrade selected for slot " + i);
+                    //Debug.Log("No Upgrade selected for slot " + i);
                     break;
             }
         }

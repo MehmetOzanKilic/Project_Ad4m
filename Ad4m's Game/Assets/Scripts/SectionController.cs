@@ -135,9 +135,30 @@ public class SectionController : MonoBehaviour
 
         if(sectionCounter == 1)
         {
-            //single section loader
-            snap.returnSnap();
-            printSections();
+            if(SelectedSections.isHorrorPresent)
+            {
+                SceneManager.LoadScene("HorrorLevel");
+            }
+
+            if(SelectedSections.isCardPresent)
+            {
+                SceneManager.LoadScene("Card Game");
+            }
+
+            if(SelectedSections.isDodgerPresent)
+            {
+                SceneManager.LoadScene("DHS");
+            }
+
+            if(SelectedSections.isShooterPresent)
+            {
+                SceneManager.LoadScene("ShooterLevel");
+            }
+
+            if(SelectedSections.isPuzzlePresent)
+            {
+                SceneManager.LoadScene("PuzzleLevel");
+            }
 
         }
 

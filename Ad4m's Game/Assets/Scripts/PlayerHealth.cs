@@ -102,7 +102,6 @@ public class PlayerHealth : MonoBehaviour
     {
         health += healAmount;
 
-        Debug.Log("healed " + healAmount);
         lerpTimer = 0f;
     }
     private IEnumerator StartTimer()

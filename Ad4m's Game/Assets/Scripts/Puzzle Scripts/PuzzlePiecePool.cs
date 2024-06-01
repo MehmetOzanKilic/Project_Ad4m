@@ -120,8 +120,6 @@ public class PuzzlePiecePool : MonoBehaviour
             randomPuzzlePiece.SetActive(true);
             puzzlePieceScript.remaningPuzzlePiece--;
             puzzlePieceScript.correctPuzzlePieces.Add(randomPuzzlePiece);
-            Debug.Log("Piece added: " + randomPuzzlePiece.name);
-            print("randomIndex: " + randomIndex);
             tempPuzzlePieceList.RemoveAt(randomIndex);
             tempPuzzlePiecePositions.RemoveAt(randomIndex);
         }

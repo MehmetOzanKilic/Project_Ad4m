@@ -23,6 +23,8 @@ public class MovementController : MonoBehaviour
     {
         playerObject = GameObject.FindWithTag("Player"); //sets the game object
     }
+
+    private int levelCount;
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
@@ -31,6 +33,8 @@ public class MovementController : MonoBehaviour
         // Get the PlayerDamageController component from the player GameObject
         playerAttributeController = playerObject.GetComponent<PlayerAttributeController>();
         animator = GetComponent<Animator>();
+        levelCount = SelectedSections.returnCount();
+
     }
 
     private float h;
@@ -57,17 +61,20 @@ public class MovementController : MonoBehaviour
 
         RotateTowardsMouse();
 
-        if (moveSpeed != playerAttributeController.moveSpeed)
+        if(levelCount>1)
         {
-            moveSpeed = playerAttributeController.moveSpeed;
-        }
-        if (dashSpeed != playerAttributeController.dashSpeed)
-        {
-            dashSpeed = playerAttributeController.dashSpeed;
-        }
-        if (dashTime != playerAttributeController.dashTime)
-        {
-            dashTime = playerAttributeController.dashTime;
+            if (moveSpeed != playerAttributeController.moveSpeed)
+            {
+                moveSpeed = playerAttributeController.moveSpeed;
+            }
+            if (dashSpeed != playerAttributeController.dashSpeed)
+            {
+                dashSpeed = playerAttributeController.dashSpeed;
+            }
+            if (dashTime != playerAttributeController.dashTime)
+            {
+                dashTime = playerAttributeController.dashTime;
+            }
         }
     }
 
@@ -110,7 +117,6 @@ public class MovementController : MonoBehaviour
             //Debug.Log(target);
             target.y = transform.position.y;
             transform.LookAt(target);
-            print(hitInfo.collider.gameObject.name);
         }
     }
 }

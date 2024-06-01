@@ -21,10 +21,8 @@ public class PuzzlePiece : MonoBehaviour
 
     private void findPuzzlePieces()
     {
-        print("findPuzzlePieces start");
         puzzlePieces = GameObject.FindGameObjectsWithTag("PuzzlePiece");
         gameController = GameObject.Find("GameController").GetComponent<PuzzleController>();
-        print("findPuzzlePieces finish");
     }
 
     void Update()

@@ -21,7 +21,7 @@ public class MovementController3D : MonoBehaviour
     {
         //Cursor.lockState = CursorLockMode.Locked;
         isDashing = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        if(SelectedSections.returnCount()>3)Cursor.lockState = CursorLockMode.Locked;
     }
 
     private float h;

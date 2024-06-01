@@ -50,11 +50,17 @@ public class GameController : MonoBehaviour
         mainCam = Camera.main;
         camPersFlag=false;
         tempLevel = levelNo;
-        controllCamera();
+        
         horrorSection=SelectedSections.isHorrorPresent;
         shooterSection=SelectedSections.isShooterPresent;
         dodgerSection=SelectedSections.isDodgerPresent;
         puzzleSection=SelectedSections.isPuzzlePresent;
+        print("horrorSection: " + horrorSection);
+        print("shooterSection: " + shooterSection);
+        print("dodgerSection:" + dodgerSection);
+        print("puzzleSection" + puzzleSection);
+
+        controllCamera();
 
         if(!puzzleSection)
         {
@@ -350,6 +356,7 @@ public class GameController : MonoBehaviour
             adam.GetComponent<MovementController3D>().enabled=true;
             adam.GetComponent<DashController2D>().enabled=false;
             adam.GetComponent<DashController3D>().enabled=true;
+            print("level4herehere");
             break;
 
             case 5:
