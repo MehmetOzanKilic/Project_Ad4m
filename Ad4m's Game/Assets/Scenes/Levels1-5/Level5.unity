@@ -2020,6 +2020,10 @@ PrefabInstance:
       propertyPath: frontHealthBar
       value: 
       objectReference: {fileID: 539731046}
+    - target: {fileID: 3976062290168420236, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: puzzlePiecePool
+      value: 
+      objectReference: {fileID: 1915584205}
     - target: {fileID: 4091503520278688114, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2036,6 +2040,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 330585546}
+    - target: {fileID: 5327826922072482977, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: lower
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5344564814009895604, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2091,6 +2099,10 @@ PrefabInstance:
     - target: {fileID: 6394616138299663925, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049789130308078668, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2689,6 +2701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f7a4ce2b7bb72468ff9e66fbc6784f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePlace: {fileID: 0}
   puzzlePiecePool: {fileID: 0}
   remaningPuzzlePiece: 9
   correctPuzzlePieces: []

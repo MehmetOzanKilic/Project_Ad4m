@@ -5,6 +5,7 @@ using UnityEngine;
 public class PuzzlePiece : MonoBehaviour
 {
     GameObject pickedPiece;
+    [SerializeField] private Transform puzzlePlace;
     PuzzleController gameController;
     Vector3 negativeFlagVector = new Vector3(-1, -1, -1);
     [SerializeField]private PuzzlePiecePool puzzlePiecePool;
@@ -84,8 +85,17 @@ public class PuzzlePiece : MonoBehaviour
 
     if (pickedPiece != null)
     {
-        Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
-        pickedPiece.transform.position = newPosition;
+        //Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
+        if(puzzlePlace != null)
+        {
+            pickedPiece.transform.position = puzzlePlace.position;
+        }
+        if(puzzlePlace== null)
+        {
+            Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
+            pickedPiece.transform.position = newPosition;
+        }
+
     }
 }
 
@@ -117,7 +127,7 @@ public class PuzzlePiece : MonoBehaviour
         }
         else
         {
-            pickedPiece.transform.position = new Vector3(pickedPiece.transform.position.x, 0f, pickedPiece.transform.position.z);
+            pickedPiece.transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
         }
 
         //pickedPiece.transform.localScale = originalSize;

@@ -21,6 +21,8 @@ public class EnemyController : MonoBehaviour
     {
         isPlacingCard = true;
 
+        cardGameManager.drawOpponentHand();
+
         if (playedCardCount < 2)
         {
             if (ChooseCardFromHand() != null && ChooseSlotToPlaceCard() != null)
@@ -32,7 +34,15 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            cardGameManager.currentPhase = CardGameManager.GamePhase.FightingStage;
+            if(SelectedSections.fightingStagePresent())
+            {
+                cardGameManager.currentPhase = CardGameManager.GamePhase.FightingStage;
+            }
+            else
+            {
+                cardGameManager.currentPhase = CardGameManager.GamePhase.Action;
+            }
+            
             playedCardCount = 0;
         }
 
