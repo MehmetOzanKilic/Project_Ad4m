@@ -12,6 +12,8 @@ public class ScreenController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         sections.text = "";
         if(SelectedSections.gameWon)
         {
@@ -53,6 +55,7 @@ public class ScreenController : MonoBehaviour
 
     public void retryLevel()
     {
+        print("clickclick");
         gameObject.GetComponent<SectionController>().openGameEnd(); 
     }
 

@@ -655,6 +655,7 @@ GameObject:
   - component: {fileID: 200335484}
   - component: {fileID: 200335486}
   - component: {fileID: 200335487}
+  - component: {fileID: 200335488}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -723,6 +724,35 @@ MonoBehaviour:
   camPersFlag: 0
   levelEndTimer: 100
   waveTimeText: {fileID: 782956306}
+--- !u!114 &200335488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200335482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e8687aac50b584dab0078dffbd99c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelNo: 0
+  adam: {fileID: 0}
+  mainCam: {fileID: 0}
+  spawner: {fileID: 0}
+  spawn: 1
+  horrorSection: 0
+  shooterSection: 0
+  dodgerSection: 0
+  puzzleSection: 0
+  prepareStage: 0
+  vCams: []
+  eyeSpawnTime: 2
+  mobSpawnTime: 2
+  projectileShooterTime: 1
+  camPersFlag: 0
+  levelEndTimer: 100
+  waveTimeText: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

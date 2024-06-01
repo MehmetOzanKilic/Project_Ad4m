@@ -135,6 +135,7 @@ public class SectionController : MonoBehaviour
 
         if(sectionCounter == 1)
         {
+            printSections();
             if(SelectedSections.isHorrorPresent)
             {
                 SceneManager.LoadScene("HorrorLevel");
@@ -197,7 +198,30 @@ public class SectionController : MonoBehaviour
 
         if(sectionCounter == 1)
         {
-            //single section loader
+            if(SelectedSections.isHorrorPresent)
+            {
+                SceneManager.LoadScene("HorrorLevel");
+            }
+
+            if(SelectedSections.isCardPresent)
+            {
+                SceneManager.LoadScene("Card Game");
+            }
+
+            if(SelectedSections.isDodgerPresent)
+            {
+                SceneManager.LoadScene("DHS");
+            }
+
+            if(SelectedSections.isShooterPresent)
+            {
+                SceneManager.LoadScene("ShooterLevel");
+            }
+
+            if(SelectedSections.isPuzzlePresent)
+            {
+                SceneManager.LoadScene("PuzzleLevel");
+            }
             printSections();
 
         }
