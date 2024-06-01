@@ -18,10 +18,12 @@ public class MovementController : MonoBehaviour
     private PlayerAttributeController playerAttributeController;
     private GameObject playerObject;
     Animator animator;
+    private Rigidbody rb;
 
     private void Awake()
     {
         playerObject = GameObject.FindWithTag("Player"); //sets the game object
+        rb = GetComponent<Rigidbody>();
     }
 
     private int levelCount;
@@ -84,7 +86,7 @@ public class MovementController : MonoBehaviour
 
         targetVector = Quaternion.Euler(0, mainCamera.gameObject.transform.eulerAngles.y, 0) * targetVector;
         var targetPosition = transform.position + targetVector * speed;
-        transform.position = targetPosition;
+        rb.MovePosition(transform.position + targetVector * speed);
     }
 
     public void Dashing()
@@ -104,7 +106,7 @@ public class MovementController : MonoBehaviour
 
         targetVector = Quaternion.Euler(0, mainCamera.gameObject.transform.eulerAngles.y, 0) * targetVector;
         var targetPosition = transform.position + targetVector * speed;
-        transform.position = targetPosition;
+        rb.MovePosition(transform.position + targetVector * speed);
     }
 
     public void RotateTowardsMouse()

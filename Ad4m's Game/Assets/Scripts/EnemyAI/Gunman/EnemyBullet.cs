@@ -12,7 +12,7 @@ public class EnemyBullet : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(DestroyAfterDelay(5f)); //destroys bullet if it doesn't hit within 5 seconds
+        StartCoroutine(DestroyAfterDelay(2f)); //destroys bullet if it doesn't hit within 5 seconds
         // Get the PlayerDamageController component from the player GameObject
         enemyAttributeController = gameController.GetComponent<EnemyAttributeController>();
     }

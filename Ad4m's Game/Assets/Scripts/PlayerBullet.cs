@@ -64,16 +64,10 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-   /* private void OnCollisionEnter(Collision collision)
+   private void OnCollisionEnter(Collision collision)
     {
-        Transform hitTransform = collision.transform;
-        if (hitTransform.CompareTag("Mobs"))
-        {
-            Debug.Log("player hit mob with bullet!");
-        }
         Destroy(gameObject);
-
-    }*/
+    }
 
     void FixedUpdate()
     {
