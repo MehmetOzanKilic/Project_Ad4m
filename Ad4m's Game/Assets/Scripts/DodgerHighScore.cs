@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DodgerHighScore : MonoBehaviour
 {
@@ -56,6 +57,14 @@ public class DodgerHighScore : MonoBehaviour
 
         currentHits = 0;
         UpdateHighScoreText();
+
+        Invoke("GameEndScreen",3);
+    }
+
+    private void GameEndScreen()
+    {
+        SelectedSections.gameWon=true;
+        SceneManager.LoadScene("GameEndScreen");
     }
 
     IEnumerator TimerCoroutine()

@@ -44,6 +44,12 @@ public class RedEyeController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 currentPos=transform.position;
+
+        currentPos.y = 1;
+
+        transform.position=currentPos;
+        
         if(adam)
         {
             adamFound=true;
@@ -115,11 +121,24 @@ public class RedEyeController : MonoBehaviour
     private void changeColor()
     {
         var distance = Vector3.Distance(adam.transform.position, transform.position);
-        distance = Math.Clamp(distance,2,10);
-        float sat = 100-(10*distance);
+        distance = Mathf.Clamp(distance, 2, 10);
+        float sat = 100 - (10 * (distance-2));
 
-        renderers[1].material.color = Color.HSVToRGB(0,sat/100,1);
-        renderers[2].material.color = Color.HSVToRGB(0,sat/100,1);  
+        // Calculate the new color
+        Color newColor = Color.HSVToRGB(0, sat / 100, 0.3f);
+
+        // Change the color of the material
+        renderers[1].material.color = newColor;
+        renderers[2].material.color = newColor;
+
+        newColor = Color.HSVToRGB(0, sat / 100, 1f);
+        // Enable emission keyword
+        renderers[1].material.EnableKeyword("_EMISSION");
+        renderers[2].material.EnableKeyword("_EMISSION");
+
+        // Change the emission color of the material
+        renderers[1].material.SetColor("_EmissionColor", newColor);
+        renderers[2].material.SetColor("_EmissionColor", newColor);
     }
 
     //navmesh
