@@ -342,7 +342,7 @@ MonoBehaviour:
   projectilePool: {fileID: 0}
   diesIn: 5
   adam: {fileID: 0}
-  deathTime: 1.5
+  deathTime: 0.5
   errorMargin: 0.5
   seeAng: 30
   range: 10

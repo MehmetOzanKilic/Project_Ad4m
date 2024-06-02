@@ -59,6 +59,11 @@ public class ProjectileEyeController : MonoBehaviour
             //makes the eye look at adam
             transform.LookAt(adam.transform.position);
 
+            if(Vector3.Distance(transform.position, adam.transform.position) < 3)
+            {
+                death();
+            }
+
             //makes the eye change color over distances from white to red
             changeColor();
 
@@ -169,6 +174,12 @@ public class ProjectileEyeController : MonoBehaviour
                     //if the eye-adam vector and adam's look direction vector has a angle smaller then the seeAngle eye renderer becomes visible
                     //and the eye is stopped when invisible
                     if(Math.Abs(angle)<seeAng)
+                    {
+                        renderers[loopCounter].enabled=true;
+                        agent.isStopped = true;
+                    }
+
+                    else if(Vector3.Distance(transform.position, adam.transform.position) < 5)
                     {
                         renderers[loopCounter].enabled=true;
                         agent.isStopped = true;

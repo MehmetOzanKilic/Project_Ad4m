@@ -9,7 +9,8 @@ public class WhiteEyeController : MonoBehaviour
 {
     public NavMeshAgent agent; //variable for the Enemy navMesh.
     public LayerMask whatIsGround, whatIsPlayer; //to select the ground and player layers.
-    [SerializeField]private float moveSpeed=1f;
+    [SerializeField]private float moveSpeed=4f;
+    [SerializeField]private float damageAmount=1f;
     public GameObject adam;
     private MovementController movementController;//adam movement controller script
 
@@ -56,6 +57,10 @@ public class WhiteEyeController : MonoBehaviour
             {
                 Patrol();
             }
+            if(Vector3.Distance(transform.position, adam.transform.position) < 3)
+            {
+                Attack();
+            }
             else ChasePlayer();
 
             //visibility of the eyes
@@ -73,6 +78,7 @@ public class WhiteEyeController : MonoBehaviour
             }
             else
                 counter=0f;
+                
         }
         
 
@@ -81,6 +87,12 @@ public class WhiteEyeController : MonoBehaviour
     void FixedUpdate()
     {
 
+    }
+
+    private void Attack()
+    {
+        adam.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
+        Destroy(gameObject);
     }
 
     private void Patrol()
@@ -156,6 +168,12 @@ public class WhiteEyeController : MonoBehaviour
                         renderers[loopCounter].enabled=true;
                         agent.isStopped=true;
 
+                    }
+
+                    else if(Vector3.Distance(transform.position, adam.transform.position)<5)
+                    {
+                        renderers[loopCounter].enabled=true;
+                        agent.isStopped=false;
                     }
                     //eye moves if not visible
                     else
