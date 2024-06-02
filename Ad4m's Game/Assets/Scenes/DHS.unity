@@ -823,6 +823,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1491528254109253601, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221115180304882407, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
+      propertyPath: m_Drag
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221115180304882407, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 4005145655688318404, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
       propertyPath: m_Name
       value: Ad4m Variant

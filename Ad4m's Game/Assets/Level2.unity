@@ -4762,6 +4762,10 @@ PrefabInstance:
       propertyPath: frontHealthBar
       value: 
       objectReference: {fileID: 644261119}
+    - target: {fileID: 3971485394506753969, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.33
+      objectReference: {fileID: 0}
     - target: {fileID: 3976062290168420236, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: puzzlePiecePool
       value: 
