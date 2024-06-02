@@ -675,8 +675,7 @@ Transform:
   m_LocalPosition: {x: 0.016154923, y: 1.2727637, z: 0.20557308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1155125411}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &200335486
@@ -737,8 +736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNo: 0
-  adam: {fileID: 0}
-  mainCam: {fileID: 0}
+  adam: {fileID: 1684991524}
+  mainCam: {fileID: 330585545}
   spawner: {fileID: 0}
   spawn: 1
   horrorSection: 0
@@ -752,7 +751,7 @@ MonoBehaviour:
   projectileShooterTime: 1
   camPersFlag: 0
   levelEndTimer: 100
-  waveTimeText: {fileID: 0}
+  waveTimeText: {fileID: 782956306}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,50 +1715,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096646994}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1155125410
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1155125411}
-  - component: {fileID: 1155125412}
-  m_Layer: 0
-  m_Name: PuzzleManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1155125411
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155125410}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 200335484}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1155125412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155125410}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4629ed54c5eaea94b8a78767d710da6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1311238307
 GameObject:
   m_ObjectHideFlags: 0
@@ -2011,6 +1966,18 @@ PrefabInstance:
       propertyPath: puzzlePiecePool
       value: 
       objectReference: {fileID: 1915584205}
+    - target: {fileID: 4870832727750111510, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870832727750111510, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870832727750111510, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5327826922072482977, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: cam
       value: 
@@ -2069,9 +2036,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8073904531515254376, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+    - {fileID: 8906403403064103952, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+    - {fileID: 2189567743272471300, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+    - {fileID: 5327826922072482977, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+    - {fileID: 273995304993728209, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6394616138299663925, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1684991535}
+    - targetCorrespondingSourceObject: {fileID: 6394616138299663925, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1684991536}
   m_SourcePrefab: {fileID: 100100000, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
 --- !u!4 &1575374307 stripped
 Transform:
@@ -2159,6 +2136,51 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6394616138299663925, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
   m_PrefabInstance: {fileID: 1554332214}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1684991535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684991524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cae003e534b78b47b48ed2085087b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  dashSpeed: 10
+  dashTime: 1
+  target: {x: 0, y: 0, z: 0}
+  movement2D: 0
+--- !u!114 &1684991536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684991524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14a01e7a4fd24344bbb03f4424fff00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBulletDamage: 20
+  reloadSpeed: 1
+  bulletSpeed: 10
+  shotAmount: 3
+  isMachineGun: 0
+  playerMeleeDamage: 40
+  timeSlowMultiplier: 1
+  seeAngle: 30
+  meleeAttackCooldown: 1
+  moveSpeed: 10
+  dashSpeed: 30
+  dashTime: 0.1
+  dashCoolDown: 1
+  playerHealth: 100
+  canBurstHeal: 0
+  Upgrades: 010000000200000003000000
 --- !u!1 &1794846838
 GameObject:
   m_ObjectHideFlags: 0

@@ -97,7 +97,7 @@ public class SpawnerController : MonoBehaviour
         float distance = rnd.Next(1,2);
         float angle = rnd.Next(0,360) * Mathf.Deg2Rad;
 
-        return new Vector3(Mathf.Cos(angle) * distance, 0.5f, Mathf.Sin(angle) * distance)+pos;
+        return new Vector3(Mathf.Cos(angle) * distance, 1.5f, Mathf.Sin(angle) * distance)+pos;
     }
     public void insEyes()
     {

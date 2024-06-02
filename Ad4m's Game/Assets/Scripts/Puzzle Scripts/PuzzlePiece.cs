@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PuzzlePiece : MonoBehaviour
 {
     GameObject pickedPiece;
-    [SerializeField] private Transform puzzlePlace;
-    [SerializeField] private GameObject puzzleImage;
+    [SerializeField] private UnityEngine.UI.Image puzzleImage;
     GameController gameController;
     Vector3 negativeFlagVector = new Vector3(-1, -1, -1);
     [SerializeField]private PuzzlePiecePool puzzlePiecePool;
@@ -20,6 +20,9 @@ public class PuzzlePiece : MonoBehaviour
     void Start()
     {
         Invoke("findPuzzlePieces",0.3f);
+        //puzzleImage.SetActive(false);
+        puzzleImage.sprite = null;
+        puzzleImage.color = Color.HSVToRGB(0,0,0.1f);
     }
 
     private void findPuzzlePieces()
@@ -88,15 +91,15 @@ public class PuzzlePiece : MonoBehaviour
         if (pickedPiece != null)
         {
             //Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
-            if(puzzlePlace != null)
-            {
-                pickedPiece.transform.position = puzzlePlace.position;
+            if(puzzleImage != null)
+            {   
+                puzzleImage.sprite = pickedPiece.GetComponentInChildren<SpriteRenderer>().sprite;
+                puzzleImage.color = Color.HSVToRGB(0,0,1f);
             }
-            if(puzzlePlace == null)
-            {
-                Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
-                pickedPiece.transform.position = newPosition;
-            }
+    
+            Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
+            pickedPiece.transform.position = newPosition;
+    
             
 
         }
@@ -111,6 +114,8 @@ public class PuzzlePiece : MonoBehaviour
 
     void DropPiece()
     {
+        puzzleImage.sprite = null;
+        puzzleImage.color = Color.HSVToRGB(0,0,0.1f);
         if(pickedPiece.transform.localScale == new Vector3(0.2f, 0.001f, 0.2f))
         {
             pickedPiece.transform.localScale = new Vector3(2, 0.2f, 2);

@@ -49,6 +49,13 @@ public class ProjectileEyeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Vector3 currentPos=transform.position;
+
+        currentPos.y = 1;
+
+        transform.position=currentPos;
+        
         if(adam)
         {
             adamFound=true;
@@ -121,10 +128,21 @@ public class ProjectileEyeController : MonoBehaviour
     {
         var distance = Vector3.Distance(adam.transform.position, transform.position);
         distance = Math.Clamp(distance,2,10);
-        float sat = 100-(10*distance);
+        float sat = 100-(10*(distance-2));
 
-        renderers[1].material.color = Color.HSVToRGB(0,sat/100,1);
-        renderers[2].material.color = Color.HSVToRGB(0,sat/100,1);  
+        Color newColor = Color.HSVToRGB(0.9f,sat/100,0.5f);
+
+        renderers[1].material.color = newColor;
+        renderers[2].material.color = newColor;
+
+        renderers[1].material.EnableKeyword("_EMISSION");
+        renderers[2].material.EnableKeyword("_EMISSION");
+
+        newColor = Color.HSVToRGB(0.9f,sat/100,1f);
+
+        // Change the emission color of the material
+        renderers[1].material.SetColor("_EmissionColor", newColor);
+        renderers[2].material.SetColor("_EmissionColor", newColor);  
     }
 
     //navmesh

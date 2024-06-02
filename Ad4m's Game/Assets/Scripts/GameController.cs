@@ -36,13 +36,14 @@ public class GameController : MonoBehaviour
     
     
     [SerializeField]private bool camPersFlag;
-    [SerializeField]private float levelEndTimer=100f;
+    [SerializeField]private float levelEndTimer=30f;
     [SerializeField]private Text waveTimeText;
     private bool endTimerFlag=false;
     
     private int tempLevel;
     void Start()
     {   
+        escCanvas.SetActive(false);
         //levelEndTimer=500f;
         levelNo=SelectedSections.returnCount();
         if(levelNo==0)
@@ -50,6 +51,8 @@ public class GameController : MonoBehaviour
         mainCam = Camera.main;
         camPersFlag=false;
         tempLevel = levelNo;
+
+        levelEndTimer=100;
         
         horrorSection=SelectedSections.isHorrorPresent;
         shooterSection=SelectedSections.isShooterPresent;
@@ -70,6 +73,10 @@ public class GameController : MonoBehaviour
             endTimerFlag=true;
             print("endTimerFlag: " + endTimerFlag);
         }
+        else if(puzzleSection && levelNo==1)
+        {
+            waveTimeText.enabled=true;
+        }
         else
         {
             waveTimeText.enabled=false;
@@ -83,8 +90,30 @@ public class GameController : MonoBehaviour
     }
     
     private float enemyCountTimer=0f;
+    private bool escFlag=false;
+    [SerializeField]private GameObject escCanvas;
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(escFlag==false)
+            {
+                escCanvas.SetActive(true);
+                escFlag=true;
+                Time.timeScale=0;
+                Cursor.lockState = CursorLockMode.None;
+            }
+
+            else if(escFlag==true)
+            {
+                escCanvas.SetActive(false);
+                escFlag=false;
+                Time.timeScale=1;
+                if(SelectedSections.returnCount()>3)Cursor.lockState = CursorLockMode.Locked;
+            }
+            
+        }
+
         if(prepareStage)
         {
             StateController.gamePhase = "PlayerTurn";
@@ -168,10 +197,10 @@ public class GameController : MonoBehaviour
         if(shooterSection)
         {   
             //only one spawnerEye is allowed
-            if(spawnerEyesPresent.Length==0)
+            if(spawnerEyesPresent.Length<2)
             {
                 //spawn time for spawnerEyes are 3 times the normal amount
-                if(spawnerEyeTimer>=eyeSpawnTime*3)
+                if(spawnerEyeTimer>=eyeSpawnTime*((spawnerEyesPresent.Length*2)+2))
                 {
                     spawner.insSpawnerEye();
                     spawnerEyesPresent = GameObject.FindGameObjectsWithTag("SpawnerEye");
@@ -182,11 +211,13 @@ public class GameController : MonoBehaviour
 
             else if(spawnerEyesPresent.Length!=0)
             {   
-                if(mobsPresent.Length<10)
+                if(mobsPresent.Length<(5*spawnerEyesPresent.Length))
                 {
                     if(mobTimer>=mobSpawnTime)
                     {
-                        spawner.insMobs(dodgerSection,GameObject.FindGameObjectWithTag("SpawnerEye").transform.position);
+                        int randomIndex = Random.Range(0,spawnerEyesPresent.Length);
+
+                        spawner.insMobs(dodgerSection,spawnerEyesPresent[randomIndex].transform.position);
                         mobsPresent = GameObject.FindGameObjectsWithTag("Mobs");
                         mobTimer=0.0f;
                     }
@@ -319,54 +350,58 @@ public class GameController : MonoBehaviour
     //sets every levels spesific parameters and cams
     private void controllCamera()
     {
+
         setCamsFalse();
-        switch(levelNo)
+        if(levelNo>1)
         {
-            case 1:
-            vCams[0].SetActive(true);
-            mainCam.orthographic = true;
-            adam.GetComponent<MovementController>().enabled=true;
-            adam.GetComponent<MovementController3D>().enabled=false;
-            adam.GetComponent<DashController2D>().enabled=true;
-            adam.GetComponent<DashController3D>().enabled=false;
-            break;
-            
-            case 2:
-            vCams[1].SetActive(true);
-            mainCam.orthographic = true;
-            adam.GetComponent<MovementController>().enabled=true;
-            adam.GetComponent<MovementController3D>().enabled=false;
-            adam.GetComponent<DashController2D>().enabled=true;
-            adam.GetComponent<DashController3D>().enabled=false;
-            break;
+            switch(levelNo)
+            {
+                case 1:
+                vCams[0].SetActive(true);
+                mainCam.orthographic = true;
+                adam.GetComponent<MovementController>().enabled=true;
+                adam.GetComponent<MovementController3D>().enabled=false;
+                adam.GetComponent<DashController2D>().enabled=true;
+                adam.GetComponent<DashController3D>().enabled=false;
+                break;
+                
+                case 2:
+                vCams[1].SetActive(true);
+                mainCam.orthographic = true;
+                adam.GetComponent<MovementController>().enabled=true;
+                adam.GetComponent<MovementController3D>().enabled=false;
+                adam.GetComponent<DashController2D>().enabled=true;
+                adam.GetComponent<DashController3D>().enabled=false;
+                break;
 
-            case 3:
-            vCams[2].SetActive(true);
-            mainCam.orthographic = true;
-            adam.GetComponent<MovementController>().enabled=true;
-            adam.GetComponent<MovementController3D>().enabled=false;
-            adam.GetComponent<DashController2D>().enabled=true;
-            adam.GetComponent<DashController3D>().enabled=false;
-            break;
+                case 3:
+                vCams[2].SetActive(true);
+                mainCam.orthographic = true;
+                adam.GetComponent<MovementController>().enabled=true;
+                adam.GetComponent<MovementController3D>().enabled=false;
+                adam.GetComponent<DashController2D>().enabled=true;
+                adam.GetComponent<DashController3D>().enabled=false;
+                break;
 
-            case 4:
-            vCams[3].SetActive(true);
-            mainCam.orthographic = false;
-            adam.GetComponent<MovementController>().enabled=false;
-            adam.GetComponent<MovementController3D>().enabled=true;
-            adam.GetComponent<DashController2D>().enabled=false;
-            adam.GetComponent<DashController3D>().enabled=true;
-            print("level4herehere");
-            break;
+                case 4:
+                vCams[3].SetActive(true);
+                mainCam.orthographic = false;
+                adam.GetComponent<MovementController>().enabled=false;
+                adam.GetComponent<MovementController3D>().enabled=true;
+                adam.GetComponent<DashController2D>().enabled=false;
+                adam.GetComponent<DashController3D>().enabled=true;
+                print("level4herehere");
+                break;
 
-            case 5:
-            vCams[4].SetActive(true);
-            mainCam.orthographic = false;
-            adam.GetComponent<MovementController>().enabled=false;
-            adam.GetComponent<MovementController3D>().enabled=true;
-            adam.GetComponent<DashController2D>().enabled=false;
-            adam.GetComponent<DashController3D>().enabled=true;
-            break;
+                case 5:
+                vCams[4].SetActive(true);
+                mainCam.orthographic = false;
+                adam.GetComponent<MovementController>().enabled=false;
+                adam.GetComponent<MovementController3D>().enabled=true;
+                adam.GetComponent<DashController2D>().enabled=false;
+                adam.GetComponent<DashController3D>().enabled=true;
+                break;
+            }
         }
     }
 
@@ -393,5 +428,20 @@ public class GameController : MonoBehaviour
             SelectedSections.gameWon=true;
             SceneManager.LoadScene("GameEndScreen");
         }
+    }
+
+    public void retryLevel()
+    {
+        Time.timeScale=1;
+        print("clickclick");
+        SelectedSections.gameWon=false;
+        gameObject.GetComponent<SectionController>().openGameEnd(); 
+    }
+
+    public void returnToComputer()
+    {
+        Time.timeScale=1;
+        SelectedSections.gameWon=false;
+        SceneManager.LoadScene("The Computer");
     }
 }

@@ -40,18 +40,16 @@ public class MovementController_Level1 : MonoBehaviour
         else v = 0;
         inputVector = new Vector2(h,v);
         
-
-        
     }
     void FixedUpdate()
     {
         mousePos = Input.mousePosition;
         var targetVector = new Vector3(inputVector.x, 0, inputVector.y).normalized;
         
-        /*if(!isDashing)
+        if(!isDashing)
             MoveTowardsTarget(targetVector);
         else if(isDashing)
-            DashTowardsTarget(targetVector);*/
+            DashTowardsTarget(targetVector);
 
         RotateTowardsMouse();
 

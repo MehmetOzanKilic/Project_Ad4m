@@ -37,7 +37,8 @@ public class CardGameManager : MonoBehaviour
     }
 
     public GamePhase currentPhase ;
-
+    [SerializeField]private GameObject escCanvas;
+    private bool escFlag = false;
     public Transform playerHandParent;
     public List<GameObject> playerCards;
     public GameObject[] playerCardsPositions;
@@ -71,7 +72,9 @@ public class CardGameManager : MonoBehaviour
     public List<GameObject> emptySlots;
 
     void Start()
-    {   getPhase();
+    {   
+        escCanvas.SetActive(false);
+        getPhase();
         SwitchCamera();
 
         for (int i = 0; i < gridSlots.Count; i++)
@@ -91,6 +94,26 @@ public class CardGameManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(escFlag==false)
+            {
+                escCanvas.SetActive(true);
+                escFlag=true;
+                Time.timeScale=0;
+                Cursor.lockState = CursorLockMode.None;
+            }
+
+            else if(escFlag==true)
+            {
+                escCanvas.SetActive(false);
+                escFlag=false;
+                Time.timeScale=1;
+                if(SelectedSections.returnCount()>3)Cursor.lockState = CursorLockMode.Locked;
+            }
+            
+        }
+
         switch (currentPhase)
         {
             case GamePhase.PlayerTurn:
@@ -523,5 +546,20 @@ public class CardGameManager : MonoBehaviour
     {
         SelectedSections.gameWon=false;
         SceneManager.LoadScene("GameEndScreen");
+    }
+
+    public void retryLevel()
+    {
+        Time.timeScale=1;
+        print("clickclick");
+        SelectedSections.gameWon=false;
+        gameObject.GetComponent<SectionController>().openGameEnd(); 
+    }
+
+    public void returnToComputer()
+    {
+        Time.timeScale=1;
+        SelectedSections.gameWon=false;
+        SceneManager.LoadScene("The Computer");
     }
 }
