@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectiles : MonoBehaviour
 {
     public Vector3 startingPos = new Vector3();
-    [SerializeField] float deactivateDelay = 5f;
+    float deactivateDelay = 3.5f;
 
     public void SetStartingPos(Vector3 pos)
     {

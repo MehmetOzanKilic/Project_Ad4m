@@ -11,15 +11,15 @@ public class DodgerManager : MonoBehaviour
     void Awake()
     {
         projectilePool = FindObjectOfType<ProjectilePool>();
-        pizzaSlice = FindObjectOfType<PizzaSlice>();
-        wreckingDiscoBall = FindObjectOfType<WreckingDiscoBall>();
+        //pizzaSlice = FindObjectOfType<PizzaSlice>();
+        //wreckingDiscoBall = FindObjectOfType<WreckingDiscoBall>();
     }
 
     void Start()
     {
         projectilePool.InitializePool();
         StartCoroutine(projectilePool.ActivateProjectilesPeriodically());
-        wreckingDiscoBall.PrepareDiscoBall();
+        //wreckingDiscoBall.PrepareDiscoBall();
         //StartCoroutine(pizzaSlice.TakeASlice());
     }
 }
