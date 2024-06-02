@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -97,6 +98,11 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damage;
         lerpTimer = 0f;
+
+        if(health <= 0f)
+        {
+            EndGameScreen();
+        }
     }
     public void RestoreHealth(float healAmount)
     {
@@ -111,5 +117,11 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(timerInterval);
             RestoreHealth(1f);
         }
+    }
+
+    private void EndGameScreen()
+    {
+        SceneManager.LoadScene("GameEndScreen");
+        SelectedSections.gameWon=false;
     }
 }

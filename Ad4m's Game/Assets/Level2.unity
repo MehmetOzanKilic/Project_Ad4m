@@ -124,6 +124,7 @@ NavMeshSettings:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &30045034
+--- !u!1 &23276295
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,12 +138,16 @@ GameObject:
   - component: {fileID: 30045036}
   m_Layer: 0
   m_Name: Cube (18)
+  - component: {fileID: 23276296}
+  m_Layer: 0
+  m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &30045035
+--- !u!4 &23276296
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,6 +338,15 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37004554}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_GameObject: {fileID: 23276295}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -39.8, y: -2.7762444, z: 28.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &42613710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1540,9 +1554,9 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 5000
-  field of view: 30
+  field of view: 40
   orthographic: 0
-  orthographic size: 4.18
+  orthographic size: 11.15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1566,12 +1580,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 1.8520002, z: -4.5340004}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.15, y: 10.000001, z: -5.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 77524329}
+  - {fileID: 1163683521}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &330585549
@@ -4376,6 +4391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1210080383
+--- !u!1 &1163683520
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4389,12 +4405,16 @@ GameObject:
   - component: {fileID: 1210080385}
   m_Layer: 0
   m_Name: Cube (20)
+  - component: {fileID: 1163683521}
+  m_Layer: 0
+  m_Name: PuzzlePlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1210080384
+--- !u!4 &1163683521
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4480,6 +4500,15 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210080383}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_GameObject: {fileID: 1163683520}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.8, y: -9, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 330585546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1392733974
 GameObject:
   m_ObjectHideFlags: 0
@@ -4568,7 +4597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1425744584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4617,7 +4646,7 @@ Transform:
   m_GameObject: {fileID: 1425744583}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: 10.000002, z: -3.8999999}
+  m_LocalPosition: {x: -0.15, y: 10.000001, z: -5.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4766,6 +4795,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.33
       objectReference: {fileID: 0}
+    - target: {fileID: 3976062290168420236, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: puzzlePlace
+      value: 
+      objectReference: {fileID: 1163683521}
     - target: {fileID: 3976062290168420236, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
       propertyPath: puzzlePiecePool
       value: 
@@ -6690,3 +6723,4 @@ SceneRoots:
   - {fileID: 1915584204}
   - {fileID: 2141689100}
   - {fileID: 462080489}
+  - {fileID: 23276296}

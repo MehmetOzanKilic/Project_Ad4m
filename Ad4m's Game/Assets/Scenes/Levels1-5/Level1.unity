@@ -2630,6 +2630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f7a4ce2b7bb72468ff9e66fbc6784f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePlace: {fileID: 0}
+  puzzleImage: {fileID: 0}
+  puzzlePiecePool: {fileID: 0}
   remaningPuzzlePiece: 9
   correctPuzzlePieces: []
 --- !u!114 &1785544403
@@ -3227,6 +3230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: myAd4m@T-Pose
       objectReference: {fileID: 0}
+    - target: {fileID: 6394616138299663925, guid: c571de3a4efc2884aba3e5a0664c4aef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3270,7 +3277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8615761620283550106, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8615761620283550106, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: m_TagString

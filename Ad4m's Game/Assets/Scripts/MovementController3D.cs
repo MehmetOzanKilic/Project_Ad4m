@@ -32,24 +32,21 @@ public class MovementController3D : MonoBehaviour
     [SerializeField] private Transform cam;
     [SerializeField] private float upper=320;
     [SerializeField] private float lower=30;
+
     void Update()
     {
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
-
         Vector3 camForward = cam.forward;
         Vector3 camRight = cam.right;
-
         camForward.y=0;
         camRight.y=0;
-
         Vector3 forwardRel = v * camForward;
         Vector3 rightRel = h * camRight;
-
-        Vector3 movementDir = forwardRel + rightRel; 
-        
+        Vector3 movementDir = forwardRel + rightRel;
         mouseX = Input.GetAxis("Mouse Y");
         mouseY = Input.GetAxis("Mouse X");
+        inputVector = movementDir; 
         target = new Vector3(-mouseX,mouseY*cameraSensivity,0);
         transform.eulerAngles = transform.eulerAngles + target;
 
@@ -63,21 +60,18 @@ public class MovementController3D : MonoBehaviour
 
         transform.localEulerAngles = angles;
 
-        inputVector = movementDir;
-        
 
         mousePos = Input.mousePosition;
+
+        
     }
     void FixedUpdate()
     {
         var targetVector = new Vector3(inputVector.x, 0, inputVector.z).normalized;
-        
         if(!isDashing)
             MoveTowardsTarget(targetVector);
         else if(isDashing)
             DashTowardsTarget(targetVector);
-
-
     }
 
     private void MoveTowardsTarget(Vector3 targetVector)

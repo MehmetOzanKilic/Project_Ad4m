@@ -127,6 +127,7 @@ public class CardGameManager : MonoBehaviour
 
             playerCards[i].transform.parent = playerCardsPositions[i].transform;
 
+
             // Get the target position and rotation
             //Vector3 targetPosition = cardsPositions[i].transform.position;
             //Quaternion targetRotation = Quaternion.Euler(0f, 0f, 45f);
@@ -162,8 +163,31 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
+    public void drawOpponentHand()
+    {
+        if(opponentCards.Count() ==1)
+        {
+            for (int i = 1; i < 3; i++)
+            {
+                opponentCards.Add(gameDeckController.deckCards[i]);
+                gameDeckController.deckCards.Remove(gameDeckController.deckCards[i]);
+                opponentCards[i].transform.parent = null;
+
+                opponentCards[i].transform.rotation = Quaternion.Euler(0f, 180f, 45f);
+                opponentCards[i].transform.position = opponentCardsPositions[i].transform.position;
+
+                opponentCards[i].transform.parent = opponentCardsPositions[i].transform;
+                opponentCards[i].GetComponent<CardController>().isFriendlyCard = false;
+            }
+
+        }
+        
+    }
+
     void HandleTurnPhase() //TURN PHASE
     {
+        if(playerCards.Count==1)EnsurePlayerHasThreeCards();
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentPhase = GamePhase.SlotSelection;
@@ -180,6 +204,34 @@ public class CardGameManager : MonoBehaviour
             MoveRight();
         }
     }
+
+    public void DrawCard()
+    {
+        if (gameDeckController.deckCards.Count > 0)
+        {
+            GameObject card = gameDeckController.deckCards[0];
+            gameDeckController.deckCards.RemoveAt(0);
+            playerCards.Add(card);
+
+            // Set the card's parent to the hand and adjust its position
+            card.transform.parent = playerHandParent;
+            card.transform.position = playerCardsPositions[playerCards.Count - 1].transform.position;
+            card.transform.rotation = Quaternion.Euler(0f, 0f, 45f);
+            card.transform.SetParent(playerCardsPositions[playerCards.Count - 1].transform);
+        }
+        else
+        {
+            Debug.LogWarning("Deck is empty. Cannot draw more cards.");
+        }
+    }
+    public void EnsurePlayerHasThreeCards()
+    {
+        while (playerCards.Count < 3)
+        {
+            DrawCard();
+        }
+    }
+
     [SerializeField] private GameObject turnOnOff;
     void FightingStagePhase()
     {
@@ -188,7 +240,7 @@ public class CardGameManager : MonoBehaviour
         SceneManager.LoadScene(levelString);
     }
 
-    void HandleSlotSelectionPhase()
+    /*void HandleSlotSelectionPhase()
     {
         playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 
@@ -235,14 +287,14 @@ public class CardGameManager : MonoBehaviour
 
                 if (playedCardCount == 2)
                 {
-                    currentPhase = GamePhase.EnemyTurn;
                     playedCardCount = 0;
                     SwitchCamera();
+                    currentPhase = GamePhase.EnemyTurn;
                 }
                 else
                 {
-                    currentPhase = GamePhase.PlayerTurn;
                     SwitchCamera();
+                    currentPhase = GamePhase.PlayerTurn;
                 }
             }
             else
@@ -255,7 +307,74 @@ public class CardGameManager : MonoBehaviour
             Vector3 targetPosition = GetInitialSlotPosition();
             MoveCardToPosition(selectedCardIndex, targetPosition);
         }
+    }*/
+
+    void HandleSlotSelectionPhase()
+    {
+        playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            MoveUp();
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            MoveDown();
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            MoveLeftOnGrid();
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            MoveRightOnGrid();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (playerCards.Count > 0 && selectedCardIndex < playerCards.Count)
+            {
+                playedCardCount++;
+                isPlacingCard = false;
+                emptySlots.Remove(gridSlots[selectedGridIndex]);
+
+                Vector3 targetPositionGrid = GetGridSlotPosition(selectedGridIndex);
+                MoveCardToPosition(selectedCardIndex, targetPositionGrid);
+
+                cardsPlayed.Enqueue(playerCards[selectedCardIndex]); // ENQUEUE
+
+                playerCards[selectedCardIndex].transform.SetParent(gridSlots[selectedGridIndex].transform);
+                playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+
+                playerCards.RemoveAt(selectedCardIndex);
+
+                RearrangePlayerHand();
+                selectedCardIndex = 0;
+
+                if (playedCardCount == 2)
+                {
+                    playedCardCount = 0;
+                    currentPhase = GamePhase.EnemyTurn;
+                    SwitchCamera();
+                }
+                else
+                {
+                    currentPhase = GamePhase.PlayerTurn;
+                    SwitchCamera();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Invalid card index.");
+            }
+        }
+        else
+        {
+            Vector3 targetPosition = GetInitialSlotPosition();
+            MoveCardToPosition(selectedCardIndex, targetPosition);
+        }
     }
+
 
     Vector3 GetInitialSlotPosition()
     {
@@ -301,8 +420,8 @@ public class CardGameManager : MonoBehaviour
 
         if (checkIfAllCardsPlayed())
         {
-            
-            //
+            currentPhase = GamePhase.PlayerTurn;
+            SwitchCamera();
         }
     }
 

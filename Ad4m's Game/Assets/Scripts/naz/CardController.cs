@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using static CardGameManager;
 using System.Linq;
+using System.Numerics;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class CardController : MonoBehaviour
 {
@@ -35,7 +37,6 @@ public class CardController : MonoBehaviour
 
     public GameObject lastCardToAttack;
 
-    
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +75,7 @@ public class CardController : MonoBehaviour
         if (card != null && card_info_txt != null)
         {
             this.card_info_txt.text = $"{card.name}\nHealth: {thisCardHlt}\nAttack: {thisCardAtk}\n{card.abilitytxt}";
+            //this.card_info_txt.rectTransform
         }
     }
 

@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3014759449459287166, guid: 11e6120cfbd75aa4aa311d88c2516783, type: 3}
-  endTimer: 30
+  endTimer: 5
   counterText: {fileID: 782956306}
 --- !u!1 &215213120
 GameObject:
@@ -1545,6 +1545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f7a4ce2b7bb72468ff9e66fbc6784f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePlace: {fileID: 0}
+  puzzleImage: {fileID: 0}
   puzzlePiecePool: {fileID: 0}
   remaningPuzzlePiece: 9
   correctPuzzlePieces: []

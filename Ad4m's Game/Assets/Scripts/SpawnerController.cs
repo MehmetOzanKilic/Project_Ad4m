@@ -59,8 +59,31 @@ public class SpawnerController : MonoBehaviour
     {
         float distance = rnd.Next(12,16);
         float angle = rnd.Next(0,360) * Mathf.Deg2Rad;
+        Vector3 pos = new Vector3(Mathf.Cos(angle) * distance, 0.5f, Mathf.Sin(angle) * distance)+adam.transform.position;
+        bool first;
+        bool second;
 
-        return new Vector3(Mathf.Cos(angle) * distance, 0.5f, Mathf.Sin(angle) * distance)+adam.transform.position;
+        if(Mathf.Abs(pos.x)<40 && Mathf.Abs(pos.z)<40)
+        {
+            first = true;  
+        }
+        else first=false;
+
+        if(Mathf.Pow(pos.x,2)+Mathf.Pow(pos.z,2)<Mathf.Pow(40,2))
+        {
+            second = true;
+        }
+        else second=false;
+
+        if(first && second)
+        {
+            return pos;
+        }
+        else
+        {
+            pos = randomPos();
+            return pos;
+        }
     }
     private Vector3 randomPos(int a)
     {

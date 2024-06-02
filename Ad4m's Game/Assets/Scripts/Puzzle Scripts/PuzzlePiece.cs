@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class PuzzlePiece : MonoBehaviour
 {
     GameObject pickedPiece;
-    PuzzleController gameController;
+    [SerializeField] private Transform puzzlePlace;
+    [SerializeField] private GameObject puzzleImage;
+    GameController gameController;
     Vector3 negativeFlagVector = new Vector3(-1, -1, -1);
     [SerializeField]private PuzzlePiecePool puzzlePiecePool;
     public int remaningPuzzlePiece = 9;
@@ -22,72 +25,82 @@ public class PuzzlePiece : MonoBehaviour
     private void findPuzzlePieces()
     {
         puzzlePieces = GameObject.FindGameObjectsWithTag("PuzzlePiece");
-        gameController = GameObject.Find("GameController").GetComponent<PuzzleController>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     void Update()
-{
-    if (Input.GetKeyDown(KeyCode.Space))
     {
-        GameObject closest = null;
-        float closestDistance = 100;
-        if (pickedPiece == null)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (puzzlePieces != null)
+            GameObject closest = null;
+            float closestDistance = 100;
+            if (pickedPiece == null)
             {
-                //if every puzzle piece is spawned at the same time
-                /*for (int i = 0; i < puzzlePieces.Length; i++)
+                if (puzzlePieces != null)
                 {
-                    print("index: " + i);
-                    while (correctPuzzlePieces.Contains(puzzlePieces[i]))
+                    //if every puzzle piece is spawned at the same time
+                    /*for (int i = 0; i < puzzlePieces.Length; i++)
                     {
-                        print("correct puzzle piece: " + puzzlePieces[i]);
-                        i++;
+                        print("index: " + i);
+                        while (correctPuzzlePieces.Contains(puzzlePieces[i]))
+                        {
+                            print("correct puzzle piece: " + puzzlePieces[i]);
+                            i++;
+                            if (i >= puzzlePieces.Length) // Ensure not to go out of bounds
+                                break;
+                        }
                         if (i >= puzzlePieces.Length) // Ensure not to go out of bounds
                             break;
+
+                        print("false puzzle piece: " + puzzlePieces[i]);
+                        float distance = Vector3.Distance(puzzlePieces[i].transform.position, transform.position);
+                        if (distance < closestDistance) { closestDistance = distance; closest = puzzlePieces[i]; }
+                        print("closest: " + closest);
+
                     }
-                    if (i >= puzzlePieces.Length) // Ensure not to go out of bounds
-                        break;
 
-                    print("false puzzle piece: " + puzzlePieces[i]);
-                    float distance = Vector3.Distance(puzzlePieces[i].transform.position, transform.position);
-                    if (distance < closestDistance) { closestDistance = distance; closest = puzzlePieces[i]; }
-                    print("closest: " + closest);
-
-                }
-
-                if (closestDistance < 2)
-                {
-                    PickUpPiece(closest);
-                }*/
-                
-                GameObject activePuzzlePiece = GameObject.FindGameObjectWithTag("PuzzlePiece");
-                if(Vector3.Distance(activePuzzlePiece.transform.position, transform.position)<3)
-                {
-                    pickedPiece = activePuzzlePiece;
+                    if (closestDistance < 2)
+                    {
+                        PickUpPiece(closest);
+                    }*/
+                    
+                    GameObject activePuzzlePiece = GameObject.FindGameObjectWithTag("PuzzlePiece");
+                    if(Vector3.Distance(activePuzzlePiece.transform.position, transform.position)<3)
+                    {
+                        pickedPiece = activePuzzlePiece;
+                    }
                 }
             }
-        }
-        else
-        {
-            DropPiece();
-        }
-
-        if(correctPuzzlePieces.Count != 9 )
-        {
-            if(GameObject.FindGameObjectWithTag("PuzzlePiece")==null)
+            else
             {
-                puzzlePiecePool.activateRandomPiece();
+                DropPiece();
+            }
+
+            if(correctPuzzlePieces.Count != 9 )
+            {
+                if(GameObject.FindGameObjectWithTag("PuzzlePiece")==null)
+                {
+                    puzzlePiecePool.activateRandomPiece();
+                }
             }
         }
-    }
 
-    if (pickedPiece != null)
-    {
-        Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
-        pickedPiece.transform.position = newPosition;
+        if (pickedPiece != null)
+        {
+            //Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
+            if(puzzlePlace != null)
+            {
+                pickedPiece.transform.position = puzzlePlace.position;
+            }
+            if(puzzlePlace == null)
+            {
+                Vector3 newPosition = transform.position + new Vector3(0, 130, 0);
+                pickedPiece.transform.position = newPosition;
+            }
+            
+
+        }
     }
-}
 
     void PickUpPiece(GameObject piece)
     {
@@ -98,6 +111,10 @@ public class PuzzlePiece : MonoBehaviour
 
     void DropPiece()
     {
+        if(pickedPiece.transform.localScale == new Vector3(0.2f, 0.001f, 0.2f))
+        {
+            pickedPiece.transform.localScale = new Vector3(2, 0.2f, 2);
+        }
         Vector3 closestPosition = GetClosestPosition(transform.position);
         float distance = Vector3.Distance(closestPosition, transform.position);
 
@@ -117,7 +134,7 @@ public class PuzzlePiece : MonoBehaviour
         }
         else
         {
-            pickedPiece.transform.position = new Vector3(pickedPiece.transform.position.x, 0f, pickedPiece.transform.position.z);
+            pickedPiece.transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
         }
 
         //pickedPiece.transform.localScale = originalSize;

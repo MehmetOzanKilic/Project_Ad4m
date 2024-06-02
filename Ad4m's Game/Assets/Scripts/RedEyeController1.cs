@@ -63,6 +63,11 @@ public class RedEyeController : MonoBehaviour
             //visibility of the eyes
             EyeSight();
 
+            if(Vector3.Distance(transform.position,adam.transform.position) < 3)
+            {
+                death();
+            }
+
             //differences between mouse position and eye position
             var xDif=Math.Abs(movementController.target.x-transform.position.x);
             var zDif=Math.Abs(movementController.target.z-transform.position.z);
@@ -80,6 +85,8 @@ public class RedEyeController : MonoBehaviour
         }
 
     }
+
+    [SerializeField]private float damageAmount=30f;
 
     private void checkDeath()
     {
@@ -100,6 +107,7 @@ public class RedEyeController : MonoBehaviour
     //will be changed
     private void death()
     {
+        adam.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
         Destroy(gameObject);
     }
 
@@ -169,6 +177,12 @@ public class RedEyeController : MonoBehaviour
                     {
                         renderers[loopCounter].enabled=true;
                         agent.isStopped = true;
+                    }
+
+                    else if(Vector3.Distance(transform.position, adam.transform.position)<5)
+                    {
+                        renderers[loopCounter].enabled=true;
+                        agent.isStopped = false;
                     }
                     //eye moves if visible
                     else
