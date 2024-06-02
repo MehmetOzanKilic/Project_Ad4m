@@ -52,10 +52,10 @@ public class ProjectileEyeController : MonoBehaviour
 
         Vector3 currentPos=transform.position;
 
-        currentPos.y = 1;
+        currentPos.y = 1.3f;
 
         transform.position=currentPos;
-        
+
         if(adam)
         {
             adamFound=true;
@@ -85,13 +85,26 @@ public class ProjectileEyeController : MonoBehaviour
             var zDif=Math.Abs(movementController.target.z-transform.position.z);
 
             //if the differences are small enough scripts checks death
-            if(xDif<errorMargin && zDif<errorMargin)
+            if(SelectedSections.returnCount() <4)
             {
-                checkDeath();
-                counter+=Time.deltaTime;
+                if(xDif<errorMargin && zDif<errorMargin)
+                {
+                    checkDeath();
+                    counter+=Time.deltaTime;
+                }
+                else
+                    counter=0f;
             }
             else
-                counter=0f;
+            {
+                if(seenFlag)
+                {
+                    checkDeath();
+                    counter+=Time.deltaTime;
+                }
+                else
+                    counter=0f;
+            }
 
 
         }
@@ -165,6 +178,7 @@ public class ProjectileEyeController : MonoBehaviour
         }    
     }
     //visibility of the eyes
+    private bool seenFlag = false;
     private void EyeSight()
     {
         //counts for body eye1 and eye2
@@ -175,11 +189,27 @@ public class ProjectileEyeController : MonoBehaviour
             {
                 if(loopCounter==0)
                 {
-                    float angle = Vector3.Angle(adam.transform.forward, transform.position-adam.transform.position);
+                    // Get the player's forward direction, ignoring the y component
+                    Vector3 playerForward = new Vector3(adam.transform.forward.x, 0, adam.transform.forward.z);
+
+                    // Get the direction to the target object, ignoring the y component
+                    Vector3 targetDirection = new Vector3(transform.position.x - adam.transform.position.x, 0, transform.position.z - adam.transform.position.z);
+
+                    // Calculate the angle between the player's forward direction and the target direction
+                    float angle = Vector3.Angle(playerForward, targetDirection);
+                    angle-=5;
+                    print(angle);
+
                     //seeAngle is increased here for body
                     if(Math.Abs(angle)<seeAng+70d)
                     {
                         renderers[0].enabled=true;
+                        if(Math.Abs(angle)<(seeAng-27f))
+                        {
+                            seenFlag=true;
+                        }
+                        else seenFlag=false;
+                        
                     }
                     else
                     {   

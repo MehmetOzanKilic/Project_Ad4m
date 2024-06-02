@@ -43,7 +43,7 @@ public class WhiteEyeController : MonoBehaviour
 
         Vector3 currentPos=transform.position;
 
-        currentPos.y = 1;
+        currentPos.y = 1.3f;
 
         transform.position=currentPos;
 
@@ -75,21 +75,34 @@ public class WhiteEyeController : MonoBehaviour
             //differences between mouse position and eye position
             var xDif=Math.Abs(movementController.target.x-transform.position.x);
             var zDif=Math.Abs(movementController.target.z-transform.position.z);
-
             //if the differences are small enough scripts checks death 
-            if(xDif<errorMargin && zDif<errorMargin)
+            if(SelectedSections.returnCount() <4)
             {
-                checkDeath();
-                counter+=Time.deltaTime;
+                if(xDif<errorMargin && zDif<errorMargin)
+                {
+                    checkDeath();
+                    counter+=Time.deltaTime;
+                }
+                else
+                    counter=0f;
             }
             else
-                counter=0f;
+            {
+                if(seenFlag)
+                {
+                    checkDeath();
+                    counter+=Time.deltaTime;
+                }
+                else
+                    counter=0f;
+            }
+            
                 
         }
         
 
     }
-
+    private bool seenFlag=false;
     void FixedUpdate()
     {
 
@@ -152,11 +165,27 @@ public class WhiteEyeController : MonoBehaviour
                 //speacial case for the body renderer in case we want to be able to see it sooner
                 if(loopCounter==0)
                 {
-                    float angle = Vector3.Angle(adam.transform.forward, transform.position-adam.transform.position);
+                    // Get the player's forward direction, ignoring the y component
+                    Vector3 playerForward = new Vector3(adam.transform.forward.x, 0, adam.transform.forward.z);
+
+                    // Get the direction to the target object, ignoring the y component
+                    Vector3 targetDirection = new Vector3(transform.position.x - adam.transform.position.x, 0, transform.position.z - adam.transform.position.z);
+
+                    // Calculate the angle between the player's forward direction and the target direction
+                    float angle = Vector3.Angle(playerForward, targetDirection);
+                    angle-=5;
+                    print(angle);
+
                     //seeAngle is increased here for body
                     if(Math.Abs(angle)<seeAng+70d)
                     {
                         renderers[0].enabled=true;
+                        if(Math.Abs(angle)<(seeAng-27f))
+                        {
+                            seenFlag=true;
+                        }
+                        else seenFlag=false;
+                        
                     }
                     else
                     {   
@@ -166,7 +195,15 @@ public class WhiteEyeController : MonoBehaviour
 
                 else
                 {
-                    float angle = Vector3.Angle(adam.transform.forward, transform.GetChild(loopCounter-1).position-adam.transform.position);
+                    // Get the player's forward direction, ignoring the y component
+                    Vector3 playerForward = new Vector3(adam.transform.forward.x, 0, adam.transform.forward.z);
+
+                    // Get the direction to the target object, ignoring the y component
+                    Vector3 targetDirection = new Vector3(transform.GetChild(loopCounter-1).position.x - adam.transform.position.x, 0, transform.GetChild(loopCounter-1).position.z - adam.transform.position.z);
+
+                    // Calculate the angle between the player's forward direction and the target direction
+                    float angle = Vector3.Angle(playerForward, targetDirection);
+                    
                     //if the eye-adam vector and adam's look direction vector has a angle smaller then the seeAngle eye renderer becomes visible
                     //and the eye is stopped when visible  
                     if(Math.Abs(angle)<seeAng)
@@ -180,12 +217,14 @@ public class WhiteEyeController : MonoBehaviour
                     {
                         renderers[loopCounter].enabled=true;
                         agent.isStopped=false;
+                        seenFlag=false;
                     }
                     //eye moves if not visible
                     else
                     {   
                         renderers[loopCounter].enabled=false;
                         agent.isStopped=false;
+                        seenFlag=false;
                     }
                 }
                 loopCounter+=1;
