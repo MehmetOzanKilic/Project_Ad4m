@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerAttributeController : MonoBehaviour
 {
-    public float playerBulletDamage = 20f;
+    public float playerBulletDamage = 2000f;
     public float reloadSpeed = 1f;
     public float bulletSpeed = 10f;
     public int shotAmount = 3;
@@ -120,7 +120,7 @@ public class PlayerAttributeController : MonoBehaviour
     }
     public void ResetAttributes()
     {
-        playerBulletDamage = 20f;
+        playerBulletDamage = 2000f;
         reloadSpeed = 1f;
         bulletSpeed = 10f;
         shotAmount = 3;
