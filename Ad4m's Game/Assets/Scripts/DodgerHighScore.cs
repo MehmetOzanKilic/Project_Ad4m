@@ -71,7 +71,7 @@ public class DodgerHighScore : MonoBehaviour
     {
         while (countdownTime > 0)
         {
-            timerText.text = "Time Remaining: " + Mathf.CeilToInt(countdownTime).ToString();
+            timerText.text = Mathf.CeilToInt(countdownTime).ToString();
             yield return null;
             countdownTime -= Time.deltaTime;
         }

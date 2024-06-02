@@ -43,7 +43,6 @@ public class GameController : MonoBehaviour
     private int tempLevel;
     void Start()
     {   
-        spawn=false;
         escCanvas.SetActive(false);
         //levelEndTimer=500f;
         levelNo=SelectedSections.returnCount();
