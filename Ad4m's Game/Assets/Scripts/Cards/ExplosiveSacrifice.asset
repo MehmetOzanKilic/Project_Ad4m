@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: Explosive Sacrifice
   health: 1
-  attack: 2
-  abilitytxt: Destroy this card to deal 2 damage to all cards adjacent to it.
+  attack: 3
+  healingAmount: 0
+  buffingAmount: 0
+  imageOnCard: {fileID: 21300000, guid: 97737a22d3f2cde46accf025c95693e9, type: 3}
+  abilitytxt: Destroy this card to deal 3 damage to all cards adjacent to it.
   symboltype: 0
   type: 6

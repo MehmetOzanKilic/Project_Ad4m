@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public CardGameManager cardGameManager;
-    private int playedCardCount = 0;
-    private bool isPlacingCard = false;
-    public float cardPlacementDelay = 1f; 
+    public int playedCardCount = 0;
+    public bool isPlacingCard = false;
+    private float cardPlacementDelay = 1f; 
 
     void Update()
     {
@@ -22,15 +22,16 @@ public class EnemyController : MonoBehaviour
         isPlacingCard = true;
 
         cardGameManager.drawOpponentHand();
+        //cardGameManager.EnemyDrawCard();
 
         if (playedCardCount < 2)
         {
-            if (ChooseCardFromHand() != null && ChooseSlotToPlaceCard() != null)
-            {
+            //if (ChooseCardFromHand() != null && ChooseSlotToPlaceCard() != null)
+            //{
                 yield return new WaitForSeconds(cardPlacementDelay);
                 yield return StartCoroutine(PlaceCard(ChooseSlotToPlaceCard(), ChooseCardFromHand()));
                 playedCardCount++;
-            }
+            //}
         }
         else
         {
@@ -104,6 +105,6 @@ public class EnemyController : MonoBehaviour
        
         card.transform.SetParent(slot.transform);
         slot.GetComponent<SlotController>().isOccupied = true;
-        
+        cardGameManager.RearrangEnemyHand();
     }
 }

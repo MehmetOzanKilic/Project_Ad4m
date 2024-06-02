@@ -50,7 +50,7 @@ public class CardGameManager : MonoBehaviour
     public List<GameObject> gridSlots;
 
     private int selectedCardIndex = 0;
-    private int selectedGridIndex = 4;
+    //public int selectedGridIndex = 4;
     public float movementSpeed = 5f;
     public GameObject selectedCard;
 
@@ -126,24 +126,6 @@ public class CardGameManager : MonoBehaviour
             playerCards[i].transform.position = playerCardsPositions[i].transform.position;
 
             playerCards[i].transform.parent = playerCardsPositions[i].transform;
-
-
-            // Get the target position and rotation
-            //Vector3 targetPosition = cardsPositions[i].transform.position;
-            //Quaternion targetRotation = Quaternion.Euler(0f, 0f, 45f);
-
-            // Smoothly move and rotate
-
-            /*float smoothMovementSpeed = 10f;
-            float smoothRotationSpeed = 10f;
-            cards.Add(gameDeckController.deckCards[i]);
-            gameDeckController.deckCards.Remove(gameDeckController.deckCards[i]);
-            cards[i].transform.parent = null;
-
-            cards[i].transform.position = Vector3.Lerp(cards[i].transform.position, targetPosition, smoothMovementSpeed * Time.deltaTime);
-            cards[i].transform.rotation = Quaternion.Lerp(cards[i].transform.rotation, targetRotation, smoothRotationSpeed * Time.deltaTime);
-
-            cards[i].transform.parent = cardsPositions[i].transform;*/
         }
     }
 
@@ -232,6 +214,35 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
+    public void EnemyDrawCard()
+    {
+        if (opponentCards.Count() == 1)
+        {
+            GameObject card = gameDeckController.deckCards[0];
+            gameDeckController.deckCards.RemoveAt(0);
+            opponentCards.Add(card);
+
+            // Set the card's parent to the hand and adjust its position
+            card.transform.parent = opponentHandParent;
+            card.transform.position = opponentCardsPositions[opponentCards.Count - 1].transform.position;
+            card.transform.rotation = Quaternion.Euler(0f, 0f, 45f);
+            card.transform.SetParent(opponentCardsPositions[playerCards.Count - 1].transform);
+        }
+        else
+        {
+            Debug.LogWarning("Deck is empty. Cannot draw more cards.");
+        }
+
+    }
+
+    public void EnsureOpponentHasThreeCards()
+    {
+        while (opponentCards.Count < 3)
+        {
+            DrawCard();
+        }
+    }
+
     [SerializeField] private GameObject turnOnOff;
     void FightingStagePhase()
     {
@@ -239,75 +250,6 @@ public class CardGameManager : MonoBehaviour
         string levelString = "Level" + SelectedSections.returnCount().ToString();
         SceneManager.LoadScene(levelString);
     }
-
-    /*void HandleSlotSelectionPhase()
-    {
-        playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            MoveUp();
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            MoveDown();
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            MoveLeftOnGrid();
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            MoveRightOnGrid();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (playerCards.Count > 0 && selectedCardIndex < playerCards.Count)
-            {
-                playedCardCount++;
-                isPlacingCard = false;
-                emptySlots.Remove(gridSlots[selectedGridIndex]);
-
-                Vector3 targetPositionGrid = GetGridSlotPosition(selectedGridIndex);
-                MoveCardToPosition(selectedCardIndex, targetPositionGrid);
-
-                cardsPlayed.Enqueue(playerCards[selectedCardIndex]); //ENQUEUE
-
-
-                playerCards[selectedCardIndex].transform.SetParent(gridSlots[selectedGridIndex].transform);
-                playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-
-                playerCards.RemoveAt(selectedCardIndex);
-
-                RearrangePlayerHand();
-                selectedCardIndex = 0;
-
-                //AddCardToDeck();
-
-                if (playedCardCount == 2)
-                {
-                    playedCardCount = 0;
-                    SwitchCamera();
-                    currentPhase = GamePhase.EnemyTurn;
-                }
-                else
-                {
-                    SwitchCamera();
-                    currentPhase = GamePhase.PlayerTurn;
-                }
-            }
-            else
-            {
-                Debug.LogWarning("invalid card index.");
-            }
-        }
-        else
-        {
-            Vector3 targetPosition = GetInitialSlotPosition();
-            MoveCardToPosition(selectedCardIndex, targetPosition);
-        }
-    }*/
 
     void HandleSlotSelectionPhase()
     {
@@ -336,14 +278,14 @@ public class CardGameManager : MonoBehaviour
             {
                 playedCardCount++;
                 isPlacingCard = false;
-                emptySlots.Remove(gridSlots[selectedGridIndex]);
+                emptySlots.Remove(gridSlots[playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex]);
 
-                Vector3 targetPositionGrid = GetGridSlotPosition(selectedGridIndex);
+                Vector3 targetPositionGrid = GetGridSlotPosition(playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex);
                 MoveCardToPosition(selectedCardIndex, targetPositionGrid);
 
                 cardsPlayed.Enqueue(playerCards[selectedCardIndex]); // ENQUEUE
 
-                playerCards[selectedCardIndex].transform.SetParent(gridSlots[selectedGridIndex].transform);
+                playerCards[selectedCardIndex].transform.SetParent(gridSlots[playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex].transform);
                 playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 
                 playerCards.RemoveAt(selectedCardIndex);
@@ -361,6 +303,8 @@ public class CardGameManager : MonoBehaviour
                 {
                     currentPhase = GamePhase.PlayerTurn;
                     SwitchCamera();
+
+                  
                 }
             }
             else
@@ -379,18 +323,18 @@ public class CardGameManager : MonoBehaviour
     Vector3 GetInitialSlotPosition()
     {
         //If the middle slot is unoccupied, put the card in the middle slot.
-        if (!gridSlots[selectedGridIndex].GetComponent<SlotController>().isOccupied)
+        if (!gridSlots[playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex].GetComponent<SlotController>().isOccupied)
         {
-            return GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
+            return GetGridSlotPosition(playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex) + new Vector3(0f, 1f, 0f);
         }
-        else if (gridSlots[selectedGridIndex].GetComponent<SlotController>().isOccupied) //If the middle slot is occupied, put it on an unoccupied adjacent slot
+        else if (gridSlots[playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex].GetComponent<SlotController>().isOccupied) //If the middle slot is occupied, put it on an unoccupied adjacent slot
         {
-            int[] adjacentSlots = { selectedGridIndex - 1, selectedGridIndex + 1, selectedGridIndex - 3, selectedGridIndex + 3 };
+            int[] adjacentSlots = { playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex - 1, playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex + 1, playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex - 3, playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex + 3 };
             foreach (int index in adjacentSlots)
             {
                 if (index >= 0 && index < 9 && !gridSlots[index].GetComponent<SlotController>().isOccupied)
                 {
-                    selectedGridIndex = index;
+                    playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex = index;
                     return GetGridSlotPosition(index) + new Vector3(0f, 1f, 0f);
                 }
             }
@@ -403,14 +347,14 @@ public class CardGameManager : MonoBehaviour
             {
                 if (!gridSlots[index].GetComponent<SlotController>().isOccupied)
                 {
-                    selectedGridIndex = index;
+                    playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex = index;
                     return GetGridSlotPosition(index) + new Vector3(0f, 1f, 0f);
                 }
             }
         }
 
 
-        return GetGridSlotPosition(selectedGridIndex) + new Vector3(0f, 1f, 0f);
+        return GetGridSlotPosition(playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex) + new Vector3(0f, 1f, 0f);
     }
 
     void HandleActionPhase()
@@ -421,6 +365,11 @@ public class CardGameManager : MonoBehaviour
         if (checkIfAllCardsPlayed())
         {
             currentPhase = GamePhase.PlayerTurn;
+            foreach (GameObject card in cardsPlayed)
+            {
+                card.GetComponent<CardController>().playedThisRound = false;
+            }
+
             SwitchCamera();
         }
     }
@@ -439,7 +388,6 @@ public class CardGameManager : MonoBehaviour
 
     void RearrangePlayerHand()
     {
-        //float smoothMovementSpeed = 5f;
         for (int i = 0; i < playerCards.Count; i++)
         {
             playerCards[i].transform.parent = null;
@@ -448,6 +396,17 @@ public class CardGameManager : MonoBehaviour
             /*cards[i].transform.parent = null;
             cards[i].transform.position = Vector3.Lerp(cards[i].transform.position, cardsPositions[i].transform.position, smoothMovementSpeed * Time.deltaTime);
             cards[i].transform.parent = cardsPositions[i].transform;*/
+        }
+    }
+
+    public void RearrangEnemyHand()
+    {
+        for (int i = 0; i < opponentCards.Count; i++)
+        {
+            opponentCards[i].transform.parent = null;
+            opponentCards[i].transform.position = opponentCardsPositions[i].transform.position;
+            opponentCards[i].transform.parent = opponentCardsPositions[i].transform;
+
         }
     }
 
@@ -506,37 +465,37 @@ public class CardGameManager : MonoBehaviour
 
     void MoveUp()
     {
-        int newIndex = selectedGridIndex - 3;
+        int newIndex = playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex - 3;
         if (newIndex >= 0 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
         {
-            selectedGridIndex = newIndex;
+            playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex = newIndex;
         }
     }
 
     void MoveDown()
     {
-        int newIndex = selectedGridIndex + 3;
+        int newIndex = playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex + 3;
         if (newIndex < 9 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
         {
-            selectedGridIndex = newIndex;
+            playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex = newIndex;
         }
     }
 
     void MoveLeftOnGrid()
     {
-        int newIndex = selectedGridIndex - 1;
-        if (newIndex >= 0 && newIndex / 3 == selectedGridIndex / 3 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
+        int newIndex = playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex - 1;
+        if (newIndex >= 0 && newIndex / 3 == playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex / 3 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
         {
-            selectedGridIndex = newIndex;
+            playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex = newIndex;
         }
     }
 
     void MoveRightOnGrid()
     {
-        int newIndex = selectedGridIndex + 1;
-        if (newIndex < 9 && newIndex / 3 == selectedGridIndex / 3 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
+        int newIndex = playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex + 1;
+        if (newIndex < 9 && newIndex / 3 == playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex / 3 && !gridSlots[newIndex].GetComponent<SlotController>().isOccupied)
         {
-            selectedGridIndex = newIndex;
+            playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex = newIndex;
         }
     }
 

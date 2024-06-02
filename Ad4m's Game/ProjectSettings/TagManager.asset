@@ -26,6 +26,7 @@ TagManager:
   - Picked
   - ProjectileShooter
   - Target
+  - ActionInfo
   layers:
   - Default
   - TransparentFX

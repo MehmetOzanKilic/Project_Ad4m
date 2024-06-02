@@ -17,6 +17,7 @@ MonoBehaviour:
   attack: 0
   healingAmount: 0
   buffingAmount: -1
+  imageOnCard: {fileID: 21300000, guid: 66a9b3419e867e6408f07fa1ce7696b7, type: 3}
   abilitytxt: Decrease attack of all adjacent enemy cards by 1.
   symboltype: 0
   type: 3

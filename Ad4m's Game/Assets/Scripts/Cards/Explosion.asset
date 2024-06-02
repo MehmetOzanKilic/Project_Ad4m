@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: Explosion
   health: 2
-  attack: 1
-  abilitytxt: Deal 1 damage to all cards adjacent to this card.
+  attack: 4
+  healingAmount: 0
+  buffingAmount: 0
+  imageOnCard: {fileID: 21300000, guid: ad37dda470ffb464b8d6072a99918691, type: 3}
+  abilitytxt: Deal 4 damage to all cards adjacent to this card.
   symboltype: 0
   type: 2

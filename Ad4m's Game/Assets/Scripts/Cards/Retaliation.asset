@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: Retaliation
   health: 2
-  attack: 1
-  abilitytxt: Deal 1 damage to the attacking card after being attacked.
+  attack: 3
+  healingAmount: 0
+  buffingAmount: 0
+  imageOnCard: {fileID: 0}
+  abilitytxt: Deal 3 damage to the attacking card after being attacked.
   symboltype: 0
   type: 5

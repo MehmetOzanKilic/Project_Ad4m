@@ -17,6 +17,7 @@ MonoBehaviour:
   attack: 0
   healingAmount: 0
   buffingAmount: 1
+  imageOnCard: {fileID: 21300000, guid: e8c3549b00457774a874922740f3632a, type: 3}
   abilitytxt: Increase attack of all adjacent friendly cards by 1.
   symboltype: 0
   type: 3

@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: Last Stand
   health: 3
-  attack: 1
+  attack: 3
+  healingAmount: 0
+  buffingAmount: 0
+  imageOnCard: {fileID: 21300000, guid: dbfba316767d62540860de46842b3a72, type: 3}
   abilitytxt: When this card is destroyed, deal 3 damage to the card that destroyed
     it.
   symboltype: 0

@@ -17,6 +17,7 @@ MonoBehaviour:
   attack: 0
   healingAmount: 1
   buffingAmount: 0
+  imageOnCard: {fileID: 21300000, guid: f4324eb50b091ac45a2f182215c29bd8, type: 3}
   abilitytxt: Heal all adjacent friendly cards by 1 health each turn.
   symboltype: 0
   type: 1

@@ -17,6 +17,7 @@ MonoBehaviour:
   attack: 0
   healingAmount: 1
   buffingAmount: 0
+  imageOnCard: {fileID: 21300000, guid: e7c12fba27f8dbd4eb241371cf5592c0, type: 3}
   abilitytxt: Heal 1 health at the beginning of each turn.
   symboltype: 0
   type: 1

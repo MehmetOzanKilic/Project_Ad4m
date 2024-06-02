@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Cards/Card")]
 public class CardData : ScriptableObject
@@ -10,6 +11,7 @@ public class CardData : ScriptableObject
     public int attack;
     public int healingAmount;
     public int buffingAmount;
+    public Sprite imageOnCard;
 
 
     public string abilitytxt;
