@@ -102,4 +102,19 @@ public class ShooterController : MonoBehaviour
         enemyCounter+=1;
         enemyCounterText.text=enemyCounter.ToString();
     }
+
+    public void retryLevel()
+    {
+        Time.timeScale=1;
+        print("clickclick");
+        SelectedSections.gameWon=false;
+        gameObject.GetComponent<SectionController>().openGameEnd(); 
+    }
+
+    public void returnToComputer()
+    {
+        Time.timeScale=1;
+        SelectedSections.gameWon=false;
+        SceneManager.LoadScene("The Computer");
+    }
 }

@@ -13,18 +13,39 @@ public class HorrorController : MonoBehaviour
 
     [SerializeField]private float endTimer=30;
     [SerializeField]private Text counterText;
+    [SerializeField]private GameObject escCanvas;
     // Start is called before the first frame update
     void Start()
     {   
         eyesPresent=GameObject.FindGameObjectsWithTag("Eye");
         rnd = new System.Random();
+        escCanvas.SetActive(false);
     }
 
     private float enemyCountTimer = 0;
-    
+    private bool escFlag = false;
     // Update is called once per frame
     void Update()
     {
+         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(escFlag==false)
+            {
+                escCanvas.SetActive(true);
+                escFlag=true;
+                Time.timeScale=0;
+                Cursor.lockState = CursorLockMode.None;
+            }
+
+            else if(escFlag==true)
+            {
+                escCanvas.SetActive(false);
+                escFlag=false;
+                Time.timeScale=1;
+                if(SelectedSections.returnCount()>3)Cursor.lockState = CursorLockMode.Locked;
+            }
+            
+        }
         if(enemyCountTimer>10f)
         {
             eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
@@ -70,5 +91,20 @@ public class HorrorController : MonoBehaviour
         float y = rnd.Next(5,14);
 
         return new Vector3(x,y,22);
+    }
+
+    public void retryLevel()
+    {
+        Time.timeScale=1;
+        print("clickclick");
+        SelectedSections.gameWon=false;
+        gameObject.GetComponent<SectionController>().openGameEnd(); 
+    }
+
+    public void returnToComputer()
+    {
+        Time.timeScale=1;
+        SelectedSections.gameWon=false;
+        SceneManager.LoadScene("The Computer");
     }
 }
