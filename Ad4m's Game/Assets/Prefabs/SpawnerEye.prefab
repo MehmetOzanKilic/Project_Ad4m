@@ -360,7 +360,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  diesIn: 3
+  diesIn: 2
   adam: {fileID: 0}
   deathTime: 1.5
   errorMargin: 0.5

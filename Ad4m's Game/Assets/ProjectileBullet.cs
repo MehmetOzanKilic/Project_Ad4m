@@ -43,6 +43,12 @@ public class ProjectileBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Vector3 currentPos = transform.position;;
+
+        currentPos.y = 1;
+
+        transform.position=currentPos;
+        
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
