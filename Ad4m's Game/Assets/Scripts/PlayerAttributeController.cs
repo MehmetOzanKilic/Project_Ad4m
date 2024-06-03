@@ -63,18 +63,21 @@ public class PlayerAttributeController : MonoBehaviour
             {
                 if (sacrificeCount > 0)
                 {
-                    while (GameObject.FindWithTag("Mobs"))
-                    {
-                        tempmob = GameObject.FindWithTag("Mobs");
-                        Destroy(tempmob);
-                    }
+                    DestroyAllMobs();
                     sacrificeCount--;
                     playerHealthScript.TakeDamage(70f);
                 }
             }
         }
     }
-
+    void DestroyAllMobs()
+    {
+        GameObject[] mobs = GameObject.FindGameObjectsWithTag("Mobs");
+        foreach (GameObject mob in mobs)
+        {
+            Destroy(mob);
+        }
+    }
     void RemoveDuplicateUpgrades()
     {
         for (int i = 0; i < Upgrades.Length; i++)
@@ -164,3 +167,4 @@ public class PlayerAttributeController : MonoBehaviour
         enemyAttributeController.swordsmanHealth = 80f;
 }
 }
+
