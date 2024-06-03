@@ -398,7 +398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 91eeec802dab22445975bcebf507ef45, type: 2}
   card_info_txt: {fileID: 232256978}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -954,7 +953,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 7971749ec41745641a5063925a7d50e2, type: 2}
   card_info_txt: {fileID: 263947589}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -2186,7 +2184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2750,7 +2748,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 2d423eb1ce227c3458dafbf145b5a18c, type: 2}
   card_info_txt: {fileID: 769938880}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -3327,7 +3324,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: e3a586ae0eb9ab54093f53e42a3d8d2e, type: 2}
   card_info_txt: {fileID: 578394798}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -3924,7 +3920,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 264893712e2a16942a8412c7218de736, type: 2}
   card_info_txt: {fileID: 1169508880}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -5326,7 +5321,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: dcec59d348ed872428ca697da5b085a2, type: 2}
   card_info_txt: {fileID: 700893790}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -6101,7 +6095,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 7971749ec41745641a5063925a7d50e2, type: 2}
   card_info_txt: {fileID: 1825123137}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -7038,7 +7031,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: feeaad72715c92a44be499b892a9424b, type: 2}
   card_info_txt: {fileID: 535349659}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -7330,7 +7322,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 264893712e2a16942a8412c7218de736, type: 2}
   card_info_txt: {fileID: 66832559}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -7718,7 +7709,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 06cbed22e4fe7164cbb04b24fa01829e, type: 2}
   card_info_txt: {fileID: 649212835}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -7988,7 +7978,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: dcec59d348ed872428ca697da5b085a2, type: 2}
   card_info_txt: {fileID: 148237818}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -8838,7 +8827,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: feeaad72715c92a44be499b892a9424b, type: 2}
   card_info_txt: {fileID: 759545663}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -9639,7 +9627,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 91eeec802dab22445975bcebf507ef45, type: 2}
   card_info_txt: {fileID: 913987641}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -9902,7 +9889,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 85388e5319c804f4a8cac3e20d62fb2d, type: 2}
   card_info_txt: {fileID: 674999191}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -10458,7 +10444,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 85388e5319c804f4a8cac3e20d62fb2d, type: 2}
   card_info_txt: {fileID: 1643581161}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -11059,7 +11044,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: e3a586ae0eb9ab54093f53e42a3d8d2e, type: 2}
   card_info_txt: {fileID: 1320437637}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -11377,7 +11361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 06cbed22e4fe7164cbb04b24fa01829e, type: 2}
   card_info_txt: {fileID: 1511626054}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -12374,7 +12357,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 264893712e2a16942a8412c7218de736, type: 2}
   card_info_txt: {fileID: 1534922403}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -12778,7 +12760,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 5991080081e07024fbb7633bf14b5b6b, type: 2}
   card_info_txt: {fileID: 694239553}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -13119,7 +13100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 4841128b78dbcca47973f1e368d59018, type: 2}
   card_info_txt: {fileID: 408033795}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -13256,7 +13236,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 4841128b78dbcca47973f1e368d59018, type: 2}
   card_info_txt: {fileID: 798195227}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -13755,7 +13734,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: dcec59d348ed872428ca697da5b085a2, type: 2}
   card_info_txt: {fileID: 1362291259}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -14364,7 +14342,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 06cbed22e4fe7164cbb04b24fa01829e, type: 2}
   card_info_txt: {fileID: 765345995}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -14551,7 +14528,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 5991080081e07024fbb7633bf14b5b6b, type: 2}
   card_info_txt: {fileID: 856813434}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -14866,7 +14842,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 2d423eb1ce227c3458dafbf145b5a18c, type: 2}
   card_info_txt: {fileID: 376388933}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
@@ -15003,7 +14978,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: feeaad72715c92a44be499b892a9424b, type: 2}
   card_info_txt: {fileID: 1710961448}
-  currentActionInfotxt: {fileID: 0}
   cardGameManager: {fileID: 1533233583}
   cardOnTopofQueue: {fileID: 0}
   cardGridPos: {fileID: 0}
