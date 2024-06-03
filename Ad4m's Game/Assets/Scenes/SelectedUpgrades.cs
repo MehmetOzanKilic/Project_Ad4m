@@ -113,7 +113,7 @@ public class SelectedUpgrades : MonoBehaviour
             
         }
 
-        switch(upgrade1)
+        switch(upgrade2)
         {
             case ("Arrowshot"):
             selectedUpgrades[1]=0;

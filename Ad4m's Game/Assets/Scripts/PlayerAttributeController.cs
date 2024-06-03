@@ -31,7 +31,7 @@ public class PlayerAttributeController : MonoBehaviour
     public bool canSacrifice = false;
     private int sacrificeCount = 3;
 
-    public int[] Upgrades = { 1, 2, 3 };
+    public int[] Upgrades = { -1, -1 };
 
     private GameObject playerObject;
     private PlayerHealth playerHealthScript;
@@ -54,9 +54,7 @@ public class PlayerAttributeController : MonoBehaviour
     }
     private void Update()
     {
-        /*RemoveDuplicateUpgrades();
-        UpdateUpgrades();*/
-        GameObject tempmob;
+        //UpdateUpgrades();
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (canSacrifice)
@@ -94,6 +92,9 @@ public class PlayerAttributeController : MonoBehaviour
     public void UpdateUpgrades()
     {
         ResetAttributes();
+
+        Upgrades[0] = SelectedUpgrades.selectedUpgrades[0];
+        Upgrades[1] = SelectedUpgrades.selectedUpgrades[1];
         RemoveDuplicateUpgrades();
         //Upgrade IDs: 0- Direct Damage, 1- Healing, 2- AoE Damage, 3-Buff, 4-Debuff, 5- Sacrifice 6-Counterattack
         for (int i = 0; i < Upgrades.Length; i++)
@@ -102,36 +103,36 @@ public class PlayerAttributeController : MonoBehaviour
             {
                 case 0:
 
-                    //Debug.Log("Direct Damage");
+                    Debug.Log("Direct Damage");
                     playerBulletDamage = 50f;
                     playerMeleeDamage = 100f;
                     break;
 
                 case 1:
-                    //Debug.Log("Healing");
+                    Debug.Log("Healing");
                     canBurstHeal = true;
                     break;
 
                 case 2:
-                    //Debug.Log("AoE Damage");
+                    Debug.Log("AoE Damage");
                     reloadSpeed = 0.5f;
                     shotAmount = 20;
                     isMachineGun = true;
                     break;
 
                 case 3:
-                    //Debug.Log("Buff");
+                    Debug.Log("Buff");
                     playerHealth = 150f;
                     break;
 
                 case 4:
-                    //Debug.Log("Debuff");
+                    Debug.Log("Debuff");
                     enemyAttributeController.gunmanHealth = 75f;
                     enemyAttributeController.swordsmanHealth = 60f;
                     break;
 
                 case 5:
-                    //Debug.Log("Sacrifice");
+                    Debug.Log("Sacrifice");
                     canSacrifice = true; 
                     break;
 
@@ -140,7 +141,7 @@ public class PlayerAttributeController : MonoBehaviour
                     break;
 
                 default:
-                    //Debug.Log("No Upgrade selected for slot " + i);
+                    Debug.Log("No Upgrade selected for slot " + i);
                     break;
             }
         }

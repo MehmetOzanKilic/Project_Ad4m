@@ -125,7 +125,7 @@ public class CardGameManager : MonoBehaviour
                 break;
             case GamePhase.FightingStage:
                 Invoke("FightingStagePhase", 2);
-                print("switching to fighting stage");
+                //print("switching to fighting stage");
                 break;
             case GamePhase.SlotSelection:
                 HandleSlotSelectionPhase();
