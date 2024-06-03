@@ -841,15 +841,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4386209634582534014, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4386209634582534014, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4386209634582534014, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4386209634582534014, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1510,13 +1510,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396629386}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.35364968, y: -0.25003612, z: 0.09850459, w: -0.8959412}
-  m_LocalPosition: {x: -15.998394, y: 26.652054, z: -26.295258}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.6811086, y: 0.18997668, z: -0.18997668, w: 0.6811086}
+  m_LocalPosition: {x: 0, y: 60, z: 0}
+  m_LocalScale: {x: 0.05882353, y: 0.11816267, z: 0.10485376}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 51.84, y: 0, z: 0}
+  m_Father: {fileID: 1638788162}
+  m_LocalEulerAnglesHint: {x: 90, y: 31.197, z: 0.027}
 --- !u!1 &1558115903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,7 +1833,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 17, y: 1, z: 17}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1396629390}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1785040463
@@ -2421,7 +2422,6 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1396629390}
   - {fileID: 292102822}
   - {fileID: 835582060}
   - {fileID: 950295198}

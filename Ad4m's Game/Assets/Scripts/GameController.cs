@@ -117,6 +117,7 @@ public class GameController : MonoBehaviour
         if(prepareStage)
         {
             StateController.gamePhase = "PlayerTurn";
+            SelectedUpgrades.reset();
             SceneManager.LoadScene("Card Game");
         }
 

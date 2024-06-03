@@ -1031,6 +1031,37 @@ Transform:
   - {fileID: 1927329779}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &694860504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 694860505}
+  m_Layer: 6
+  m_Name: ShootingPointPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &694860505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694860504}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1161750707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &782956304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,7 +1394,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 9.12, z: 0}
   m_LocalScale: {x: 1.30696, y: 4.57573, z: 4.52591}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 694860505}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1518243457
@@ -1545,7 +1577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f7a4ce2b7bb72468ff9e66fbc6784f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzlePlace: {fileID: 0}
   puzzleImage: {fileID: 0}
   puzzlePiecePool: {fileID: 0}
   remaningPuzzlePiece: 9
@@ -1788,6 +1819,10 @@ PrefabInstance:
       propertyPath: movement2D
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7238328566733245870, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
+      propertyPath: bulletSpawnPoint
+      value: 
+      objectReference: {fileID: 694860505}
     - target: {fileID: 7517663450656350941, guid: 8d205c2e14ca8364f9301e4d31467ebf, type: 3}
       propertyPath: m_Mass
       value: 3

@@ -73,6 +73,7 @@ public class CardGameManager : MonoBehaviour
 
     void Start()
     {   
+        SelectedUpgrades.reset();
         escCanvas.SetActive(false);
         getPhase();
         SwitchCamera();
@@ -190,7 +191,7 @@ public class CardGameManager : MonoBehaviour
     }
 
     void HandleTurnPhase() //TURN PHASE
-    {
+    {   
         if(playerCards.Count==1)EnsurePlayerHasThreeCards();
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -274,6 +275,7 @@ public class CardGameManager : MonoBehaviour
         SceneManager.LoadScene(levelString);
     }
 
+    private int upgradeCounter=0;
     void HandleSlotSelectionPhase()
     {
         playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
@@ -307,7 +309,14 @@ public class CardGameManager : MonoBehaviour
                 MoveCardToPosition(selectedCardIndex, targetPositionGrid);
 
                 cardsPlayed.Enqueue(playerCards[selectedCardIndex]); // ENQUEUE
-
+                SelectedUpgrades.selectedCards[upgradeCounter] = playerCards[selectedCardIndex];
+                print(SelectedUpgrades.selectedCards[upgradeCounter]);
+                upgradeCounter+=1;
+                if(upgradeCounter==2)
+                {
+                    upgradeCounter=0;
+                    SelectedUpgrades.GiveUpgrades();
+                }
                 playerCards[selectedCardIndex].transform.SetParent(gridSlots[playerCards[selectedCardIndex].GetComponent<CardController>().selectedGridIndex].transform);
                 playerCards[selectedCardIndex].transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 

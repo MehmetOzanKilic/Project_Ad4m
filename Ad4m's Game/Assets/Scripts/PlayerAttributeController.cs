@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerAttributeController : MonoBehaviour
 {
-    public float playerBulletDamage = 2000f;
+    public float playerBulletDamage = 80f;
     public float reloadSpeed = 1f;
     public float bulletSpeed = 10f;
     public int shotAmount = 3;
@@ -28,8 +28,13 @@ public class PlayerAttributeController : MonoBehaviour
 
     public float playerHealth = 100f;
     public bool canBurstHeal = false;
+    public bool canSacrifice = false;
+    private int sacrificeCount = 3;
 
     public int[] Upgrades = { 1, 2, 3 };
+
+    private GameObject playerObject;
+    private PlayerHealth playerHealthScript;
 
 
 
@@ -39,16 +44,35 @@ public class PlayerAttributeController : MonoBehaviour
     private void Awake()
     {
         gameController = GameObject.FindWithTag("GameController"); //sets the game object
+        playerObject = GameObject.FindWithTag("Player"); //sets the game object
     }
     private void Start()
     {
         enemyAttributeController = gameController.GetComponent<EnemyAttributeController>();
+        playerHealthScript = playerObject.GetComponent<PlayerHealth>();
         UpdateUpgrades();
     }
     private void Update()
     {
         /*RemoveDuplicateUpgrades();
         UpdateUpgrades();*/
+        GameObject tempmob;
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (canSacrifice)
+            {
+                if (sacrificeCount > 0)
+                {
+                    while (GameObject.FindWithTag("Mobs"))
+                    {
+                        tempmob = GameObject.FindWithTag("Mobs");
+                        Destroy(tempmob);
+                    }
+                    sacrificeCount--;
+                    playerHealthScript.TakeDamage(70f);
+                }
+            }
+        }
     }
 
     void RemoveDuplicateUpgrades()
@@ -105,12 +129,12 @@ public class PlayerAttributeController : MonoBehaviour
 
                 case 5:
                     //Debug.Log("Sacrifice");
-                    //sacrifice logic
+                    canSacrifice = true; 
                     break;
 
-                /*/case 6:
-                    Debug.Log("Counterattack");
-                    break;*/
+                case 6:
+                    moveSpeed=7.5f;
+                    break;
 
                 default:
                     //Debug.Log("No Upgrade selected for slot " + i);
@@ -120,7 +144,7 @@ public class PlayerAttributeController : MonoBehaviour
     }
     public void ResetAttributes()
     {
-        playerBulletDamage = 2000f;
+        playerBulletDamage = 80f;
         reloadSpeed = 1f;
         bulletSpeed = 10f;
         shotAmount = 3;
@@ -135,8 +159,8 @@ public class PlayerAttributeController : MonoBehaviour
         dashCoolDown = 1f;
         playerHealth = 100f;
         canBurstHeal = false;
+        canSacrifice = false;
         enemyAttributeController.gunmanHealth = 100f;
         enemyAttributeController.swordsmanHealth = 80f;
-    }
 }
-
+}

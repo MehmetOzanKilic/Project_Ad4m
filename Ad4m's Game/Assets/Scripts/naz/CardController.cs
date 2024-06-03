@@ -86,7 +86,10 @@ public class CardController : MonoBehaviour
         }
     }
 
-
+    public CardData returnCardData()
+    {
+        return card;
+    }
 
     IEnumerator ExecuteCardAbility()
     {
