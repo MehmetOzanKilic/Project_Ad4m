@@ -135,7 +135,7 @@ public class RedEyeController : MonoBehaviour
     {
         var distance = Vector3.Distance(adam.transform.position, transform.position);
         distance = Mathf.Clamp(distance, 2, 10);
-        float sat = 100 - (10 * (distance-2));
+        float sat = 100 - (10 * (distance-4));
 
         // Calculate the new color
         Color newColor = Color.HSVToRGB(0, sat / 100, 0.3f);
@@ -205,7 +205,7 @@ public class RedEyeController : MonoBehaviour
                     if(Math.Abs(angle)<seeAng+70d)
                     {
                         renderers[0].enabled=true;
-                        if(Math.Abs(angle)<(seeAng-27f))
+                        if(Math.Abs(angle)<(seeAng-26f))
                         {
                             seenFlag=true;
                         }

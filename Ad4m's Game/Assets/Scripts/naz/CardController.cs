@@ -5,13 +5,13 @@ using TMPro;
 using static CardGameManager;
 using System.Linq;
 using System.Numerics;
-using Microsoft.Unity.VisualStudio.Editor;
+
 
 public class CardController : MonoBehaviour
 {
     [SerializeField] public CardData card;
     public TextMeshProUGUI card_info_txt;
-    public TextMeshProUGUI currentActionInfotxt;
+    //public TextMeshProUGUI currentActionInfotxt;
 
     public CardGameManager cardGameManager;
     public GameObject cardOnTopofQueue;
@@ -54,7 +54,7 @@ public class CardController : MonoBehaviour
        
 
         cardGameManager = FindObjectOfType<CardGameManager>();
-        currentActionInfotxt = GameObject.FindGameObjectWithTag("ActionInfo").GetComponent<TextMeshProUGUI>();
+        //currentActionInfotxt = GameObject.FindGameObjectWithTag("ActionInfo").GetComponent<TextMeshProUGUI>();
 
     }
 
@@ -71,7 +71,7 @@ public class CardController : MonoBehaviour
             if (isTheTopCardInQueue && !isExecutingAbility && !playedThisRound && this.gameObject != null)
             {
                 Debug.Log("Starting ExecuteCardAbility coroutine for " + card.name);
-                currentActionInfotxt.text = "Starting ExecuteCardAbility coroutine for " + card.name;
+                //currentActionInfotxt.text = "Starting ExecuteCardAbility coroutine for " + card.name;
              
                     StartCoroutine(ExecuteCardAbility());
                 
@@ -95,7 +95,7 @@ public class CardController : MonoBehaviour
     {
         //yield return new WaitForSeconds(1f);
         Debug.Log("retreiving card type and executing action...");
-        currentActionInfotxt.text = "retreiving card type and executing action...";
+        //currentActionInfotxt.text = "retreiving card type and executing action...";
         switch (card.type)
         {
             case CardData.CardType.DirectDamage:
@@ -254,17 +254,17 @@ public class CardController : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
         Debug.Log(name + "has executed its ability");
-        currentActionInfotxt.text = name + "has executed its ability";
+        //currentActionInfotxt.text = name + "has executed its ability";
         playedThisRound = true;
         Debug.Log("moving card..");
-        currentActionInfotxt.text = "moving card..";
+        //currentActionInfotxt.text = "moving card..";
 
         yield return new WaitForSeconds(2f);
         cardGameManager.cardsPlayed.Enqueue(cardGameManager.cardsPlayed.First());
         cardGameManager.cardsPlayed.First().GetComponent<CardController>().isTheTopCardInQueue = false;
         cardGameManager.cardsPlayed.Dequeue();
         Debug.Log("card moved");
-        currentActionInfotxt.text = "card moved";
+        //currentActionInfotxt.text = "card moved";
         cardGameManager.cardsPlayed.First().GetComponent<CardController>().isTheTopCardInQueue = true;
 
         foreach (GameObject cardGameObject in cardGameManager.cardsPlayed)
@@ -377,11 +377,11 @@ public class CardController : MonoBehaviour
             isExecutingAbility = true;
 
             Debug.Log(dmgAmount + " of damage has been dealt to " + targetcard.name + " by " + gameObject.name);
-            currentActionInfotxt.text = dmgAmount + " of damage has been dealt to " + targetcard.name + " by " + gameObject.name;
+            //currentActionInfotxt.text = dmgAmount + " of damage has been dealt to " + targetcard.name + " by " + gameObject.name;
             if (targetcard.GetComponent<CardController>().thisCardHlt <= 0)
             {
             Debug.Log(targetcard + "has been destroyed");
-            currentActionInfotxt.text = targetcard + "has been destroyed";
+            //currentActionInfotxt.text = targetcard + "has been destroyed";
             destroyCard(targetcard);
            
             }
@@ -411,7 +411,7 @@ public class CardController : MonoBehaviour
         isExecutingAbility = true;
 
         Debug.Log(healAmount + " of health has been healed to " + targetcard.name + " by " + gameObject.name);
-        currentActionInfotxt.text = healAmount + " of health has been healed to " + targetcard.name + " by " + gameObject.name;
+        //currentActionInfotxt.text = healAmount + " of health has been healed to " + targetcard.name + " by " + gameObject.name;
     }
 
     public void buffDebuffCard(GameObject targetcard)
@@ -421,7 +421,7 @@ public class CardController : MonoBehaviour
         isExecutingAbility = true;
 
         Debug.Log(buffdebuffamt + " of atk has been buffed to " + targetcard.name + " by " + gameObject.name);
-        currentActionInfotxt.text = buffdebuffamt + " of atk has been buffed to " + targetcard.name + " by " + gameObject.name;
+        //currentActionInfotxt.text = buffdebuffamt + " of atk has been buffed to " + targetcard.name + " by " + gameObject.name;
     }
     public void destroyCard(GameObject targetcard)
     {

@@ -342,8 +342,8 @@ MonoBehaviour:
   projectilePool: {fileID: 0}
   diesIn: 5
   adam: {fileID: 0}
-  deathTime: 0.5
-  errorMargin: 0.5
+  deathTime: 0.3
+  errorMargin: 1
   seeAng: 30
   range: 10
 --- !u!195 &2146895677063139287

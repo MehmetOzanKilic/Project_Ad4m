@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
     [SerializeField]private GameObject[] vCams; 
 
 
-    [SerializeField]private float eyeSpawnTime=2f;
+    [SerializeField]private float eyeSpawnTime=1.5f;
     [SerializeField]private float mobSpawnTime=2f;
     [SerializeField]private float projectileShooterTime=1f;
 
@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
         camPersFlag=false;
         tempLevel = levelNo;
 
-        levelEndTimer=100;
+        levelEndTimer=70;
         
         horrorSection=SelectedSections.isHorrorPresent;
         shooterSection=SelectedSections.isShooterPresent;
@@ -115,12 +115,6 @@ public class GameController : MonoBehaviour
             
         }
 
-        if(prepareStage)
-        {
-            StateController.gamePhase = "PlayerTurn";
-            SelectedUpgrades.reset();
-            SceneManager.LoadScene("Card Game");
-        }
 
 
         if(spawn)
@@ -153,18 +147,12 @@ public class GameController : MonoBehaviour
 
             if(levelEndTimer <= 0)
             {
-                if(SelectedSections.isCardPresent)
-                {
-                    StateController.gamePhase = "PlayerTurn";
-                    SceneManager.LoadScene("Card Game");
-                }
-                else
-                {
-                    //more waves or end level
-                    print("wave end");
-                    SelectedSections.gameWon=true;
-                    SceneManager.LoadScene("GameEndScreen");
-                }
+                
+                //more waves or end level
+                print("wave end");
+                SelectedSections.gameWon=true;
+                SceneManager.LoadScene("GameEndScreen");
+                
             }
         }
 
@@ -233,7 +221,7 @@ public class GameController : MonoBehaviour
                 {
                     if(eyeTimer>=eyeSpawnTime)
                     {
-                        spawner.insRedEye();
+                        spawner.insEyes();
                         eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
                         eyeTimer=0f;
                     }
@@ -265,7 +253,7 @@ public class GameController : MonoBehaviour
                 {
                     if(eyeTimer>=eyeSpawnTime)
                     {
-                        spawner.insWhiteEye();
+                        spawner.insEyes();
                         eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
                         eyeTimer=0f;
                     }
@@ -277,7 +265,7 @@ public class GameController : MonoBehaviour
         //if both shooter and dodger are not present.
         if(!shooterSection && !dodgerSection)
         {
-            if(eyesPresent.Length<7 && eyeTimer>=eyeSpawnTime)
+            if(eyesPresent.Length<14 && eyeTimer>=eyeSpawnTime)
             {
                 spawner.insEyes();
                 eyesPresent = GameObject.FindGameObjectsWithTag("Eye");
@@ -417,19 +405,10 @@ public class GameController : MonoBehaviour
 
     public void puzzleFinished()
     {
-        Debug.LogError("puzzle complete");
-        if(SelectedSections.isCardPresent)
-        {
-            StateController.gamePhase = "PlayerTurn";
-            SceneManager.LoadScene("Card Game");
-        }
-        else
-        {
             //more waves or end level
             print("wave end");
             SelectedSections.gameWon=true;
             SceneManager.LoadScene("GameEndScreen");
-        }
     }
 
     public void retryLevel()

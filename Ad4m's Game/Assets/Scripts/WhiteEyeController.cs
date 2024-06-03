@@ -173,14 +173,14 @@ public class WhiteEyeController : MonoBehaviour
 
                     // Calculate the angle between the player's forward direction and the target direction
                     float angle = Vector3.Angle(playerForward, targetDirection);
-                    angle-=5;
+                    if(SelectedSections.returnCount()==4)angle-=5;
                     print(angle);
 
                     //seeAngle is increased here for body
                     if(Math.Abs(angle)<seeAng+70d)
                     {
                         renderers[0].enabled=true;
-                        if(Math.Abs(angle)<(seeAng-27f))
+                        if(Math.Abs(angle)<(seeAng-26f))
                         {
                             seenFlag=true;
                         }

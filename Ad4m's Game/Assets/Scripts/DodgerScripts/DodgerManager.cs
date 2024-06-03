@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DodgerManager : MonoBehaviour
 {
-    [SerializeField] private float endTimer = 5;
+    [SerializeField] private float endTimer;
     [SerializeField] private Text counterText;
     [SerializeField]private GameObject escCanvas;
     ProjectilePool projectilePool;
@@ -23,6 +23,7 @@ public class DodgerManager : MonoBehaviour
 
     void Start()
     {
+        endTimer=30;
         projectilePool.InitializePool();
         StartCoroutine(projectilePool.ActivateProjectilesPeriodically());
         //wreckingDiscoBall.PrepareDiscoBall();
@@ -58,7 +59,6 @@ public class DodgerManager : MonoBehaviour
         }
         else
         {
-            counterText.text=((int)endTimer).ToString();
             endTimer-=Time.deltaTime;
         }
 

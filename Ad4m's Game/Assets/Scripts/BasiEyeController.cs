@@ -11,6 +11,7 @@ public class BasiEyeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         adam=GameObject.Find("Ad4m").GetComponent<MovementController_Level1>();
         renderers = GetComponentsInChildren<Renderer>();
         wallBase = GameObject.Find("WallBase").GetComponent<Transform>();
@@ -49,6 +50,7 @@ public class BasiEyeController : MonoBehaviour
         {
             if(deathCounter>1)
             {
+                GameObject.Find("GameController").GetComponent<HorrorController>().eyeFound();
                 Destroy(gameObject);
             }
             else deathCounter += Time.deltaTime; 
@@ -58,9 +60,9 @@ public class BasiEyeController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!seen)
+        /*if(!seen)
         {
             transform.position = Vector3.MoveTowards(transform.position,wallBase.position, 2  * Time.deltaTime);
-        }
+        }*/
     }
 }

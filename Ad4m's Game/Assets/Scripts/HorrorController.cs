@@ -13,10 +13,13 @@ public class HorrorController : MonoBehaviour
 
     [SerializeField]private float endTimer=30;
     [SerializeField]private Text counterText;
+    [SerializeField]private Text eyeFoundText;
+    private int eyeFoundCounter=0;
     [SerializeField]private GameObject escCanvas;
     // Start is called before the first frame update
     void Start()
     {   
+        eyeFoundText.text = "0";
         eyesPresent=GameObject.FindGameObjectsWithTag("Eye");
         rnd = new System.Random();
         escCanvas.SetActive(false);
@@ -73,7 +76,7 @@ public class HorrorController : MonoBehaviour
     private float spawnTimer=0;
     private void eyeSpawn()
     {
-        if(spawnTimer>=3 && eyesPresent.Length<10)
+        if(spawnTimer>=1.5f && eyesPresent.Length<10)
         {
             Instantiate(eye,randomPoint(),quaternion.identity );
             spawnTimer=0;
@@ -106,5 +109,11 @@ public class HorrorController : MonoBehaviour
         Time.timeScale=1;
         SelectedSections.gameWon=false;
         SceneManager.LoadScene("The Computer");
+    }
+
+    public void eyeFound()
+    {
+        eyeFoundCounter+=1;
+        eyeFoundText.text=eyeFoundCounter.ToString();
     }
 }

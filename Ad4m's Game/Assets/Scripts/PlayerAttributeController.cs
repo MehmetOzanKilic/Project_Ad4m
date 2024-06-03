@@ -20,7 +20,7 @@ public class PlayerAttributeController : MonoBehaviour
 
     public float meleeAttackCooldown = 1f;
 
-    public float moveSpeed = 5f;
+    public float moveSpeed = 7.5f;
 
     public float dashSpeed = 30f;
     public float dashTime = 0.1f;
@@ -137,7 +137,7 @@ public class PlayerAttributeController : MonoBehaviour
                     break;
 
                 case 6:
-                    moveSpeed=7.5f;
+                    moveSpeed=10f;
                     break;
 
                 default:
@@ -157,7 +157,7 @@ public class PlayerAttributeController : MonoBehaviour
         timeSlowMultiplier = 1f;
         seeAngle = 30f;
         meleeAttackCooldown = 1f;
-        moveSpeed = 5f;
+        moveSpeed = 7.5f;
         dashSpeed = 30f;
         dashTime = 0.1f;
         dashCoolDown = 1f;

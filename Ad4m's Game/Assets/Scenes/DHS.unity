@@ -143,7 +143,7 @@ MonoBehaviour:
   highScoreText: {fileID: 178487013}
   hitCountText: {fileID: 72764054}
   timerText: {fileID: 2033993586}
-  countdownTime: 5
+  countdownTime: 30
 --- !u!1 &72764052
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,8 +210,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294836116
-  m_fontColor: {r: 0.5801887, g: 1, b: 0.99210304, a: 1}
+    rgba: 4291677645
+  m_fontColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -422,7 +422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &178487012
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1061,7 +1061,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1491528254109253601, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
       propertyPath: moveSpeed
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3221115180304882407, guid: 3f918d1cd12e4c24282324c760262408, type: 3}
       propertyPath: m_Drag
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84c06dcf7b3d764ab3b4f644ae1697d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endTimer: 5
+  endTimer: 30
   counterText: {fileID: 0}
   escCanvas: {fileID: 1506945701}
 --- !u!4 &1267994177
@@ -2776,8 +2776,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4291677645
-  m_fontColor: {r: 0.8037735, g: 0.8037735, b: 0.8037735, a: 1}
+    rgba: 1322110413
+  m_fontColor: {r: 0.8037735, g: 0.8037735, b: 0.8037735, a: 0.30588236}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

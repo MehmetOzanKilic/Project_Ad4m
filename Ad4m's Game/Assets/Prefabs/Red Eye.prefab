@@ -362,7 +362,7 @@ MonoBehaviour:
     m_Bits: 0
   diesIn: 10
   adam: {fileID: 0}
-  deathTime: 0.5
+  deathTime: 0.3
   errorMargin: 1
   seeAng: 30
   range: 10

@@ -5,11 +5,11 @@ using UnityEngine;
 public class SelectedSections : MonoBehaviour
 {
     public static int sections;
-    public static bool isCardPresent=true;
-    public static bool isHorrorPresent=true;
-    public static bool isShooterPresent=true;
-    public static bool isDodgerPresent=true;
-    public static bool isPuzzlePresent=true;
+    public static bool isCardPresent;
+    public static bool isHorrorPresent;
+    public static bool isShooterPresent;
+    public static bool isDodgerPresent;
+    public static bool isPuzzlePresent;
 
     public static bool gameWon = true;
 
